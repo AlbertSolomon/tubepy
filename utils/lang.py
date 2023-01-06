@@ -1,0 +1,1 @@
+downloadstatus = ["loading... 😒", " download successful 🥳"," download failed... 💔"]
