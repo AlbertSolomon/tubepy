@@ -1,4 +1,5 @@
 from pytube import YouTube
+import ffmpeg
 import json
 from lang import read_config_file, download_location, empty
 
@@ -30,5 +31,6 @@ def download(youtube_url):
     preferred_location = location["download_location"]
     # print(preferred_location)
     
+    youtube_file = YouTube(youtube_url)
     
           
