@@ -1,6 +1,6 @@
 from pytube import YouTube
 import json
-from lang import read_config_file, download_location
+from lang import read_config_file, download_location, empty
 
 # with importlib.resources.
 # using new_location for testing purposes
@@ -15,7 +15,7 @@ def change_download_location(new_location):
             json.dump(default_location, file_location, indent=4 )
         
     except Exception:
-        print(" empty default location")
+        print(empty.get("empty_location"))
     else:
         default_location["download_location"] = download_location
         

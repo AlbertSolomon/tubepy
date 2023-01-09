@@ -6,6 +6,10 @@ downloadstatus = {
     "unsuccessful": "download failed... 💔", 
 }
 
+empty = {
+    "empty_location":  " empty default location",
+}
+
 download_location = '~/Downloads'
 '''
     {
