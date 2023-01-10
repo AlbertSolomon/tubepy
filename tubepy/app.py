@@ -3,7 +3,6 @@ import ffmpeg
 import json
 from lang import read_config_file, download_location, empty, progressive_vtags
 
-# with importlib.resources.
 # using new_location for testing purposes
 new_location:str = "~/Music"
 def change_download_location(new_location):
@@ -20,7 +19,7 @@ def change_download_location(new_location):
     else:
         default_location["download_location"] = download_location
         
-change_download_location(new_location)
+# change_download_location(new_location)
 
 
 # try to read from config.json file where to store the downloaded video
