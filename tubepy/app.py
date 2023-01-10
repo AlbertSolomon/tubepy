@@ -20,7 +20,7 @@ def change_download_location(new_location):
     else:
         default_location["download_location"] = download_location
         
-# change_download_location(new_location)
+change_download_location(new_location)
 
 
 # try to read from config.json file where to store the downloaded video
@@ -37,8 +37,8 @@ def download(youtube_url):
     
     for yt_stream in available_youtube_files:
         print(yt_stream)
+
     
     # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
     progressive_res = youtube_file.streams.get_by_itag(video_res)
-    progressive_res.download(preferred_location)
-          
+    progressive_res.download(preferred_location)   
