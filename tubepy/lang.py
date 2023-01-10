@@ -25,3 +25,10 @@ def read_config_file():
     return loction
 
 # print(read_config_file())
+
+# progressive tags for video formats
+progressive_vtags = {
+    "144p": 17,
+    "360p": 18,
+    "720p": 22,
+}
