@@ -32,7 +32,7 @@ def download(youtube_url):
     # print(preferred_location)
     
     youtube_file = YouTube(youtube_url)
-    available_youtube_files = youtube_file.streams
+    available_youtube_files = youtube_file.streams.filter(progressive=True)
     
     for yt_stream in available_youtube_files:
         print(yt_stream)
