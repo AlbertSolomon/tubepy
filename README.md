@@ -1,7 +1,5 @@
 # tubepy
 
-<div align="center">
-    ![version 1](https://github.com/https://github.com/AlbertSolomon/tubepy)
-</div>
+## version 1
 
 > youtube video downloader in python
