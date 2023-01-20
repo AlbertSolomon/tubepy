@@ -17,6 +17,8 @@ download_location = '~/Downloads'
     }
 '''
 
+url_input = "Enter Youtube Video URL here 👉🏾: "
+
 # refactoring for reading for reading from config.json file
 def read_config_file():
     with open('utilities/config.json', 'r') as config_location:

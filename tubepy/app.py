@@ -20,4 +20,10 @@ def download(youtube_url):
     
     # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
     progressive_res = youtube_file.streams.get_by_itag(video_res)
-    progressive_res.download(preferred_location)   
+    progressive_res.download(preferred_location) 
+    
+#? download audio files from youtube
+
+#? download Dynamic Adaptive Streaming over HTTP (DASH) and merge them with ffmpeg from youtube
+
+#? download video files from youtube with other formats
