@@ -1,6 +1,6 @@
 from pytube import YouTube
 import ffmpeg
-from lang import read_config_file, download_location, empty, progressive_vtags
+from lang import read_config_file, progressive_vtags
 
 # try to read from config.json file where to store the downloaded video
 location:str = ''

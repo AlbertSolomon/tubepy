@@ -20,9 +20,9 @@ download_location = '~/Downloads'
 # refactoring for reading for reading from config.json file
 def read_config_file():
     with open('utilities/config.json', 'r') as config_location:
-        loction = json.load(config_location)
+        location = json.load(config_location)
         
-    return loction
+    return location
 
 # print(read_config_file())
 

@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import filedialog
 import json
+from lang import read_config_file, download_location, empty
 
 # using new_location for testing purposes
 # new_location:str = "~/Music"
@@ -27,3 +28,4 @@ def download_path_settings():
 
     filepath = filedialog.askdirectory()
     change_download_location(filepath)
+
