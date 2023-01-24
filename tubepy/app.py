@@ -4,7 +4,7 @@ from lang import read_config_file, progressive_vtags
 
 # try to read from config.json file where to store the downloaded video
 video_res = progressive_vtags.get("720p")
-audio_fq:str = ''
+audio_fq:int = 140
 
 location = read_config_file()
 preferred_location = location["download_location"]
