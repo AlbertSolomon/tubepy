@@ -1,4 +1,4 @@
-from app import download, audio_download
+from app import download, audio_download, DASH_download
 from settings import download_path_settings, change_download_location
 from lang import url_input
 
@@ -8,4 +8,5 @@ def test_url_input():
 
 # download_path_settings()
 # download(test_url_input)
-audio_download(test_url_input())
+# audio_download(test_url_input())
+DASH_download(test_url_input())
