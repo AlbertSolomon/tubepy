@@ -3,6 +3,8 @@ from ffmpeg import FFmpeg, Progress, ffmpeg
 from lang import read_config_file, progressive_vtags, clean_filename
 import time
 import subprocess
+import os
+
 
 # try to read from config.json file where to store the downloaded video
 video_res = progressive_vtags.get("720p")
@@ -11,7 +13,14 @@ current_time = time.time()
 
 location = read_config_file()
 preferred_location = location["download_location"]
-# print(preferred_location)
+
+def quick_download(youtube_url):
+    youtube_file = YouTube(youtube_url) 
+    youtube_file.streams.get_highest_resolution().download(preferred_location)
+
+def data_save_download(youtube_url):
+    youtube_file = YouTube(youtube_url)
+    youtube_file.streams.get_lowest_resolution().download(preferred_location)
 
 def download(youtube_url):
     youtube_file = YouTube(youtube_url)
@@ -55,6 +64,21 @@ def DASH_download(youtube_url):
     # FFmpeg.output(audio, video, filename).run(overwrite_output=True)
     # # tracking the time
     # print('Time taken:'.format(time.time() - current_time))
-        
+    
+    #? TRYING TO SELECT VIDEO AND AUDIO FILES FROM PREFERRED DIRECTORY
+    #? KEPT GETTING FILE NOT FOUND ERROR WHEN TRYING TO MERGE THE VIDEO AND AUDIO FILES USING FFMPEG
+    # video = "video.mp4"
+    # audio = "audio.mp3"
+    # output_file = preferred_location + "\\\output.mp4"
+    # 
+    # folder = []    
+    # for files in os.scandir(preferred_location):
+    #     if files.name == video or files.name == audio:
+    #         folder.append(files.path)
+    #         print(files.path)
+    # print(folder)
+    # print(output_file)
 
+    # subprocess.run(['ffmpeg', '-i', folder[1], '-i', folder[0], '-c:v', 'copy', '-c:a', 'aac', '-strict', 'experimental', output_file])
+       
 #? download video files from youtube with other formats
