@@ -14,4 +14,11 @@ app.title("Tubepy")
 entry = ctk.CTkEntry(master=app, border_color="#009999", text_color="#009999", placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
 entry.place(relx=0.5, rely=0.125, anchor=tkinter.CENTER)
 
+url = entry.get()
+def button_event():
+    print(url)
+    
+button = ctk.CTkButton(master=app, text="Fetch", command=button_event, width=120, height=32, border_width=0, corner_radius=8)
+button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
 app.mainloop()
