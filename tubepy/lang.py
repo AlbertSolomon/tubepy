@@ -1,4 +1,5 @@
 import json
+import re
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -45,4 +46,12 @@ def clean_filename(name):
         filename = (''.join([x if x not in forbidden_chars else '#' for x in name])).replace('  ', ' ').strip()
         if len(filename) >= 176:
             filename = filename[:170] + '...'
-        return filename 
+        return filename
+    
+def validate_youtube_url(url):
+    youtube_regex = re.compile(
+        r'(https?://)?(www\.)?'
+        '(youtube|youtu|youtube-nocookie)\.(com|be)/'
+        '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
+
+    return youtube_regex.match(url) is not None
