@@ -18,7 +18,7 @@ url = entry.get()
 def button_event():
     print(url)
     
-button = ctk.CTkButton(master=app, text="Fetch", command=button_event, width=120, height=32, border_width=0, corner_radius=8)
-button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+button = ctk.CTkButton(master=app, text="Fetch", command=button_event, width=150, height=50, border_width=0, corner_radius=50)
+button.place(relx=0.5, rely=0.25, anchor=tkinter.CENTER)
 
 app.mainloop()
