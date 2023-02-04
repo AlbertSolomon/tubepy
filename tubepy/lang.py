@@ -1,5 +1,6 @@
 import json
 import re
+import requests
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -55,3 +56,7 @@ def validate_youtube_url(url):
         '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
 
     return youtube_regex.match(url) is not None
+
+def file_Availability(youtube_url):
+    request = requests.get(youtube_url)
+    print (request.status_code)
