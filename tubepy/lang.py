@@ -58,5 +58,5 @@ def validate_youtube_url(url):
     return youtube_regex.match(url) is not None
 
 def file_Availability(youtube_url):
-    request = requests.get(youtube_url)
-    print (request.status_code)
+    request = requests.get(youtube_url, allow_redirects=False)
+    return request.status_code
