@@ -12,6 +12,16 @@ empty = {
     "empty_location":  " empty default location",
 }
 
+error_message ={
+    "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥"
+}
+
+event_color = {
+    "danger": "red",
+    "success": "green",
+    "warning": "orange"
+}
+
 download_location = '~/Downloads'
 '''
     {
