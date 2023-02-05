@@ -19,13 +19,15 @@ entry.place(relx=0.5, rely=0.125, anchor=tkinter.CENTER)
 
 def event_label(app, message, color):
     text_var = tkinter.StringVar(value= message)
-    label = ctk.CTkLabel(master=app, textvariable=text_var, width=120, height=25, text_color= color, corner_radius= 0)
+    label = ctk.CTkLabel(master=app, textvariable=text_var, width=500, height=25, text_color= color, corner_radius= 0)
     label.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
 
+
 def button_event():
-    url = entry.get()
-    
+    url = entry.get()   
+    event_label(app, "", event_color.get("dark"))
     if len(url) >= 20 and len(url) <= 2048:
+        
         print(url)
         print(len(url))
     else:

@@ -19,7 +19,8 @@ error_message ={
 event_color = {
     "danger": "red",
     "success": "green",
-    "warning": "orange"
+    "warning": "orange",
+    "dark": "black",
 }
 
 download_location = '~/Downloads'
