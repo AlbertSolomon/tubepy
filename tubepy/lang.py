@@ -17,9 +17,10 @@ error_message ={
 }
 
 app_color = {
-    "primary": "#F5456F",
+    "primary": "#DC245E",
     "secondary": "",
-    "supporting_clr": ""
+    "supporting_clr": "",
+    "text_color": "",
 }
 
 event_color = {

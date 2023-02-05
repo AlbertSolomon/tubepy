@@ -35,4 +35,8 @@ def button_event():
 button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, corner_radius=50, fg_color=app_color.get("primary"))
 button.place(relx=0.5, rely=0.28, anchor=tkinter.CENTER)
 
+progressbar = ctk.CTkProgressBar(master=app, width=250, height=25, corner_radius=50, progress_color=app_color.get("primary"))
+progressbar.pack(padx=20, pady=10)
+progressbar.place(relx=0.5, rely=0.9, anchor=tkinter.CENTER)
+
 app.mainloop()

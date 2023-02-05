@@ -5,7 +5,6 @@ import time
 import subprocess
 import os
 
-
 # try to read from config.json file where to store the downloaded video
 video_res = progressive_vtags.get("720p")
 audio_fq:int = 140
