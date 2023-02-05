@@ -16,6 +16,12 @@ error_message ={
     "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥"
 }
 
+app_color = {
+    "primary": "#F5456F",
+    "secondary": "",
+    "supporting_clr": ""
+}
+
 event_color = {
     "danger": "red",
     "success": "green",

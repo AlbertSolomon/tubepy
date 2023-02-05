@@ -2,7 +2,7 @@ import tkinter
 import customtkinter as ctk
 from app import audio_download
 from settings import download_path_settings
-from lang import error_message, event_color
+from lang import error_message, event_color, app_color
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
@@ -14,14 +14,13 @@ app.geometry("840x640")
 app.title("Tubepy")
 
 # #009999 is a placeholder color for the app
-entry = ctk.CTkEntry(master=app, border_color="#009999", text_color="#009999", placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
+entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color="#009999", placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
 entry.place(relx=0.5, rely=0.125, anchor=tkinter.CENTER)
 
 def event_label(app, message, color):
     text_var = tkinter.StringVar(value= message)
     label = ctk.CTkLabel(master=app, textvariable=text_var, width=500, height=25, text_color= color, corner_radius= 0)
     label.place(relx=0.5, rely=0.2, anchor=tkinter.CENTER)
-
 
 def button_event():
     url = entry.get()   
@@ -33,7 +32,7 @@ def button_event():
     else:
        event_label(app, error_message.get("invalid_length"), event_color.get("danger")) 
     
-button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, corner_radius=50)
+button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, corner_radius=50, fg_color=app_color.get("primary"))
 button.place(relx=0.5, rely=0.28, anchor=tkinter.CENTER)
 
 app.mainloop()
