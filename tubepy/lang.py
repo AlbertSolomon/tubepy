@@ -20,6 +20,7 @@ download_location = '~/Downloads'
 '''
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
+sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp" #https://www.youtube.com/shorts/mBqK_-L-PVg (this url works) 
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
