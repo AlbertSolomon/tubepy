@@ -17,10 +17,11 @@ error_message ={
 }
 
 app_color = {
-    "primary": "#DC245E",
+    "primary": "#EECF89",
     "secondary": "#24DCA2",
-    "supporting_clr": "",
-    "text_color": "#f4bacc",
+    "extra_color": "#1C2331",
+    "text_color": "#9B2E51",
+    "hover_color": "#c9941d",
 }
 
 event_color = {
