@@ -24,8 +24,8 @@ app_color = {
 }
 
 event_color = {
-    "danger": "red",
-    "success": "green",
+    "danger": "#AA1B48",
+    "success": "#1BAA7D",
     "warning": "orange",
     "dark": "black",
 }
