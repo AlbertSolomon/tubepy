@@ -14,7 +14,7 @@ app.geometry("840x640")
 app.title("Tubepy")
 
 # #009999 is a placeholder color for the app
-entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color="#009999", placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
+entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("text_color"), placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
 entry.place(relx=0.5, rely=0.125, anchor=tkinter.CENTER)
 
 def event_label(app, message, color):
