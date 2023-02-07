@@ -1,6 +1,8 @@
 import json
 import re
-import requests
+import requests # this has been abundonned since its not asynchronous
+import asyncio
+import aiohttp
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -77,6 +79,8 @@ def validate_youtube_url(url):
 
     return youtube_regex.match(url) is not None
 
-def file_Availability(youtube_url):
-    request = requests.get(youtube_url, allow_redirects=False)
-    return request.status_code
+async def search_file_Availability(youtube_url) -> int:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(youtube_url) as response:
+            return response.status
+

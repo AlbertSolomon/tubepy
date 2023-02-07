@@ -37,12 +37,14 @@ button = ctk.CTkButton(master=app, text="Download", command=button_event, width=
 button.place(relx=0.5, rely=0.28, anchor=tkinter.CENTER)
 
 # progress bar
-progressbar = ctk.CTkProgressBar(master=app, width=250, height=25, corner_radius=50, progress_color=app_color.get("primary"))
+progressbar = ctk.CTkProgressBar(master=app, width=320, height=25, corner_radius=50, progress_color=app_color.get("primary"))
 progressbar.pack(padx=20, pady=10)
 progressbar.place(relx=0.5, rely=0.9, anchor=tkinter.CENTER)
+progressbar.set(0)
+progressbar.start()
 
 #progress label
-label_text = tkinter.StringVar(value="50%")
+label_text = tkinter.StringVar(value="0%")
 label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, text_color=app_color.get("primary"), font=("", 16))
 label.place(relx=0.5, rely=0.94, anchor=tkinter.CENTER)
 
