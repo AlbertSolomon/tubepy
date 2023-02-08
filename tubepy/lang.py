@@ -41,7 +41,7 @@ download_location = '~/Downloads'
 '''
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
-sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp" #https://www.youtube.com/shorts/mBqK_-L-PVg (this url works) 
+sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp" #"https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works) 
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
@@ -76,7 +76,7 @@ def validate_youtube_url(url) -> bool:
         r'(https?://)?(www\.)?'
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
         '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
-
+    
     return youtube_regex.match(url) is not None
 
 async def search_file_Availability(youtube_url) -> int:
@@ -84,3 +84,9 @@ async def search_file_Availability(youtube_url) -> int:
         async with session.get(youtube_url, allow_redirects=False) as response:
             return response.status
 
+async def file_verification(youtube_url) -> bool:
+    validatd_url = validate_youtube_url(youtube_url)
+    status = await search_file_Availability(youtube_url) if validatd_url else None
+    if status == 200:
+        return True
+    return False
