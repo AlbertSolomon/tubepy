@@ -17,3 +17,4 @@ def test_url_input() -> None:
 # print(validate_youtube_url(sample_url))
 
 # print(asyncio.run(search_file_Availability(sample_url)))
+print(asyncio.run(file_verification(sample_url)))
