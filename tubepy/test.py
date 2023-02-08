@@ -14,4 +14,5 @@ def test_url_input() -> None:
 # DASH_download(test_url_input())
 
 # quick_download(test_url_input())
+print(validate_youtube_url(sample_url))
 print(asyncio.run(search_file_Availability(sample_url)))

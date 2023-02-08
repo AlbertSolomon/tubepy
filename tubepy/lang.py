@@ -60,7 +60,7 @@ progressive_vtags = {
 }
 
 # function from https://github.com/JNYH/pytube/blob/master/pytube_sample_code.ipynb
-def clean_filename(name):
+def clean_filename(name) -> str:
         """Ensures each file name does not contain forbidden characters and is within the character limit"""
         # For some reason the file system (Windows at least) is having trouble saving files that are over 180ish
         # characters.  I'm not sure why this is, as the file name limit should be around 240. But either way, this
@@ -71,7 +71,7 @@ def clean_filename(name):
             filename = filename[:170] + '...'
         return filename
     
-def validate_youtube_url(url):
+def validate_youtube_url(url) -> bool:
     youtube_regex = re.compile(
         r'(https?://)?(www\.)?'
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
@@ -81,6 +81,6 @@ def validate_youtube_url(url):
 
 async def search_file_Availability(youtube_url) -> int:
     async with aiohttp.ClientSession() as session:
-        async with session.get(youtube_url) as response:
+        async with session.get(youtube_url, allow_redirects=False) as response:
             return response.status
 
