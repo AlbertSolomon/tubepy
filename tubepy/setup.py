@@ -65,6 +65,8 @@ switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), butt
                         onvalue="on", offvalue="off")
 switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 
+#
+
 # Combo box
 def combobox_callback(choice):
     print("combobox dropdown clicked:", choice)

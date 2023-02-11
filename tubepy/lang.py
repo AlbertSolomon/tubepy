@@ -3,6 +3,7 @@ import re
 import requests # this has been abundonned since its not asynchronous
 import asyncio
 import aiohttp
+from pytube import YouTube
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -90,3 +91,14 @@ async def file_verification(youtube_url) -> bool:
     if status == 200:
         return True
     return False
+
+# adding stream codes to a list 
+def add_audio_stream_codes(youtube_url):
+    youtube_file = YouTube(youtube_url)
+    
+    # getting all the streams
+    available_audiofiles = youtube_file.streams.filter(only_audio=True)
+    for available_audiofile in available_audiofiles:
+        
+        # format the string returned and append it to the list
+        print(available_audiofile)
