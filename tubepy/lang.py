@@ -93,12 +93,12 @@ async def file_verification(youtube_url) -> bool:
     return False
 
 # adding stream codes to a list 
-def add_audio_stream_codes(youtube_url):
+def add_audio_stream_codes(youtube_url) -> list:
     youtube_file = YouTube(youtube_url)
+    streams: list = []
     
-    # getting all the streams
     available_audiofiles = youtube_file.streams.filter(only_audio=True)
     for available_audiofile in available_audiofiles:
+        streams.append(available_audiofile)
         
-        # format the string returned and append it to the list
-        print(available_audiofile)
+    return streams
