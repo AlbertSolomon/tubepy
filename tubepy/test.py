@@ -1,6 +1,6 @@
 from app import download, audio_download, DASH_download, quick_download
 from settings import download_path_settings, change_download_location
-from lang import url_input, validate_youtube_url, search_file_Availability, sample_url, file_verification
+from lang import url_input, validate_youtube_url, search_file_Availability, sample_url, file_verification, add_audio_stream_codes
 import asyncio
 
 # this input variable will be used for testing purposes
@@ -17,4 +17,6 @@ def test_url_input() -> None:
 # print(validate_youtube_url(sample_url))
 
 # print(asyncio.run(search_file_Availability(sample_url)))
-print(asyncio.run(file_verification(sample_url)))
+# print(asyncio.run(file_verification(sample_url)))
+
+add_audio_stream_codes(test_url_input())
