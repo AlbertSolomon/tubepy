@@ -20,4 +20,17 @@ def test_url_input() -> None:
 # print(asyncio.run(file_verification(sample_url)))
 
 audio_streams: list = add_audio_stream_codes(test_url_input())
-print(type(str(audio_streams[0])))
+print(audio_streams[0])
+fstring = str(audio_streams[0])
+print(fstring[9:19])
+
+def stripping_audio_streams(audio_streams) -> list:
+    nwLists: list= []
+    for audio_stream in audio_streams:
+        temp = str(audio_stream)
+        new = temp[9:19]
+        nwLists.append(new)
+    return nwLists
+
+nwLists = stripping_audio_streams(audio_streams)    
+print(nwLists)
