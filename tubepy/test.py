@@ -25,12 +25,12 @@ fstring = str(audio_streams[0])
 print(fstring[9:19])
 
 def stripping_audio_streams(audio_streams) -> list:
-    nwLists: list= []
+    new_audio_list: list= []
     for audio_stream in audio_streams:
         temp = str(audio_stream)
-        new = temp[9:19]
-        nwLists.append(new)
-    return nwLists
+        new_audio_stream_file = temp[9:19]
+        new_audio_list.append(new_audio_stream_file)
+    return new_audio_list
 
 nwLists = stripping_audio_streams(audio_streams)    
 print(nwLists)
