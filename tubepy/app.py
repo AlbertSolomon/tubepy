@@ -24,11 +24,6 @@ def data_save_download(youtube_url):
 def download(youtube_url):
     youtube_file = YouTube(youtube_url)
     
-    # for testing purposes
-    available_youtube_files = youtube_file.streams.filter(progressive=True)
-    for yt_stream in available_youtube_files:
-        print(yt_stream)
-
     # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
     progressive_res = youtube_file.streams.get_by_itag(video_res)
     progressive_res.download(preferred_location) 
@@ -36,11 +31,6 @@ def download(youtube_url):
 #? download audio files from youtube
 def audio_download(youtube_url):
     youtube_file = YouTube(youtube_url)
-    
-    # for testing purposes
-    available_audiofiles = youtube_file.streams.filter(only_audio=True)
-    for available_audiofile in available_audiofiles:
-        print(available_audiofile)
         
     audio_file = youtube_file.streams.get_by_itag(audio_fq)
     audio_file.download(preferred_location)
