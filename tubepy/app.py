@@ -1,6 +1,6 @@
 from pytube import YouTube
 from ffmpeg import FFmpeg, Progress, ffmpeg
-from lang import read_config_file, progressive_vtags, clean_filename
+from lang import read_config_file, progressive_vtags, clean_filename, error_message
 import time
 import subprocess
 import os
@@ -30,10 +30,17 @@ def download(youtube_url):
     
 #? download audio files from youtube
 def audio_download(youtube_url):
-    youtube_file = YouTube(youtube_url)
+    '''
+        added exception handler for convessionall purposes
+    '''
+    try:
+        youtube_file = YouTube(youtube_url)
+    except VideoUnavailable:
+        print(error_message.get("VideoUnavailable"))
+    else:
+        audio_file = youtube_file.streams.get_by_itag(audio_fq)
+        audio_file.download(preferred_location)
         
-    audio_file = youtube_file.streams.get_by_itag(audio_fq)
-    audio_file.download(preferred_location)
 
 #? download Dynamic Adaptive Streaming over HTTP (DASH) and merge them with ffmpeg from youtube
 def DASH_download(youtube_url):

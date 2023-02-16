@@ -16,7 +16,8 @@ empty = {
 }
 
 error_message ={
-    "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥"
+    "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥",
+    "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
 }
 
 app_color = {
