@@ -57,7 +57,16 @@ label.pack(side=tkinter.BOTTOM)
 
 # switch button
 def switch_event():
-    print("switch toggled, current value:", switch_var.get())
+    switch = switch_var.get()
+    print("switch toggled, current value:", switch)
+    
+    if switch == "on":
+       print("nothing to show")
+       show_combobox(app, True)
+        
+    else:
+        show_combobox(app, False)
+    
 
 switch_var = ctk.StringVar(value="on")
 switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
@@ -68,15 +77,18 @@ switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 #
 
 # Combo box
-def combobox_callback(choice):
-    print("combobox dropdown clicked:", choice)
+def show_combobox(app, switch):
+    def combobox_callback(choice):
+        print("combobox dropdown clicked:", choice)
 
-combobox_var = ctk.StringVar(value="option 2")  # set initial value
-combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
+    combobox_var = ctk.StringVar(value="option 2")  # set initial value
+    combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
+                                    # vaules will take in a a list of streams
                                      values=["option 1", "option 2", "option 3", "option 4"],
                                      command=combobox_callback,
                                      variable=combobox_var)
-combobox.pack(padx=40, pady=10, side=tkinter.TOP)
+    combobox.pack(padx=40, pady=10, side=tkinter.TOP)
+    combobox.configure(require_redraw=switch)
 
 if __name__ == "__main__":
     app.mainloop()
