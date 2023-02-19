@@ -35,6 +35,8 @@ event_color = {
     "dark": "black",
 }
 
+widget_state = ["disabled", "normal"]
+
 download_location = '~/Downloads'
 '''
     {

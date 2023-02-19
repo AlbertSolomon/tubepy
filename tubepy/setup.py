@@ -2,7 +2,7 @@ import tkinter
 import customtkinter as ctk
 from app import audio_download
 from settings import download_path_settings
-from lang import error_message, event_color, app_color, file_verification
+from lang import error_message, event_color, app_color, widget_state, file_verification
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
@@ -56,22 +56,31 @@ label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, c
 label.pack(side=tkinter.BOTTOM)
 
 # switch button
-def switch_event():
+combo_state: list = ["disabled"]
+def switch_event() -> str:
     switch = switch_var.get()
-    print("switch toggled, current value:", switch)
+    disabled = widget_state[0]
+    normal = widget_state[1]
     
     if switch == "on":
-       print("nothing to show")
-        
-    else:
-        pass
+        # print("nothing to show")
+        combo_state[0] = disabled        
+        combobox.configure(state= combo_state[0])
+    else:        
+        combo_state[0] = normal
+        combobox.configure(state= combo_state[0])
     
-
+    print("switch toggled, current value:", switch)
+    #print(switch_event())
+    #print(combo_state)
+    
+    
 switch_var = ctk.StringVar(value="on")
 switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
                         progress_color=app_color.get("primary"),text="Quick Download", command=switch_event,variable=switch_var, 
                         onvalue="on", offvalue="off")
 switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
+
 
 # Combo box
 def combobox_callback(choice):
@@ -81,9 +90,11 @@ combobox_var = ctk.StringVar(value="option 2")  # set initial value
 combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
                                     # vaules will take in a a list of streams
                                      values=["option 1", "option 2", "option 3", "option 4"],
+                                     state= combo_state[0],
                                      command=combobox_callback,
                                      variable=combobox_var)
 combobox.pack(padx=40, pady=10, side=tkinter.TOP)
+# combobox.configure(state= combo_state[0])
 
 if __name__ == "__main__":
-    app.mainloop()
+    app.mainloop()    
