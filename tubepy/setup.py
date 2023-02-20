@@ -2,6 +2,8 @@ import tkinter
 import customtkinter as ctk
 import os
 import sys
+import traceback
+import linecache
 import importlib
 from watchdog.observers import Observer
 from PIL import Image
@@ -74,12 +76,12 @@ def displayUI():
         print("radiobutton toggled, current value:", radio_var.get())
 
     radio_var = tkinter.StringVar(value="video")
-    radiobutton_1 = ctk.CTkRadioButton(master=app, text="Video",
+    radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
                                                 command=radiobutton_event, variable= radio_var, value="video")
-    radiobutton_2 = ctk.CTkRadioButton(master=app, text="Audio",
+    radiobutton_2 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Audio",
                                                 command=radiobutton_event, variable= radio_var, value="audio")
-    radiobutton_1.pack(padx=0, pady=0)
-    radiobutton_2.pack(padx=0, pady=0)
+    radiobutton_1.pack(padx=10, pady=5)
+    radiobutton_2.pack(padx=10, pady=5)
 
 
     # Combo box
@@ -121,8 +123,20 @@ if __name__ == "__main__":
     event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ['python'] + sys.argv))
     observer = Observer()
     observer.schedule(event_handler, '.', recursive=True)
-    
     observer.start()
-    displayUI()
+    
+    try:
+        displayUI()
+    except Exception as e:
+        traceback.print_exc()
+        tb = e.__traceback__
+        filename = tb.tb_frame.f_code.co_filename
+        lineno = tb.tb_lineno
+        
+        print("Error occurred at line:", lineno)
+        for i in range(lineno-2, lineno+3):
+            line = linecache.getline(filename, i)
+            print(f"{i:4d} {line.strip()}")
+    
     observer.stop()
     observer.join()
