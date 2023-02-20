@@ -98,5 +98,18 @@ my_image = ctk.CTkImage(light_image=Image.open("c:/Users/solom/OneDrive/Document
                                   size=(30, 30)) '''
 
 
+
+def radiobutton_event():
+    print("radiobutton toggled, current value:", radio_var.get())
+
+radio_var = tkinter.StringVar(value="video")
+radiobutton_1 = ctk.CTkRadioButton(master=app, text="Video",
+                                             command=radiobutton_event, variable= radio_var, value="video")
+radiobutton_2 = ctk.CTkRadioButton(master=app, text="Audio",
+                                             command=radiobutton_event, variable= radio_var, value="audio")
+radiobutton_1.pack(padx=20, pady=5)
+radiobutton_2.pack(padx=20, pady=5)
+
+
 if __name__ == "__main__":
     app.mainloop()    
