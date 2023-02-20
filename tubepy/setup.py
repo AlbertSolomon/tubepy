@@ -1,115 +1,139 @@
 import tkinter
 import customtkinter as ctk
+import os
+import sys
+import importlib
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 from PIL import Image
 from app import audio_download
 from settings import download_path_settings
 from lang import error_message, event_color, app_color, widget_state, file_verification
 
-ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("green") 
+class CodeChangeHandler(FileSystemEventHandler):
+    def __init__(self, callback):
+        super().__init__()
+        self.callback = callback
 
-app = ctk.CTk()
-app.geometry("840x640")
-app.title("Tubepy")
+    def on_any_event(self, event):
+        if event.is_directory:
+            return
+        elif event.event_type in ['modified', 'created', 'deleted']:
+            self.callback()
+
+def displayUI():
+    ctk.set_appearance_mode("dark")
+    ctk.set_default_color_theme("green") 
+
+    app = ctk.CTk()
+    app.geometry("840x640")
+    app.title("Tubepy")
 
 
-def event_label(app, message, color):
-    text_var = tkinter.StringVar(value= message)
-    label = ctk.CTkLabel(master=app, textvariable=text_var, width=500, height=25, text_color= color, corner_radius= 0)
-    label.place(relx=0.5, rely=0.02, anchor=tkinter.CENTER)
-    #label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
-    #label.pack(padx=10, pady=0)
+    def event_label(app, message, color):
+        text_var = tkinter.StringVar(value= message)
+        label = ctk.CTkLabel(master=app, textvariable=text_var, width=500, height=25, text_color= color, corner_radius= 0)
+        label.place(relx=0.5, rely=0.02, anchor=tkinter.CENTER)
+        #label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
+        #label.pack(padx=10, pady=0)
 
 
-def button_event():
-    url = entry.get()   
-    event_label(app, "", event_color.get("dark"))
-    if len(url) >= 20 and len(url) <= 2048:
+    def button_event():
+        url = entry.get()   
+        event_label(app, "", event_color.get("dark"))
+        if len(url) >= 20 and len(url) <= 2048:
+            
+            print(url)
+            print(len(url))
+        else:
+            event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
+
+
+    # switch button
+    combo_state: list = ["disabled"]
+    def switch_event():
+        switch = switch_var.get()
+        disabled = widget_state[0]
+        normal = widget_state[1]
         
-        print(url)
-        print(len(url))
-    else:
-       event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
+        if switch == "on":
+            combo_state[0] = disabled        
+            combobox.configure(state= combo_state[0])
+        else:        
+            combo_state[0] = normal
+            combobox.configure(state= combo_state[0])
 
 
-# switch button
-combo_state: list = ["disabled"]
-def switch_event():
-    switch = switch_var.get()
-    disabled = widget_state[0]
-    normal = widget_state[1]
-    
-    if switch == "on":
-        combo_state[0] = disabled        
-        combobox.configure(state= combo_state[0])
-    else:        
-        combo_state[0] = normal
-        combobox.configure(state= combo_state[0])
+    entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
+                        placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
+    entry.pack(padx=20, pady=30)
+        
+        
+    button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
+                        corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
+    button.pack(padx=10, pady=5)
 
 
-entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
-                     placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
-entry.pack(padx=20, pady=30)
-     
-    
-button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
-                       corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
-button.pack(padx=10, pady=5)
+    switch_var = ctk.StringVar(value="on")
+    switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
+                            progress_color=app_color.get("primary"),text="Quick Download", command=switch_event,variable=switch_var, 
+                            onvalue="on", offvalue="off")
+    switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 
 
-switch_var = ctk.StringVar(value="on")
-switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
-                        progress_color=app_color.get("primary"),text="Quick Download", command=switch_event,variable=switch_var, 
-                        onvalue="on", offvalue="off")
-switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
+    def radiobutton_event():
+        print("radiobutton toggled, current value:", radio_var.get())
+
+    radio_var = tkinter.StringVar(value="video")
+    radiobutton_1 = ctk.CTkRadioButton(master=app, text="Video",
+                                                command=radiobutton_event, variable= radio_var, value="video")
+    radiobutton_2 = ctk.CTkRadioButton(master=app, text="Audio",
+                                                command=radiobutton_event, variable= radio_var, value="audio")
+    radiobutton_1.pack(padx=0, pady=0)
+    radiobutton_2.pack(padx=0, pady=0)
 
 
-# Combo box
-def combobox_callback(choice):
-    print("combobox dropdown clicked:", choice)
+    # Combo box
+    def combobox_callback(choice):
+        print("combobox dropdown clicked:", choice)
 
-combobox_var = ctk.StringVar(value="option 2")  # set initial value
-combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
-                                    # vaules will take in a a list of streams
-                                     values=["option 1", "option 2", "option 3", "option 4"],
-                                     state= combo_state[0],
-                                     command=combobox_callback,
-                                     variable=combobox_var)
-combobox.pack(padx=40, pady=10, side=tkinter.TOP)
-
-
-# progress bar
-progressbar = ctk.CTkProgressBar(master=app, width=320, height=25, corner_radius=50,
-                                 progress_color=app_color.get("primary"))
-progressbar.pack(padx=20, pady=10, side=tkinter.BOTTOM)
-progressbar.set(0)
-progressbar.start()
+    combobox_var = ctk.StringVar(value="option 2")  # set initial value
+    combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
+                                        # vaules will take in a a list of streams
+                                        values=["option 1", "option 2", "option 3", "option 4"],
+                                        state= combo_state[0],
+                                        command=combobox_callback,
+                                        variable=combobox_var)
+    combobox.pack(padx=40, pady=10, side=tkinter.TOP)
 
 
-#progress label
-label_text = tkinter.StringVar(value="0%")
-label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
-                     text_color=app_color.get("primary"), font=("", 16))
-label.pack(side=tkinter.BOTTOM)
-
-'''
-my_image = ctk.CTkImage(light_image=Image.open("c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"),        
-                                  dark_image=Image.open("c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"),
-                                  size=(30, 30)) '''
+    # progress bar
+    progressbar = ctk.CTkProgressBar(master=app, width=320, height=25, corner_radius=50,
+                                    progress_color=app_color.get("primary"))
+    progressbar.pack(padx=20, pady=10, side=tkinter.BOTTOM)
+    progressbar.set(0)
+    progressbar.start()
 
 
+    #progress label
+    label_text = tkinter.StringVar(value="0%")
+    label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
+                        text_color=app_color.get("primary"), font=("", 16))
+    label.pack(side=tkinter.BOTTOM)
 
-def radiobutton_event():
-    print("radiobutton toggled, current value:", radio_var.get())
+    '''
+    my_image = ctk.CTkImage(light_image=Image.open("c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"),        
+                                    dark_image=Image.open("c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"),
+                                    size=(30, 30)) '''
 
-radio_var = tkinter.StringVar(value="video")
-radiobutton_1 = ctk.CTkRadioButton(master=app, text="Video",
-                                             command=radiobutton_event, variable= radio_var, value="video")
-radiobutton_2 = ctk.CTkRadioButton(master=app, text="Audio",
-                                             command=radiobutton_event, variable= radio_var, value="audio")
-radiobutton_1.pack(padx=20, pady=5)
-radiobutton_2.pack(padx=20, pady=5)
-
+    app.mainloop()    
 
 if __name__ == "__main__":
-    app.mainloop()    
+    event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ['python'] + sys.argv))
+    observer = Observer()
+    observer.schedule(event_handler, '.', recursive=True)
+    
+    observer.start()
+    displayUI()
+    observer.stop()
+    observer.join()
