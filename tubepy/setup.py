@@ -129,6 +129,7 @@ def displayUI():
 
     app.mainloop()    
 
+
 if __name__ == "__main__":
     event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ['python'] + sys.argv))
     observer = Observer()
