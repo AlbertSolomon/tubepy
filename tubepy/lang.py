@@ -4,6 +4,7 @@ import requests # this has been abundonned since its not asynchronous
 import asyncio
 import aiohttp
 from pytube import YouTube
+from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -62,6 +63,17 @@ progressive_vtags = {
     "360p": 18,
     "720p": 22,
 }
+
+class CodeChangeHandler(FileSystemEventHandler):
+    def __init__(self, callback):
+        super().__init__()
+        self.callback = callback
+
+    def on_any_event(self, event):
+        if event.is_directory:
+            return
+        elif event.event_type in ['modified', 'created', 'deleted']:
+            self.callback()
 
 # function from https://github.com/JNYH/pytube/blob/master/pytube_sample_code.ipynb
 def clean_filename(name) -> str:

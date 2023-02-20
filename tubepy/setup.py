@@ -4,22 +4,11 @@ import os
 import sys
 import importlib
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 from PIL import Image
 from app import audio_download
 from settings import download_path_settings
-from lang import error_message, event_color, app_color, widget_state, file_verification
+from lang import error_message, event_color, app_color, widget_state, CodeChangeHandler, file_verification
 
-class CodeChangeHandler(FileSystemEventHandler):
-    def __init__(self, callback):
-        super().__init__()
-        self.callback = callback
-
-    def on_any_event(self, event):
-        if event.is_directory:
-            return
-        elif event.event_type in ['modified', 'created', 'deleted']:
-            self.callback()
 
 def displayUI():
     ctk.set_appearance_mode("dark")
