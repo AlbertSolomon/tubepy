@@ -6,9 +6,7 @@ from settings import download_path_settings
 from lang import error_message, event_color, app_color, widget_state, file_verification
 
 ctk.set_appearance_mode("dark")
-ctk.set_default_color_theme("green")
-# ctk.set_widget_scaling(1.0)  # widget dimensions and text size
-# ctk.set_window_scaling(0.9)  # window geometry dimensions 
+ctk.set_default_color_theme("green") 
 
 app = ctk.CTk()
 app.geometry("840x640")
@@ -42,7 +40,6 @@ def switch_event():
     normal = widget_state[1]
     
     if switch == "on":
-        # print("nothing to show")
         combo_state[0] = disabled        
         combobox.configure(state= combo_state[0])
     else:        
@@ -50,7 +47,6 @@ def switch_event():
         combobox.configure(state= combo_state[0])
 
 
-# #009999 is a placeholder color for the app
 entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                      placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
 entry.pack(padx=20, pady=30)
@@ -58,7 +54,6 @@ entry.pack(padx=20, pady=30)
     
 button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
                        corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
-#button.place(relx=0.5, rely=0.28, anchor=tkinter.CENTER)
 button.pack(padx=10, pady=5)
 
 
@@ -87,7 +82,6 @@ combobox.pack(padx=40, pady=10, side=tkinter.TOP)
 progressbar = ctk.CTkProgressBar(master=app, width=320, height=25, corner_radius=50,
                                  progress_color=app_color.get("primary"))
 progressbar.pack(padx=20, pady=10, side=tkinter.BOTTOM)
-# progressbar.place(relx=0.5, rely=0.9, anchor=tkinter.CENTER)
 progressbar.set(0)
 progressbar.start()
 
@@ -96,7 +90,6 @@ progressbar.start()
 label_text = tkinter.StringVar(value="0%")
 label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
                      text_color=app_color.get("primary"), font=("", 16))
-# label.place(relx=0.5, rely=0.94, anchor=tkinter.CENTER)
 label.pack(side=tkinter.BOTTOM)
 
 '''
