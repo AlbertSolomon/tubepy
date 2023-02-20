@@ -35,7 +35,7 @@ def button_event():
     else:
        event_label(app, error_message.get("invalid_length"), event_color.get("danger")) 
     
-button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0,text_color= app_color.get("extra_color"), 
+button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
                        corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
 #button.place(relx=0.5, rely=0.28, anchor=tkinter.CENTER)
 button.pack(padx=10, pady=5)
@@ -57,7 +57,7 @@ label.pack(side=tkinter.BOTTOM)
 
 # switch button
 combo_state: list = ["disabled"]
-def switch_event() -> str:
+def switch_event():
     switch = switch_var.get()
     disabled = widget_state[0]
     normal = widget_state[1]
@@ -69,11 +69,7 @@ def switch_event() -> str:
     else:        
         combo_state[0] = normal
         combobox.configure(state= combo_state[0])
-    
-    print("switch toggled, current value:", switch)
-    #print(switch_event())
-    #print(combo_state)
-    
+
     
 switch_var = ctk.StringVar(value="on")
 switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
