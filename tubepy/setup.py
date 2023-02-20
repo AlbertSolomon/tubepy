@@ -40,19 +40,29 @@ def displayUI():
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
 
-    # switch button
-    combo_state: list = ["disabled"]
+    # switch button callback function
+    state: list = ["disabled"]
     def switch_event():
         switch = switch_var.get()
         disabled = widget_state[0]
         normal = widget_state[1]
         
         if switch == "on":
-            combo_state[0] = disabled        
-            combobox.configure(state= combo_state[0])
+            # disabling the combobox
+            state[0] = disabled        
+            combobox.configure(state= state[0])
+            
+            # disabling the radio button
+            state[0] = disabled
+            radiobutton_1.configure(state= state[0])
+            radiobutton_2.configure(state= state[0])
         else:        
-            combo_state[0] = normal
-            combobox.configure(state= combo_state[0])
+            state[0] = normal
+            combobox.configure(state= state[0])
+            
+            state[0] = normal
+            radiobutton_1.configure(state= state[0])
+            radiobutton_2.configure(state= state[0])
 
 
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
@@ -77,9 +87,9 @@ def displayUI():
 
     radio_var = tkinter.StringVar(value="video")
     radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
-                                                command=radiobutton_event, variable= radio_var, value="video")
+                                                command=radiobutton_event, variable= radio_var, value="video", state=state[0])
     radiobutton_2 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Audio",
-                                                command=radiobutton_event, variable= radio_var, value="audio")
+                                                command=radiobutton_event, variable= radio_var, value="audio", state=state[0])
     radiobutton_1.pack(padx=10, pady=5)
     radiobutton_2.pack(padx=10, pady=5)
 
@@ -88,11 +98,11 @@ def displayUI():
     def combobox_callback(choice):
         print("combobox dropdown clicked:", choice)
 
-    combobox_var = ctk.StringVar(value="option 2")  # set initial value
+    combobox_var = ctk.StringVar(value="option 1")  # set initial value
     combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
                                         # vaules will take in a a list of streams
                                         values=["option 1", "option 2", "option 3", "option 4"],
-                                        state= combo_state[0],
+                                        state= state[0],
                                         command=combobox_callback,
                                         variable=combobox_var)
     combobox.pack(padx=40, pady=10, side=tkinter.TOP)
