@@ -5,6 +5,7 @@ import sys
 import traceback
 import linecache
 import importlib
+import asyncio
 from watchdog.observers import Observer
 from PIL import Image
 from app import audio_download
@@ -34,6 +35,13 @@ def displayUI():
         event_label(app, "", event_color.get("dark"))
         if len(url) >= 20 and len(url) <= 2048:
             
+            file_Availability  = asyncio.run(file_verification(url))
+            print(file_Availability)
+            if file_Availability == True:
+                print("downloading")
+            else:
+                event_label(app, error_message.get("url_issue"), event_color.get("danger")) 
+                
             print(url)
             print(len(url))
             
