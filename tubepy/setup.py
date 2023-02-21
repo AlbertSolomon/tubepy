@@ -38,6 +38,7 @@ def displayUI():
             print(len(url))
             
             print(switch_event())
+            print( radiobutton_event() )
         else:
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
@@ -67,8 +68,7 @@ def displayUI():
             radiobutton_2.configure(state= state[0])
         
         return switch
-
-
+   
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                         placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
     entry.pack(padx=20, pady=30)
@@ -86,9 +86,11 @@ def displayUI():
     switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 
 
-    def radiobutton_event():
-        print("radiobutton toggled, current value:", radio_var.get())
-
+    def radiobutton_event() -> str:
+        radio_value = radio_var.get()
+        print(f"you selected { radio_value }")
+        return radio_value
+    
     radio_var = tkinter.StringVar(value="video")
     radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
                                                 command=radiobutton_event, variable= radio_var, value="video", state=state[0])
