@@ -36,13 +36,15 @@ def displayUI():
             
             print(url)
             print(len(url))
+            
+            print(switch_event())
         else:
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
 
     # switch button callback function
     state: list = ["disabled"]
-    def switch_event():
+    def switch_event() -> str:
         switch = switch_var.get()
         disabled = widget_state[0]
         normal = widget_state[1]
@@ -63,6 +65,8 @@ def displayUI():
             state[0] = normal
             radiobutton_1.configure(state= state[0])
             radiobutton_2.configure(state= state[0])
+        
+        return switch
 
 
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
