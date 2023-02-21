@@ -81,17 +81,20 @@ def displayUI():
     def combobox_callback(choice):
         print("combobox dropdown clicked:", choice)
    
-   
+    
+    # entry button
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                         placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
     entry.pack(padx=20, pady=30)
         
-        
+
+    # download button    
     button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
                         corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
     button.pack(padx=10, pady=5)
 
 
+    # swich button
     switch_var = ctk.StringVar(value="on")
     switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
                             progress_color=app_color.get("primary"),text="Quick Download", command=switch_event,variable=switch_var, 
@@ -99,6 +102,7 @@ def displayUI():
     switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 
 
+    # radio button
     radio_var = tkinter.StringVar(value="video")
     radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
                                                 command=radiobutton_event, variable= radio_var, value="video", state=state[0])
@@ -108,6 +112,7 @@ def displayUI():
     radiobutton_2.pack(padx=10, pady=5)
 
 
+    # combo box
     combobox_var = ctk.StringVar(value="option 1")  # set initial value
     combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
                                         # vaules will take in a a list of streams
