@@ -33,6 +33,8 @@ def displayUI():
     def button_event():
         url = entry.get()   
         event_label(app, "", event_color.get("dark"))
+        color = event_color.get("danger")
+        
         if len(url) >= 20 and len(url) <= 2048:
             
             file_Availability  = asyncio.run(file_verification(url))
@@ -48,11 +50,11 @@ def displayUI():
                     print("Download audio")
             else:
                 error = error_message.get("url_issue")
-                color = event_color.get("danger")
                 event_label(app, error, color)
             
         else:
-            event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
+            error = error_message.get("invalid_length")
+            event_label(app, error, color)
 
 
     # switch button event handler
