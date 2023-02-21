@@ -78,8 +78,9 @@ def displayUI():
 
    
     # Combo box event handler
-    def combobox_callback(choice):
+    def combobox_callback(choice) -> str:
         print("combobox dropdown clicked:", choice)
+        return choice
    
     
     # entry button
