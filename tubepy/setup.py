@@ -28,7 +28,7 @@ def displayUI():
         #label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         #label.pack(padx=10, pady=0)
 
-
+    # button event handler
     def button_event():
         url = entry.get()   
         event_label(app, "", event_color.get("dark"))
@@ -43,7 +43,7 @@ def displayUI():
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
 
-    # switch button callback function
+    # switch button event handler
     state: list = ["disabled"]
     def switch_event() -> str:
         switch = switch_var.get()
@@ -68,6 +68,19 @@ def displayUI():
             radiobutton_2.configure(state= state[0])
         
         return switch
+
+
+    # radio buttons event handler
+    def radiobutton_event() -> str:
+        radio_value = radio_var.get()
+        print(f"you selected { radio_value }")
+        return radio_value
+
+   
+    # Combo box event handler
+    def combobox_callback(choice):
+        print("combobox dropdown clicked:", choice)
+   
    
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                         placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
@@ -86,11 +99,6 @@ def displayUI():
     switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
 
 
-    def radiobutton_event() -> str:
-        radio_value = radio_var.get()
-        print(f"you selected { radio_value }")
-        return radio_value
-    
     radio_var = tkinter.StringVar(value="video")
     radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
                                                 command=radiobutton_event, variable= radio_var, value="video", state=state[0])
@@ -99,10 +107,6 @@ def displayUI():
     radiobutton_1.pack(padx=10, pady=5)
     radiobutton_2.pack(padx=10, pady=5)
 
-
-    # Combo box
-    def combobox_callback(choice):
-        print("combobox dropdown clicked:", choice)
 
     combobox_var = ctk.StringVar(value="option 1")  # set initial value
     combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
