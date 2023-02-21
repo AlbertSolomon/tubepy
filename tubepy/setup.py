@@ -49,11 +49,7 @@ def displayUI():
                         print("download Audio")
             else:
                 event_label(app, error_message.get("url_issue"), event_color.get("danger")) 
-                
-            print(url)
-            print(len(url))
             
-            print(  )
         else:
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
