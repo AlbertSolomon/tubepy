@@ -39,16 +39,17 @@ def displayUI():
             switch = switch_event()
             radiobutton_value = radiobutton_event()
             
-            if file_Availability == True:
+            if file_Availability:
                 if switch == "on":
-                    print("Quick dowload")
+                    print("Quick download")
+                elif radiobutton_value == "video":
+                    print("Download video")
                 else:
-                    if radiobutton_value == "video":
-                        print("download video")
-                    else:
-                        print("download Audio")
+                    print("Download audio")
             else:
-                event_label(app, error_message.get("url_issue"), event_color.get("danger")) 
+                error = error_message.get("url_issue")
+                color = event_color.get("danger")
+                event_label(app, error, color)
             
         else:
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
