@@ -19,6 +19,7 @@ empty = {
 error_message ={
     "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥",
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
+    "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
 }
 
 app_color = {
@@ -94,6 +95,11 @@ def validate_youtube_url(url) -> bool:
         '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
     
     return youtube_regex.match(url) is not None
+
+def file_existance(youtube_url):
+    request = requests.get(youtube_url, allow_redirects=False)
+    return request.status_code
+    
 
 async def search_file_Availability(youtube_url) -> int:
     async with aiohttp.ClientSession() as session:
