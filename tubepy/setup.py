@@ -36,17 +36,24 @@ def displayUI():
         if len(url) >= 20 and len(url) <= 2048:
             
             file_Availability  = asyncio.run(file_verification(url))
-            print(file_Availability)
+            switch = switch_event()
+            radiobutton_value = radiobutton_event()
+            
             if file_Availability == True:
-                print("downloading")
+                if switch == "on":
+                    print("Quick dowload")
+                else:
+                    if radiobutton_value == "video":
+                        print("download video")
+                    else:
+                        print("download Audio")
             else:
                 event_label(app, error_message.get("url_issue"), event_color.get("danger")) 
                 
             print(url)
             print(len(url))
             
-            print(switch_event())
-            print( radiobutton_event() )
+            print(  )
         else:
             event_label(app, error_message.get("invalid_length"), event_color.get("danger"))
 
