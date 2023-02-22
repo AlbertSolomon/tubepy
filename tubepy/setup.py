@@ -99,7 +99,17 @@ def displayUI():
    
     # progress label and progress bar
     def on_progress(stream, chunk, bytes_remaining):
-        pass
+        file_size = stream.filesize
+        downloaded_bytes = file_size - bytes_remaining
+        download_percentage = (downloaded_bytes / file_size) * 100
+        
+        percentage_string = str(int(download_percentage))
+        progress_label.configure(textvariable=percentage_string + " %")
+        progress_label.update()
+        
+        # progressbar
+        progressbar_percentage = float(download_percentage) / 100
+        progressbar.set(progressbar_percentage)
     
      
     # entry button
@@ -148,14 +158,13 @@ def displayUI():
                                     progress_color=app_color.get("primary"))
     progressbar.pack(padx=20, pady=10, side=tkinter.BOTTOM)
     progressbar.set(0)
-    progressbar.start()
 
 
     #progress label
-    label_text = tkinter.StringVar(value="0%")
-    label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
+    label_text = tkinter.StringVar(value="")
+    progress_label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
                         text_color=app_color.get("primary"), font=("", 16))
-    label.pack(side=tkinter.BOTTOM)
+    progress_label.pack(side=tkinter.BOTTOM)
 
     '''
     my_image = ctk.CTkImage(light_image=Image.open("c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"),        
