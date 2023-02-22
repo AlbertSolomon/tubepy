@@ -96,7 +96,12 @@ def displayUI():
         print("combobox dropdown clicked:", choice)
         return choice
    
+   
+    # progress label and progress bar
+    def on_progress(stream, chunk, bytes_remaining):
+        pass
     
+     
     # entry button
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                         placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
