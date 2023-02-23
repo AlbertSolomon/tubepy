@@ -157,14 +157,14 @@ def displayUI():
 
 
     # progress bar
-    progressbar = ctk.CTkProgressBar(master=app, width=320, height=25, corner_radius=50,
+    progressbar = ctk.CTkProgressBar(master=app, width=400, height=20, corner_radius=50,
                                     progress_color=app_color.get("primary"))
-    progressbar.pack(padx=20, pady=10, side=tkinter.BOTTOM)
+    progressbar.pack(padx=20, pady=(5,30), side=tkinter.BOTTOM)
     progressbar.set(0)
 
 
     #progress label
-    label_text = tkinter.StringVar(value="")
+    label_text = tkinter.StringVar(value="3 %")
     progress_label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
                         text_color=app_color.get("primary"), font=("", 16))
     progress_label.pack(side=tkinter.BOTTOM)
