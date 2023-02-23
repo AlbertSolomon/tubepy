@@ -35,8 +35,7 @@ def displayUI():
         event_label(app, "", event_color.get("dark"))
         color = event_color.get("danger")
         
-        if len(url) >= 20 and len(url) <= 2048:
-            
+        if len(url) >= 20 and len(url) <= 2048:           
             file_Availability  = asyncio.run(file_verification(url))
             switch = switch_event()
             radiobutton_value = radiobutton_event()
@@ -57,6 +56,8 @@ def displayUI():
         else:
             error = error_message.get("invalid_length")
             event_label(app, error, color)
+        
+        entry.delete(0, ctk.END)
 
 
     # switch button event handler
