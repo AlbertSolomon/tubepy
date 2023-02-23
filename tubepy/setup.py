@@ -137,10 +137,13 @@ def displayUI():
 
     # radio button
     radio_var = tkinter.StringVar(value="video")
-    radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Video",
-                                                command=radiobutton_event, variable= radio_var, value="video", state=state[0])
-    radiobutton_2 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"), hover_color= app_color.get("hover_color"), text="Audio",
-                                                command=radiobutton_event, variable= radio_var, value="audio", state=state[0])
+    radiobutton_1 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"),
+                                       hover_color= app_color.get("hover_color"), text="Video",
+                                        command=radiobutton_event, variable= radio_var, value="video", state=state[0])
+    
+    radiobutton_2 = ctk.CTkRadioButton(master=app, height=20, radiobutton_width=20, radiobutton_height=20, fg_color=app_color.get("primary"),
+                                        hover_color= app_color.get("hover_color"), text="Audio",
+                                        command=radiobutton_event, variable= radio_var, value="audio", state=state[0])
     radiobutton_1.pack(padx=10, pady=5)
     radiobutton_2.pack(padx=10, pady=5)
 
@@ -149,9 +152,7 @@ def displayUI():
     combobox_var = ctk.StringVar(value="option 1")  # set initial value
     combobox = ctk.CTkComboBox(master=app, button_color=app_color.get("hover_color"),
                                         # vaules will take in a a list of streams
-                                        values=["option 1", "option 2", "option 3", "option 4"],
-                                        state= state[0],
-                                        command=combobox_callback,
+                                        values=["option 1", "option 2", "option 3", "option 4"], state= state[0], command=combobox_callback,
                                         variable=combobox_var)
     combobox.pack(padx=40, pady=10, side=tkinter.TOP)
 
