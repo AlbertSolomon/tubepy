@@ -8,7 +8,7 @@ import importlib
 import asyncio
 from watchdog.observers import Observer
 from PIL import Image
-from app import audio_download
+from app import audio_download, quick_download
 from settings import download_path_settings
 from lang import error_message, event_color, app_color, widget_state, CodeChangeHandler, file_verification
 
@@ -44,6 +44,8 @@ def displayUI():
             if file_Availability:
                 if switch == "on":
                     print("Quick download")
+                    quick_download(url, on_progress)
+                    
                 elif radiobutton_value == "video":
                     print("Download video")
                 else:
