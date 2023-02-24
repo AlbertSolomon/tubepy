@@ -179,6 +179,7 @@ def displayUI():
 
 
 if __name__ == "__main__":
+    
     event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ['python'] + sys.argv))
     observer = Observer()
     observer.schedule(event_handler, '.', recursive=True)
@@ -187,6 +188,7 @@ if __name__ == "__main__":
     try:
         displayUI()
     except Exception as e:
+        
         traceback.print_exc()
         tb = e.__traceback__
         filename = tb.tb_frame.f_code.co_filename
