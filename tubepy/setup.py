@@ -6,6 +6,7 @@ import traceback
 import linecache
 import importlib
 import asyncio
+import threading
 from watchdog.observers import Observer
 from PIL import Image
 from app import audio_download, quick_download
@@ -28,6 +29,10 @@ def displayUI():
         label.place(relx=0.5, rely=0.02, anchor=tkinter.CENTER)
         #label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         #label.pack(padx=10, pady=0)
+        
+    def on_progress():
+        pass
+    
 
     # button event handler
     def button_event():
@@ -38,12 +43,17 @@ def displayUI():
         if len(url) >= 20 and len(url) <= 2048:           
             file_Availability  = asyncio.run(file_verification(url))
             switch = switch_event()
-            radiobutton_value = radiobutton_event()
+            radiobutton_value = radiobutton_event() 
             
             if file_Availability:
                 if switch == "on":
+                    
                     print("Quick download")
-                    quick_download(url, on_progress)
+                    
+                    download_thread = threading.Thread(target= quick_download, args=(url,))
+                    # download_thread = threading.Thread(target= quick_download, args=(url,))
+                    download_thread.start()
+                    # quick_download(url, on_progress)
                     
                 elif radiobutton_value == "video":
                     print("Download video")
@@ -99,22 +109,7 @@ def displayUI():
         print("combobox dropdown clicked:", choice)
         return choice
    
-   
-    # progress label and progress bar
-    def on_progress(stream, chunk, bytes_remaining):
-        file_size = stream.filesize
-        downloaded_bytes = file_size - bytes_remaining
-        download_percentage = (downloaded_bytes / file_size) * 100
-        
-        percentage_string = str(int(download_percentage))
-        progress_label.configure(textvariable=percentage_string + " %")
-        progress_label.update()
-        
-        # progressbar
-        progressbar_percentage = float(download_percentage) / 100
-        progressbar.set(progressbar_percentage)
-    
-     
+ 
     # entry button
     entry = ctk.CTkEntry(master=app, border_color=app_color.get("primary"), text_color=app_color.get("primary"), 
                         placeholder_text="Enter Youtube URL here", width=500, height=50, border_width=2, corner_radius=50)
@@ -165,7 +160,7 @@ def displayUI():
 
 
     #progress label
-    label_text = tkinter.StringVar(value="3 %")
+    label_text = tkinter.StringVar(value="")
     progress_label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
                         text_color=app_color.get("primary"), font=("", 16))
     progress_label.pack(side=tkinter.BOTTOM)

@@ -13,9 +13,11 @@ current_time = time.time()
 location = read_config_file()
 preferred_location = location["download_location"]
 
-def quick_download(youtube_url, on_progress):
-    youtube_file = YouTube(youtube_url, on_progress_callback=on_progress) 
+def quick_download(youtube_url):
+    youtube_file = YouTube(youtube_url) 
+    # youtube_file = YouTube(youtube_url) 
     youtube_file.streams.get_highest_resolution().download(preferred_location)
+
 
 def data_save_download(youtube_url):
     youtube_file = YouTube(youtube_url)

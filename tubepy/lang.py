@@ -82,6 +82,7 @@ def clean_filename(name) -> str:
         # For some reason the file system (Windows at least) is having trouble saving files that are over 180ish
         # characters.  I'm not sure why this is, as the file name limit should be around 240. But either way, this
         # method has been adapted to work with the results that I am consistently getting.
+        
         forbidden_chars = '"*\\/\'.|?:<>'
         filename = (''.join([x if x not in forbidden_chars else '#' for x in name])).replace('  ', ' ').strip()
         if len(filename) >= 176:
@@ -113,6 +114,7 @@ async def search_file_Availability(youtube_url) -> int:
 async def file_verification(youtube_url) -> bool:
     validatd_url = validate_youtube_url(youtube_url)
     status = await search_file_Availability(youtube_url) if validatd_url else None
+    
     if status == 200:
         return True
     return False
