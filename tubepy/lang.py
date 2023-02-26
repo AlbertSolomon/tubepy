@@ -121,6 +121,9 @@ async def file_verification(youtube_url) -> bool:
 
 # adding stream codes to a list 
 def add_audio_stream_codes(youtube_url) -> list:
+    """ This function tries to extract the audio stream codes from the youtube url.
+    it returns a list of audio stream codes, but requires further stripping... """
+    
     youtube_file = YouTube(youtube_url)
     streams: list = []
     
