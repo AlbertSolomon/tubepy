@@ -14,10 +14,26 @@ location = read_config_file()
 preferred_location = location["download_location"]
 
 def quick_download(youtube_url):
-    youtube_file = YouTube(youtube_url) 
+    youtube_file = YouTube(youtube_url, on_progress_callback=on_progress) 
     # youtube_file = YouTube(youtube_url) 
     youtube_file.streams.get_highest_resolution().download(preferred_location)
+    
+def on_progress(stream, chunk, bytes_remaining):
+    youtube_filesize = stream.filesize
+    print(f"youtube file size : { youtube_filesize }")
 
+    downloaded_chunk = youtube_filesize - bytes_remaining
+    print(f"downloaded chunk size : { downloaded_chunk }")
+    
+    if bytes_remaining > 0:
+        download_percentage = downloaded_chunk / youtube_filesize * 100
+        print(f"download percentage : { download_percentage }")
+    else:
+        print("Download complete!")
+    
+    # download_percentage = downloaded_chunk / youtube_filesize * 100
+    # print(f"download percentage : { download_percentage }")
+quick_download("https://www.youtube.com/shorts/fAmZHmPew5o")
 
 def data_save_download(youtube_url):
     youtube_file = YouTube(youtube_url)
