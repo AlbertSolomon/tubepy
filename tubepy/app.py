@@ -53,6 +53,8 @@ def audio_download(youtube_url):
     '''
     try:
         youtube_file = YouTube(youtube_url)
+    
+    # this is yet to be tested
     except VideoUnavailable:
         print(error_message.get("VideoUnavailable"))
     else:
