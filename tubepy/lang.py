@@ -100,7 +100,7 @@ def validate_youtube_url(url) -> bool:
 
 def file_existance(youtube_url) -> int:
     ''' This function is a available for testing purposes, thus to compare
-        it's result with the search_file_Availability function . '''
+        it's result with the search_file_Availability function. '''
         
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
