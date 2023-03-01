@@ -1,4 +1,4 @@
-# tubepy
+# Tubepy
 
 > Youtube video downloader in python.
 
@@ -14,3 +14,5 @@
 > After creating the virtual environment, run the following command to install the requirements.
 
 ` pip install -r requirements.txt `
+
+run the project like so ` python tubepy/setup.py ` on windows, ` python3 tutepy/setup.py ` on unix based systems.
