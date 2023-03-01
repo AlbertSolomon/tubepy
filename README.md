@@ -4,7 +4,7 @@
 
 ## version 1
 
-> This is an application which uses the custom tkinter library to render GUI widgets and pytube library to download youtube files.
+> This is an application which uses the [custom tkinter](https://github.com/TomSchimansky/CustomTkinter) library to render GUI widgets and pytube library to download youtube files.
 
 ## installation
 
