@@ -116,12 +116,6 @@ def displayUI():
     entry.pack(padx=20, pady=30)
         
 
-    # download button    
-    button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
-                        corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
-    button.pack(padx=10, pady=5)
-
-
     # swich button
     switch_var = ctk.StringVar(value="on")
     switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
@@ -150,6 +144,12 @@ def displayUI():
                                         values=["option 1", "option 2", "option 3", "option 4"], state= state[0], command=combobox_callback,
                                         variable=combobox_var)
     combobox.pack(padx=40, pady=10, side=tkinter.TOP)
+    
+    
+    # download button    
+    button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
+                        corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
+    button.pack(padx=10, pady=5)
 
 
     # progress bar
