@@ -121,7 +121,7 @@ def displayUI():
     switch_1 = ctk.CTkSwitch(master=app, button_color=app_color.get("primary"), button_hover_color=app_color.get("hover_color"), 
                             progress_color=app_color.get("primary"),text="Quick Download", command=switch_event,variable=switch_var, 
                             onvalue="on", offvalue="off")
-    switch_1.pack(padx=0, pady=10, side=tkinter.TOP)
+    switch_1.pack(padx=0, pady=5, side=tkinter.TOP)
 
 
     # radio button
@@ -149,7 +149,7 @@ def displayUI():
     # download button    
     button = ctk.CTkButton(master=app, text="Download", command=button_event, width=150, height=50, border_width=0, text_color= app_color.get("extra_color"), 
                         corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), font=("", 16))
-    button.pack(padx=10, pady=5)
+    button.pack(padx=10, pady=20)
 
 
     # progress bar
