@@ -40,9 +40,18 @@ def displayUI():
         if bytes_remaining > 0:
             download_percentage = downloaded_chunk / youtube_filesize * 100
             print(f"download percentage : { download_percentage }")
+            completion_percentage = str(int( download_percentage ))
             
+            #? buggy progress label
+            progress_label.configure(textvariable=completion_percentage)
+            progress_label.update()
+            
+            # progress bar
+            progressbar.set(float(download_percentage) / 100 )
+            print(float(download_percentage) / 100 )
         else:
             print("Download complete!")
+            progressbar.set(1)
         
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
