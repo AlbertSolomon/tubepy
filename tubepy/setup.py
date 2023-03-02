@@ -30,8 +30,22 @@ def displayUI():
         #label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         #label.pack(padx=10, pady=0)
         
-    def on_progress():
-        pass
+    def on_progress(stream, chunk, bytes_remaining):
+        youtube_filesize = stream.filesize
+        print(f"youtube file size : { youtube_filesize }")
+
+        downloaded_chunk = youtube_filesize - bytes_remaining
+        print(f"downloaded chunk size : { downloaded_chunk }")
+        
+        if bytes_remaining > 0:
+            download_percentage = downloaded_chunk / youtube_filesize * 100
+            print(f"download percentage : { download_percentage }")
+            
+        else:
+            print("Download complete!")
+        
+        # download_percentage = downloaded_chunk / youtube_filesize * 100
+        # print(f"download percentage : { download_percentage }")
     
 
     # button event handler
@@ -50,8 +64,8 @@ def displayUI():
                     
                     print("Quick download")
                     
-                    download_thread = threading.Thread(target= quick_download, args=(url,))
-                    # download_thread = threading.Thread(target= quick_download, args=(url,))
+                    download_thread = threading.Thread(target= quick_download, args=(url,on_progress))
+                    #download_thread = threading.Thread(target= quick_download, args=(url,))
                     download_thread.start()
                     # quick_download(url, on_progress)
                     
