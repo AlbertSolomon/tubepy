@@ -93,9 +93,9 @@ def validate_youtube_url(url) -> bool:
     youtube_regex = re.compile(
         r'(https?://)?(www\.)?'
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
-        '(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})')
-    
-    return youtube_regex.match(url) is not None
+        '(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})')
+
+    return youtube_regex.match(url) is not None or 'youtube.com/shorts/' in url
 
 
 def file_existance(youtube_url) -> int:
