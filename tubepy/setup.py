@@ -43,7 +43,7 @@ def displayUI():
             completion_percentage = str(int( download_percentage ))
             
             #? buggy progress label
-            progress_label.configure(textvariable=completion_percentage)
+            progress_label.configure(text=completion_percentage + " %")
             progress_label.update()
             
             # progress bar
@@ -52,6 +52,7 @@ def displayUI():
         else:
             print("Download complete!")
             progressbar.set(1)
+            progress_label.configure(text="100 %")
         
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
@@ -74,9 +75,7 @@ def displayUI():
                     print("Quick download")
                     
                     download_thread = threading.Thread(target= quick_download, args=(url,on_progress))
-                    #download_thread = threading.Thread(target= quick_download, args=(url,))
                     download_thread.start()
-                    # quick_download(url, on_progress)
                     
                 elif radiobutton_value == "video":
                     print("Download video")
@@ -183,9 +182,8 @@ def displayUI():
 
 
     #progress label
-    label_text = tkinter.StringVar(value="")
-    progress_label = ctk.CTkLabel(master=app, textvariable=label_text, width=25, height=25, corner_radius=50, 
-                        text_color=app_color.get("primary"), font=("", 16))
+    progress_label = ctk.CTkLabel(master=app, width=25, height=25, corner_radius=50, 
+                        text_color=app_color.get("primary"),text="", font=("", 16))
     progress_label.pack(side=tkinter.BOTTOM)
 
     '''
