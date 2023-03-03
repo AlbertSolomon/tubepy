@@ -19,12 +19,12 @@ def quick_download(youtube_url, on_progress):
     youtube_file.streams.get_highest_resolution().download(preferred_location)
     
 
-def data_save_download(youtube_url):
-    youtube_file = YouTube(youtube_url)
+def data_save_download(youtube_url, on_progress):
+    youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     youtube_file.streams.get_lowest_resolution().download(preferred_location)
 
-def download(youtube_url):
-    youtube_file = YouTube(youtube_url)
+def download(youtube_url, on_progress):
+    youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     
     # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
     progressive_res = youtube_file.streams.get_by_itag(video_res)
