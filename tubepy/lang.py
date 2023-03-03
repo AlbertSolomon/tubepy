@@ -94,6 +94,10 @@ def validate_youtube_url(url) -> bool:
         r'(https?://)?(www\.)?'
         '(youtube|youtu|youtube-nocookie)\.(com|be)/'
         '(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})')
+    
+    #? REGEX NEEDS TO BE REVISITED
+    # acceptable_urls = ['youtube.com/shorts/', 'youtu.be/', 'youtube.com', 'www.youtube.com', 'm.youtube.com'] 
+    # return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls) 
 
     return youtube_regex.match(url) is not None or 'youtube.com/shorts/' in url
 
