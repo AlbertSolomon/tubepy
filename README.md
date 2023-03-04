@@ -1,4 +1,10 @@
-# Tubepy
+<div align="center">
+
+<img width="150" src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"/>
+
+</div>
+
+
 
 > Youtube video downloader in python.
 
