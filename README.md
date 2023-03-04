@@ -1,10 +1,10 @@
-<div align="center">
+<div align="right">
 
 <img width="150" src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"/>
 
 </div>
 
-
+# TUBEPY
 
 > Youtube video downloader in python.
 
