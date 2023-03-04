@@ -13,6 +13,7 @@ current_time = time.time()
 location = read_config_file()
 preferred_location = location["download_location"]
 
+# TODO lETS TRY TO USED A YOUTUBE FILE DECORETOR SO THAT WE MAKE THE CODE D.R.Y
 def quick_download(youtube_url, on_progress):
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress) 
     # youtube_file = YouTube(youtube_url) 
@@ -22,13 +23,15 @@ def quick_download(youtube_url, on_progress):
 def data_save_download(youtube_url, on_progress):
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     youtube_file.streams.get_lowest_resolution().download(preferred_location)
+    
 
 def download(youtube_url, on_progress):
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     
     # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
     progressive_res = youtube_file.streams.get_by_itag(video_res)
-    progressive_res.download(preferred_location) 
+    progressive_res.download(preferred_location)
+    
     
 #? download audio files from youtube
 def audio_download(youtube_url):
