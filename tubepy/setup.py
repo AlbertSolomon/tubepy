@@ -50,13 +50,15 @@ def displayUI():
 
         downloaded_chunk = youtube_filesize - bytes_remaining
         print(f"downloaded chunk size : { downloaded_chunk }")
+        
+        progress_label.pack(padx= 20, pady=(5, 10), side=tkinter.BOTTOM)
+        progressbar.pack(padx=20, pady=(5, 5), side=tkinter.BOTTOM)
 
         if bytes_remaining > 0:
             download_percentage = downloaded_chunk / youtube_filesize * 100
             print(f"download percentage : { download_percentage }")
             completion_percentage = str(int(download_percentage))
 
-            # ? buggy progress label
             progress_label.configure(text=completion_percentage + " %")
             progress_label.update()
 
@@ -241,8 +243,9 @@ def displayUI():
         corner_radius=50,
         progress_color=app_color.get("primary"),
     )
-    progressbar.pack(padx=20, pady=(5, 30), side=tkinter.BOTTOM)
+    
     progressbar.set(0)
+    progressbar.pack_forget()
 
     # progress label
     progress_label = ctk.CTkLabel(
@@ -254,7 +257,7 @@ def displayUI():
         text="",
         font=("", 16),
     )
-    progress_label.pack(side=tkinter.BOTTOM)
+    progress_label.pack_forget()
 
     '''my_image = ctk.CTkImage(
         light_image=Image.open(
