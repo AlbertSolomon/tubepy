@@ -1,22 +1,23 @@
+import asyncio
 import json
 import re
-import requests # this has been abundonned since its not asynchronous
-import asyncio
+
 import aiohttp
+import requests  # this 
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
     "successful": " download successful 🥳",
-    "unsuccessful": "download failed... 💔", 
+    "unsuccessful": "download failed... 💔",
 }
 
 empty = {
-    "empty_location":  " empty default location",
+    "empty_location": " empty default location",
 }
 
-error_message ={
+error_message = {
     "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥",
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
@@ -39,22 +40,23 @@ event_color = {
 
 widget_state = ["disabled", "normal"]
 
-download_location = '~/Downloads'
-'''
+download_location = "~/Downloads"
+"""
     {
         "download_location": "~/Downloads"
     }
-'''
+"""
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
-sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp" #"https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works) 
+sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp"  # "https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works)
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
-    with open('utilities/config.json', 'r') as config_location:
+    with open("utilities/config.json", "r") as config_location:
         location = json.load(config_location)
-        
+
     return location
+
 
 # print(read_config_file())
 
@@ -65,6 +67,7 @@ progressive_vtags = {
     "720p": 22,
 }
 
+
 class CodeChangeHandler(FileSystemEventHandler):
     def __init__(self, callback):
         super().__init__()
@@ -73,66 +76,75 @@ class CodeChangeHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         if event.is_directory:
             return
-        elif event.event_type in ['modified', 'created', 'deleted']:
+        elif event.event_type in ["modified", "created", "deleted"]:
             self.callback()
+
 
 # function from https://github.com/JNYH/pytube/blob/master/pytube_sample_code.ipynb
 def clean_filename(name) -> str:
-        """Ensures each file name does not contain forbidden characters and is within the character limit"""
-        # For some reason the file system (Windows at least) is having trouble saving files that are over 180ish
-        # characters.  I'm not sure why this is, as the file name limit should be around 240. But either way, this
-        # method has been adapted to work with the results that I am consistently getting.
-        
-        forbidden_chars = '"*\\/\'.|?:<>'
-        filename = (''.join([x if x not in forbidden_chars else '#' for x in name])).replace('  ', ' ').strip()
-        if len(filename) >= 176:
-            filename = filename[:170] + '...'
-        return filename
-    
+    """Ensures each file name does not contain forbidden characters and is within the character limit"""
+    # For some reason the file system (Windows at least) is having trouble saving files that are over 180ish
+    # characters.  I'm not sure why this is, as the file name limit should be around 240. But either way, this
+    # method has been adapted to work with the results that I am consistently getting.
+
+    forbidden_chars = "\"*\\/'.|?:<>"
+    filename = (
+        ("".join([x if x not in forbidden_chars else "#" for x in name]))
+        .replace("  ", " ")
+        .strip()
+    )
+    if len(filename) >= 176:
+        filename = filename[:170] + "..."
+    return filename
+
+
 def validate_youtube_url(url) -> bool:
     youtube_regex = re.compile(
-        r'(https?://)?(www\.)?'
-        '(youtube|youtu|youtube-nocookie)\.(com|be)/'
-        '(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})')
-    
-    #? REGEX NEEDS TO BE REVISITED
-    # acceptable_urls = ['youtube.com/shorts/', 'youtu.be/', 'youtube.com', 'www.youtube.com', 'm.youtube.com'] 
-    # return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls) 
+        r"(https?://)?(www\.)?"
+        "(youtube|youtu|youtube-nocookie)\.(com|be)/"
+        "(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})"
+    )
 
-    return youtube_regex.match(url) is not None or 'youtube.com/shorts/' in url
+    # ? REGEX NEEDS TO BE REVISITED
+    # acceptable_urls = ['youtube.com/shorts/', 'youtu.be/', 'youtube.com', 'www.youtube.com', 'm.youtube.com']
+    # return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls)
+
+    return youtube_regex.match(url) is not None or "youtube.com/shorts/" in url
 
 
 def file_existance(youtube_url) -> int:
-    ''' This function is a available for testing purposes, thus to compare
-        it's result with the search_file_Availability function. '''
-        
+    """This function is a available for testing purposes, thus to compare
+    it's result with the search_file_Availability function."""
+
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
-    
+
 
 async def search_file_Availability(youtube_url) -> int:
     async with aiohttp.ClientSession() as session:
         async with session.get(youtube_url, allow_redirects=False) as response:
             return response.status
 
+
 async def file_verification(youtube_url) -> bool:
     validatd_url = validate_youtube_url(youtube_url)
     status = await search_file_Availability(youtube_url) if validatd_url else None
-    
+
     if status == 200:
         return True
     return False
 
-# adding stream codes to a list 
+
+# adding stream codes to a list
 def add_audio_stream_codes(youtube_url) -> list:
-    """ This function tries to extract the audio stream codes from the youtube url.
-    it returns a list of audio stream codes, but requires further stripping... """
-    
+    """This function tries to extract the audio stream codes from the youtube url.
+    it returns a list of audio stream codes, but requires further stripping..."""
+
     youtube_file = YouTube(youtube_url)
     streams: list = []
-    
+
     available_audiofiles = youtube_file.streams.filter(only_audio=True)
     for available_audiofile in available_audiofiles:
         streams.append(available_audiofile)
-        
+
     return streams
