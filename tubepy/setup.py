@@ -50,8 +50,8 @@ def displayUI():
 
         downloaded_chunk = youtube_filesize - bytes_remaining
         print(f"downloaded chunk size : { downloaded_chunk }")
-        
-        progress_label.pack(padx= 20, pady=(5, 10), side=tkinter.BOTTOM)
+
+        progress_label.pack(padx=20, pady=(5, 10), side=tkinter.BOTTOM)
         progressbar.pack(padx=20, pady=(5, 5), side=tkinter.BOTTOM)
 
         if bytes_remaining > 0:
@@ -145,6 +145,9 @@ def displayUI():
     def combobox_callback(choice) -> str:
         print("combobox dropdown clicked:", choice)
         return choice
+
+    
+    #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
 
     # entry button
     entry = ctk.CTkEntry(
@@ -243,7 +246,7 @@ def displayUI():
         corner_radius=50,
         progress_color=app_color.get("primary"),
     )
-    
+
     progressbar.set(0)
     progressbar.pack_forget()
 
@@ -259,15 +262,7 @@ def displayUI():
     )
     progress_label.pack_forget()
 
-    '''my_image = ctk.CTkImage(
-        light_image=Image.open(
-            "c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"
-        ),
-        dark_image=Image.open(
-            "c:/Users/solom/OneDrive/Documents/projects/tubepy/assets/wave.svg"
-        ),
-        size=(30, 30),
-    )'''
+    
 
     app.mainloop()
 
