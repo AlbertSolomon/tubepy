@@ -3,7 +3,7 @@ import json
 import re
 
 import aiohttp
-import requests  # this 
+import requests  # this
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 
@@ -138,13 +138,24 @@ async def file_verification(youtube_url) -> bool:
 # adding stream codes to a list
 def add_audio_stream_codes(youtube_url) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
-    it returns a list of audio stream codes, but requires further stripping..."""
+    it returns a list of audio stream codes
+
+    :fulldetails is for testing purposes..."""
 
     youtube_file = YouTube(youtube_url)
     streams: list = []
+    itag: list = []
+    abr: list = []
 
+    fulldetails: list = []  # for testing purposes
     available_audiofiles = youtube_file.streams.filter(only_audio=True)
-    for available_audiofile in available_audiofiles:
-        streams.append(available_audiofile)
 
+    for available_audiofile in available_audiofiles:
+        itag.append(available_audiofile.itag)
+        abr.append(available_audiofile.abr)
+        # fulldetails.append(available_audiofile)
+
+    streams.append(abr)
+    streams.append(itag)
+    # streams.append(fulldetails)
     return streams
