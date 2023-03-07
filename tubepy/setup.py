@@ -50,7 +50,6 @@ def displayUI():
             frame.tk_popup(event.x_root, event.y_root)
         finally:
             frame.grab_release()
-            
 
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
@@ -270,7 +269,13 @@ def displayUI():
     progress_label.pack_forget()
 
     RightClickMenu = tkinter.Menu(
-        entry, tearoff=False,activebackground=app_color.get("primary") ,background="#565b5e", fg=app_color.get("primary"), borderwidth=0, bd=0, 
+        entry,
+        tearoff=False,
+        activebackground=app_color.get("primary"),
+        background="#565b5e",
+        fg=app_color.get("primary"),
+        borderwidth=0,
+        bd=0,
     )
     RightClickMenu.add_command(
         label="Paste", command=lambda: entry.insert(tkinter.END, app.clipboard_get())
