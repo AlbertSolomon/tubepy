@@ -44,6 +44,14 @@ def displayUI():
         # label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         # label.pack(padx=10, pady=0)
 
+    # right click context menu logic
+    def do_popup(event, frame):
+        try:
+            frame.tk_popup(event.x_root, event.y_root)
+        finally:
+            frame.grab_release()
+            
+
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
         print(f"youtube file size : { youtube_filesize }")
@@ -146,7 +154,6 @@ def displayUI():
         print("combobox dropdown clicked:", choice)
         return choice
 
-    
     #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
 
     # entry button
@@ -262,7 +269,18 @@ def displayUI():
     )
     progress_label.pack_forget()
 
-    
+    RightClickMenu = tkinter.Menu(
+        entry, tearoff=False, background="#565b5e", fg="white", borderwidth=0, bd=0
+    )
+    RightClickMenu.add_command(
+        label="Paste", command=lambda: entry.insert(tkinter.END, app.clipboard_get())
+    )
+    RightClickMenu.add_command(
+        label="Copy", command=lambda: app.clipboard_append(entry.get())
+    )
+
+    entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
+    app.bind("<1>", lambda event: event.widget.focus_set())
 
     app.mainloop()
 
