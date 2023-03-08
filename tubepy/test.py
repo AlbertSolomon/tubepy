@@ -30,7 +30,7 @@ def test_url_input() -> None:
 # print(file_existance(sample_url))
 # print(asyncio.run(search_file_Availability(sample_url)))
 # print(asyncio.run(file_verification(sample_url)))
-#
-audio_streams: list = add_audio_stream_codes(test_url_input())
-print(audio_streams)
 
+audio_streams: list = []
+audio_streams = asyncio.run( add_audio_stream_codes(test_url_input()) ) 
+print(f"audio streams| { audio_streams[0] }")
