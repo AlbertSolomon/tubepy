@@ -16,6 +16,7 @@ from lang import (
     event_color,
     file_verification,
     widget_state,
+    add_audio_stream_codes,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -29,6 +30,9 @@ def displayUI():
     app = ctk.CTk()
     app.geometry("840x640")
     app.title("Tubepy")
+    
+    audio_itags: list = []
+    audio_abrs: list = ["128k", "192k"] 
 
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
@@ -100,7 +104,7 @@ def displayUI():
                         target=quick_download, args=(url, on_progress)
                     )
                     download_thread.start()
-
+                
                 elif radiobutton_value == "video":
                     print("Download video")
                 else:
@@ -216,12 +220,12 @@ def displayUI():
     radiobutton_2.pack(padx=10, pady=5)
 
     # combo box
-    combobox_var = ctk.StringVar(value="option 1")  # set initial value
+    combobox_var = ctk.StringVar(value="select 👇🏾")  # set initial value
     combobox = ctk.CTkComboBox(
         master=app,
         button_color=app_color.get("hover_color"),
         # vaules will take in a a list of streams
-        values=["option 1", "option 2", "option 3", "option 4"],
+        values=audio_abrs,
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
@@ -243,6 +247,8 @@ def displayUI():
         font=("", 16),
     )
     button.pack(padx=10, pady=20)
+    
+    frame = ctk.CTkFrame(master=app, width=200, height=200)
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
@@ -277,9 +283,11 @@ def displayUI():
         borderwidth=0,
         bd=0,
     )
+    
     RightClickMenu.add_command(
         label="Paste", command=lambda: entry.insert(tkinter.END, app.clipboard_get())
     )
+    
     RightClickMenu.add_command(
         label="Copy", command=lambda: app.clipboard_append(entry.get())
     )
