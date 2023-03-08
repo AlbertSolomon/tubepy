@@ -136,18 +136,18 @@ async def file_verification(youtube_url) -> bool:
 
 
 # adding stream codes to a list
-def add_audio_stream_codes(youtube_url) -> list:
+async def add_audio_stream_codes(youtube_url) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
     it returns a list of audio stream codes
 
-    :fulldetails is for testing purposes..."""
+    :fulldetails is for testing purposes ..."""
 
     youtube_file = YouTube(youtube_url)
     streams: list = []
     itag: list = []
     abr: list = []
 
-    fulldetails: list = []  # for testing purposes
+    fulldetails: list = []  # for testing purposesyyy
     available_audiofiles = youtube_file.streams.filter(only_audio=True)
 
     for available_audiofile in available_audiofiles:
