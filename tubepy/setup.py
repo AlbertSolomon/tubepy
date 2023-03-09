@@ -120,6 +120,8 @@ def displayUI():
         else:
             error = error_message.get("invalid_length")
             event_label(app, error, color)
+            
+        print(combobox.get())
 
         entry.delete(0, ctk.END)
 
@@ -155,8 +157,6 @@ def displayUI():
         radio_value = radio_var.get()
         url = entry.get()
         
-        print(url)
-        
         print(f"you selected { radio_value }")
         
         if radio_value == "audio":
@@ -164,12 +164,18 @@ def displayUI():
             
             if len(audio_abrs) == 0 and len(url) != 0:
                 event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
+                
+                try:
+                    audio_streams = asyncio.run(add_audio_stream_codes(url))            
+                    audio_abrs = audio_streams[0]
+                    combobox.configure(values=audio_abrs)
+                except:
+                    event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
-                None
+                event_label(app, "", event_color.get("dark"))
             
-            '''audio_streams = asyncio.run(add_audio_stream_codes(url))            
-            audio_abrs = audio_streams[0]'''
-        
+            print(audio_abrs)
+                    
         return radio_value
 
     # Combo box event handler
