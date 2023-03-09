@@ -105,11 +105,15 @@ def validate_youtube_url(url) -> bool:
         "(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})"
     )
 
-    # ? REGEX NEEDS TO BE REVISITED
-    # acceptable_urls = ['youtube.com/shorts/', 'youtu.be/', 'youtube.com', 'www.youtube.com', 'm.youtube.com']
-    # return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls)
+    acceptable_urls = [
+        "youtube.com/",
+        "www.youtube.com/",
+        "m.youtube.com/",
+        "youtu.be/",
+        "youtube-nocookie.com/"
+    ]
 
-    return youtube_regex.match(url) is not None or "youtube.com/shorts/" in url
+    return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls)
 
 
 def file_existance(youtube_url) -> int:
