@@ -24,7 +24,7 @@ def test_url_input() -> None:
 # audio_download(test_url_input())
 # DASH_download(test_url_input())
 
-# quick_download(test_url_input())
+quick_download(test_url_input())
 # print(validate_youtube_url(sample_url))
 
 # print(file_existance(sample_url))
