@@ -166,9 +166,16 @@ def displayUI():
                 event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
                 
                 try:
-                    audio_streams = asyncio.run(add_audio_stream_codes(url))            
-                    audio_abrs = audio_streams[0]
-                    combobox.configure(values=audio_abrs)
+                    
+                    def add_audiostreams(url):
+                        audio_streams = asyncio.run(add_audio_stream_codes(url))      
+                        audio_abrs = audio_streams[0]
+                        combobox.configure(values=audio_abrs)
+                        event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
+                        
+                    stream_thread = threading.Thread(target=add_audiostreams, args=(url,))
+                    stream_thread.start()
+                    
                 except:
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
