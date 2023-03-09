@@ -9,6 +9,7 @@ from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
+    "loadstreams": "loading audio frequencies... 🎶",
     "successful": " download successful 🥳",
     "unsuccessful": "download failed... 💔",
 }
@@ -56,7 +57,6 @@ def read_config_file():
         location = json.load(config_location)
 
     return location
-
 
 # print(read_config_file())
 
@@ -142,7 +142,9 @@ async def file_verification(youtube_url) -> bool:
 # adding stream codes to a list
 async def add_audio_stream_codes(youtube_url) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
-    it returns a list of audio stream codes
+    it returns a list of audio stream codes. Its simply a list of lists, it has two indices and this is it's format:
+    
+    stream[abr][itag] where streams[0] returns a list of audio abr and streams[1] returns a list of audio stream itags from a Stream object.
 
     :fulldetails is for testing purposes ..."""
 
