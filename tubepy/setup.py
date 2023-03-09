@@ -17,11 +17,16 @@ from lang import (
     file_verification,
     widget_state,
     add_audio_stream_codes,
+    downloadstatus,
 )
 from PIL import Image
 from settings import download_path_settings
 from watchdog.observers import Observer
 
+
+audio_itags: list = []
+audio_abrs: list = []
+stream_dict: dict = {}
 
 def displayUI():
     ctk.set_appearance_mode("dark")
@@ -30,9 +35,7 @@ def displayUI():
     app = ctk.CTk()
     app.geometry("840x640")
     app.title("Tubepy")
-    
-    audio_itags: list = []
-    audio_abrs: list = ["128k", "192k"] 
+       
 
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
@@ -89,6 +92,7 @@ def displayUI():
         url = entry.get()
         event_label(app, "", event_color.get("dark"))
         color = event_color.get("danger")
+        
 
         if len(url) >= 20 and len(url) <= 2048:
             file_Availability = asyncio.run(file_verification(url))
@@ -149,7 +153,23 @@ def displayUI():
     # radio buttons event handler
     def radiobutton_event() -> str:
         radio_value = radio_var.get()
+        url = entry.get()
+        
+        print(url)
+        
         print(f"you selected { radio_value }")
+        
+        if radio_value == "audio":
+            global audio_abrs, audio_itags
+            
+            if len(audio_abrs) == 0 and len(url) != 0:
+                event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
+            else:
+                None
+            
+            '''audio_streams = asyncio.run(add_audio_stream_codes(url))            
+            audio_abrs = audio_streams[0]'''
+        
         return radio_value
 
     # Combo box event handler
