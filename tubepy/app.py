@@ -34,18 +34,18 @@ def download(youtube_url, on_progress, itag):
     
     
 #? download audio files from youtube
-def audio_download(youtube_url):
+def audio_download(youtube_url, on_progress, itag):
     '''
         added exception handler for convessionall purposes
     '''
     try:
-        youtube_file = YouTube(youtube_url)
+        youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     
     # this is yet to be tested
     except VideoUnavailable:
         print(error_message.get("VideoUnavailable"))
     else:
-        audio_file = youtube_file.streams.get_by_itag(audio_fq)
+        audio_file = youtube_file.streams.get_by_itag(itag)
         audio_file.download(preferred_location)
         
 
