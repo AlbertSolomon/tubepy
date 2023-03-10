@@ -51,12 +51,14 @@ def displayUI():
         # label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         # label.pack(padx=10, pady=0)
 
+
     # right click context menu logic
     def do_popup(event, frame):
         try:
             frame.tk_popup(event.x_root, event.y_root)
         finally:
             frame.grab_release()
+            
 
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
@@ -87,43 +89,6 @@ def displayUI():
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
 
-    # button event handler
-    def button_event():
-        url = entry.get()
-        event_label(app, "", event_color.get("dark"))
-        color = event_color.get("danger")
-        
-
-        if len(url) >= 20 and len(url) <= 2048:
-            file_Availability = asyncio.run(file_verification(url))
-            switch = switch_event()
-            radiobutton_value = radiobutton_event()
-
-            if file_Availability:
-                if switch == "on":
-
-                    print("Quick download")
-
-                    download_thread = threading.Thread(
-                        target=quick_download, args=(url, on_progress)
-                    )
-                    download_thread.start()
-                
-                elif radiobutton_value == "video":
-                    print("Download video")
-                else:
-                    print("Download audio")
-            else:
-                error = error_message.get("url_issue")
-                event_label(app, error, color)
-
-        else:
-            error = error_message.get("invalid_length")
-            event_label(app, error, color)
-            
-        print(combobox.get())
-
-        entry.delete(0, ctk.END)
 
     # switch button event handler
     state: list = ["disabled"]
@@ -160,7 +125,7 @@ def displayUI():
         print(f"you selected { radio_value }")
         
         if radio_value == "audio":
-            global audio_abrs, audio_itags
+            global audio_abrs
             
             if len(audio_abrs) == 0 and len(url) != 0:
                 event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
@@ -168,8 +133,12 @@ def displayUI():
                 try:
                     
                     def add_audiostreams(url):
+                        global audio_abrs, audio_itags, stream_dict
+                        
                         audio_streams = asyncio.run(add_audio_stream_codes(url))      
                         audio_abrs = audio_streams[0]
+                        audio_itags = audio_streams[1]
+                        
                         combobox.configure(values=audio_abrs)
                         event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
                         
@@ -180,15 +149,58 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
                 event_label(app, "", event_color.get("dark"))
-            
-            print(audio_abrs)
-                    
+        print("from radio callbacks", audio_abrs)         
         return radio_value
+    
+
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
         print("combobox dropdown clicked:", choice)
         return choice
+    
+        # button event handler
+    def button_event():
+        url = entry.get()
+        event_label(app, "", event_color.get("dark"))
+        color = event_color.get("danger")
+        
+
+        if len(url) >= 20 and len(url) <= 2048:
+            file_Availability = asyncio.run(file_verification(url))
+            switch = switch_event()
+            radiobutton_value = radiobutton_event()
+
+            if file_Availability:
+                if switch == "on":
+
+                    print("Quick download")
+
+                    download_thread = threading.Thread(
+                        target=quick_download, args=(url, on_progress)
+                    )
+                    download_thread.start()
+                
+                elif radiobutton_value == "video":
+                    print("Download video")
+                else:
+                    print("Download audio")
+                    global audio_abrs
+                    
+                    print("audio abr",audio_abrs)
+            else:
+                error = error_message.get("url_issue")
+                event_label(app, error, color)
+
+        else:
+            error = error_message.get("invalid_length")
+            event_label(app, error, color)
+            
+        print(combobox.get())
+        globavalues()
+
+        entry.delete(0, ctk.END)
+
 
     #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
 
