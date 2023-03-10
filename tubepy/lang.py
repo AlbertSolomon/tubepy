@@ -175,6 +175,31 @@ async def add_audio_stream_codes(youtube_url) -> list:
     return streams
 
 
+@youtubefile
+async def add_video_stream_code(youtube_url):
+    ''' 
+    The use of a youtubefile decorator does not make this function any special, this get vidoe itags and video resolution from a Stresm object.
+    This is also a list lists with two indices and should be implemented in the following format:
+        :: stream[0] -> return list of video resolution.
+        :: stream[1] -> return list of itags.
+    '''
+    
+    youtube_file = youtube_url
+    streams: list = []
+    itag: list = []
+    video_resolution: list = []
+    
+    available_videofiles = youtube_file.streams.filter(file_extension='mp4')
 
+    for available_videofile in available_videofiles:
+        itag.append(available_videofile.itag)
+        resolution = available_videofile.resolution
+        codec = available_videofile.video_codec
+        
+        if resolution != None:
+            video_resolution.append(f"{resolution} | { codec }")  
 
+    streams.append(video_resolution)
+    streams.append(itag)
+    return streams
    
