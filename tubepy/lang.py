@@ -9,6 +9,8 @@ from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
+    "audiodownload": "downloading ⬇️ audio 🎶 ...",
+    "videodownload": "downloading ⬇️ video 📽️ ... ",
     "loadstreams": "loading audio frequencies... 🎶",
     'stream_load_success': "audio frequencies were successfully loaded 🎶",
     "successful": " download successful 🥳",
@@ -165,4 +167,9 @@ async def add_audio_stream_codes(youtube_url) -> list:
     streams.append(abr)
     streams.append(itag)
     # streams.append(fulldetails)
+    return streams
+
+
+async def add_video_stream_code(youtube_url):
+    streams: list = []
     return streams
