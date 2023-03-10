@@ -139,6 +139,8 @@ def displayUI():
                         audio_abrs = audio_streams[0]
                         audio_itags = audio_streams[1]
                         
+                        stream_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
+                        
                         combobox.configure(values=audio_abrs)
                         event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
                         
