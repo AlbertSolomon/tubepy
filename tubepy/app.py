@@ -1,13 +1,10 @@
 from pytube import YouTube
 from ffmpeg import FFmpeg, Progress, ffmpeg
-from lang import read_config_file, progressive_vtags, clean_filename, error_message
+from lang import read_config_file, clean_filename, error_message
 import time
 import subprocess
 import os
 
-# try to read from config.json file where to store the downloaded video
-video_res = progressive_vtags.get("720p")
-audio_fq:int = 140
 current_time = time.time()
 
 location = read_config_file()
