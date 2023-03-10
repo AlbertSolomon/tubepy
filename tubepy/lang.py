@@ -3,7 +3,7 @@ import json
 import re
 
 import aiohttp
-import requests  # this
+import requests  # this for testing purposes
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 
@@ -64,13 +64,6 @@ def read_config_file():
     return location
 
 # print(read_config_file())
-
-# progressive tags for video formats
-progressive_vtags = {
-    "144p": 17,
-    "360p": 18,
-    "720p": 22,
-}
 
 
 class CodeChangeHandler(FileSystemEventHandler):
@@ -144,12 +137,22 @@ async def file_verification(youtube_url) -> bool:
     return False
 
 
+
+def youtubefile(function):
+    def wrapper(youtube_url):
+        youtube_file = YouTube(youtube_url)
+        return function(youtube_file)
+    return wrapper
+
+
 # adding stream codes to a list
 async def add_audio_stream_codes(youtube_url) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
     it returns a list of audio stream codes. Its simply a list of lists, it has two indices and this is it's format:
     
-    stream[abr][itag] where streams[0] returns a list of audio abr and streams[1] returns a list of audio stream itags from a Stream object.
+    stream[abr][itag] where 
+        ::streams[0] returns a list of audio abr. 
+        ::streams[1] returns a list of audio stream itags from a Stream object.
 
     :fulldetails is for testing purposes ..."""
 
@@ -172,6 +175,6 @@ async def add_audio_stream_codes(youtube_url) -> list:
     return streams
 
 
-async def add_video_stream_code(youtube_url):
-    streams: list = []
-    return streams
+
+
+   
