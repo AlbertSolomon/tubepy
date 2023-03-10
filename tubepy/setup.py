@@ -8,7 +8,7 @@ import tkinter
 import traceback
 
 import customtkinter as ctk
-from app import audio_download, quick_download
+from app import audio_download, download, quick_download
 from lang import (
     CodeChangeHandler,
     app_color,
@@ -17,7 +17,8 @@ from lang import (
     file_verification,
     widget_state,
     add_audio_stream_codes,
-    downloadstatus,
+    add_video_stream_code,
+    downloadstatus
 )
 from PIL import Image
 from settings import download_path_settings
@@ -29,7 +30,7 @@ audio_abrs: list = []
 audio_dict: dict = {}
 
 video_itags: list = []
-video_res: list = []
+video_resolutions: list = []
 video_dict: list = []
 
 def displayUI():
@@ -120,7 +121,7 @@ def displayUI():
             radiobutton_1.configure(state=state[0])
             radiobutton_2.configure(state=state[0]) 
             
-            global audio_abrs
+            global audio_abrs, video_resolutions
             url = entry.get()
             
             if len(audio_abrs) == 0 and len(url) != 0:
@@ -137,7 +138,7 @@ def displayUI():
                         
                         audio_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
                         
-                        combobox.configure(values=audio_abrs)
+                        # combobox.configure(values=audio_abrs)
                         event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
                         
                     stream_thread = threading.Thread(target=add_audiostreams, args=(url,))
@@ -147,14 +148,46 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
                 event_label(app, "", event_color.get("dark"))
+                
 
-
+            if len(video_resolutions) == 0 and len(url) != 0:
+                event_label(app, downloadstatus.get("loadvideostreams"), app_color.get("primary"))
+                try:
+                    def add_video_resolutions(url):
+                        global video_resolutions,video_itags, video_dict
+                        
+                        video_streams = asyncio.run(add_video_stream_code(url))
+                        video_resolutions = video_streams[0]
+                        video_itags = video_streams[1]
+                        
+                        video_dict = { video_resolutions:video_itags for (video_resolutions, video_itags) in zip(video_resolutions, video_itags) }
+                        event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
+                        
+                    _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
+                    _stream_thread.start()   
+                        
+                except:
+                    event_label(app, error_message.get("url_issue"), event_color.get("danger"))
+            else:
+                 event_label(app, "", event_color.get("dark"))
+                 
+            
+                  
         return switch
 
     # radio buttons event handler
     def radiobutton_event() -> str:
         radio_value = radio_var.get()
+        global audio_abrs, video_resolutions
         print(f"you selected { radio_value }")
+        
+        if radio_value == "audio":
+            combobox.configure(values=audio_abrs)
+            combobox.update()
+        else:
+            combobox.configure(values=video_resolutions)
+            combobox.update()
+            print(video_resolutions)
         
         # if radio_value == "audio":               
         return radio_value
@@ -183,7 +216,7 @@ def displayUI():
 
             if file_Availability:
                 if switch == "on":
-
+                    event_label(app, downloadstatus.get("download"), app_color.get("primary"))
                     print("Quick download")
 
                     download_thread = threading.Thread(
@@ -288,7 +321,7 @@ def displayUI():
         master=app,
         button_color=app_color.get("hover_color"),
         # vaules will take in a a list of streams
-        values=audio_abrs,
+        # values=audio_abrs,
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
