@@ -152,7 +152,10 @@ def displayUI():
         print("from radio callbacks", audio_abrs)         
         return radio_value
     
-
+    def globavalues():
+        print("from globals callbacks: abrs", audio_abrs)
+        print("from globals callbacks: itags", audio_itags)
+        print("from globals callbacks: stream dict", stream_dict)
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
