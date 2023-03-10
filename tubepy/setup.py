@@ -89,6 +89,7 @@ def displayUI():
             print("Download complete!")
             progressbar.set(1)
             progress_label.configure(text="100 %")
+            event_label(app, downloadstatus.get("successful"), app_color.get("primary"))
 
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
@@ -146,7 +147,7 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
                 event_label(app, "", event_color.get("dark"))
-        print("from radio callbacks", audio_abrs) 
+
 
         return switch
 
@@ -192,11 +193,16 @@ def displayUI():
                 
                 elif radiobutton_value == "video":
                     print("Download video")
-                else:
-                    print("Download audio")
-                    global audio_abrs
                     
-                    print("audio abr",audio_abrs)
+                else:
+                    global audio_abrs, audio_dict
+                    event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
+                    print("Download audio")
+                    
+                    itag = audio_dict.get(combobox.get())
+                    download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
+                    download_thread.start()
+        
             else:
                 error = error_message.get("url_issue")
                 event_label(app, error, color)
