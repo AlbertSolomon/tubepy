@@ -196,12 +196,15 @@ def displayUI():
                     
                 else:
                     global audio_abrs, audio_dict
-                    event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
-                    print("Download audio")
                     
-                    itag = audio_dict.get(combobox.get())
-                    download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
-                    download_thread.start()
+                    if combobox.get() != "select 👇🏾":
+                        event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
+                        
+                        itag = audio_dict.get(combobox.get())
+                        download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
+                        download_thread.start()
+                    else:
+                        event_label(app, error_message.get("option_issue"), event_color.get("danger"))
         
             else:
                 error = error_message.get("url_issue")

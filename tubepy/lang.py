@@ -9,11 +9,12 @@ from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
-    "audiodownload": "downloading⬇️audio 🎶 ...",
-    "videodownload": "downloading⬇️video 📽️ ... ",
+    "download": "downloading... 😒",
+    "audiodownload": "downloading audio 🎶 ...",
+    "videodownload": "downloading video 📽️ ... ",
     "loadstreams": "loading audio frequencies... 🎶",
     'stream_load_success': "audio frequencies were successfully loaded 🎶",
-    "successful": "download⬇️successful 🥳",
+    "successful": "download successful 🥳",
     "unsuccessful": "download failed... 💔",
 }
 
@@ -25,6 +26,7 @@ error_message = {
     "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥",
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
+    "option_issue": "Please select an option... 😕",
 }
 
 app_color = {
