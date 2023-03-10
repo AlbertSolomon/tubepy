@@ -28,6 +28,10 @@ audio_itags: list = []
 audio_abrs: list = []
 audio_dict: dict = {}
 
+video_itags: list = []
+video_res: list = []
+video_dict: list = []
+
 def displayUI():
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")
@@ -113,19 +117,10 @@ def displayUI():
 
             state[0] = normal
             radiobutton_1.configure(state=state[0])
-            radiobutton_2.configure(state=state[0])
-
-        return switch
-
-    # radio buttons event handler
-    def radiobutton_event() -> str:
-        radio_value = radio_var.get()
-        url = entry.get()
-        
-        print(f"you selected { radio_value }")
-        
-        if radio_value == "audio":
+            radiobutton_2.configure(state=state[0]) 
+            
             global audio_abrs
+            url = entry.get()
             
             if len(audio_abrs) == 0 and len(url) != 0:
                 event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
@@ -151,7 +146,16 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
             else:
                 event_label(app, "", event_color.get("dark"))
-        print("from radio callbacks", audio_abrs)         
+        print("from radio callbacks", audio_abrs) 
+
+        return switch
+
+    # radio buttons event handler
+    def radiobutton_event() -> str:
+        radio_value = radio_var.get()
+        print(f"you selected { radio_value }")
+        
+        # if radio_value == "audio":               
         return radio_value
     
     def globavalues():
