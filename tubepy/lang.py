@@ -9,11 +9,11 @@ from watchdog.events import FileSystemEventHandler
 
 downloadstatus = {
     "load": "loading... 😒",
-    "audiodownload": "downloading ⬇️ audio 🎶 ...",
-    "videodownload": "downloading ⬇️ video 📽️ ... ",
+    "audiodownload": "downloading⬇️audio 🎶 ...",
+    "videodownload": "downloading⬇️video 📽️ ... ",
     "loadstreams": "loading audio frequencies... 🎶",
     'stream_load_success': "audio frequencies were successfully loaded 🎶",
-    "successful": " download successful 🥳",
+    "successful": "download⬇️successful 🥳",
     "unsuccessful": "download failed... 💔",
 }
 
