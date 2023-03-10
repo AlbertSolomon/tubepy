@@ -26,7 +26,7 @@ from watchdog.observers import Observer
 
 audio_itags: list = []
 audio_abrs: list = []
-stream_dict: dict = {}
+audio_dict: dict = {}
 
 def displayUI():
     ctk.set_appearance_mode("dark")
@@ -133,13 +133,13 @@ def displayUI():
                 try:
                     
                     def add_audiostreams(url):
-                        global audio_abrs, audio_itags, stream_dict
+                        global audio_abrs, audio_itags, audio_dict
                         
                         audio_streams = asyncio.run(add_audio_stream_codes(url))      
                         audio_abrs = audio_streams[0]
                         audio_itags = audio_streams[1]
                         
-                        stream_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
+                        audio_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
                         
                         combobox.configure(values=audio_abrs)
                         event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
@@ -157,7 +157,7 @@ def displayUI():
     def globavalues():
         print("from globals callbacks: abrs", audio_abrs)
         print("from globals callbacks: itags", audio_itags)
-        print("from globals callbacks: stream dict", stream_dict)
+        print("from globals callbacks: stream dict", audio_dict)
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
