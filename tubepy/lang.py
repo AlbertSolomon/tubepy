@@ -12,8 +12,10 @@ downloadstatus = {
     "download": "downloading... 😒",
     "audiodownload": "downloading audio 🎶 ...",
     "videodownload": "downloading video 📽️ ... ",
+    "loadvideostreams": "loading video resolutions ... 🎥",
     "loadstreams": "loading audio frequencies... 🎶",
-    'stream_load_success': "audio frequencies were successfully loaded 🎶",
+    "vstream_load_success": "video resolutions were successfully loaded 🎥",
+    "stream_load_success": "audio frequencies were successfully loaded 🎶",
     "successful": "download successful 🥳",
     "unsuccessful": "download failed... 💔",
 }
@@ -63,11 +65,13 @@ def read_config_file():
 
     return location
 
+
 # print(read_config_file())
 
 
 class CodeChangeHandler(FileSystemEventHandler):
-    ''' This is a handler for the code change event during development. '''
+    """This is a handler for the code change event during development."""
+
     def __init__(self, callback):
         super().__init__()
         self.callback = callback
@@ -99,7 +103,7 @@ def clean_filename(name) -> str:
 
 def validate_youtube_url(url) -> bool:
     "This makes sure the url provided is valid and acceptable. No one likes regex so i asked CHATGPT 🤣."
-    
+
     youtube_regex = re.compile(
         r"(https?://)?(www\.)?"
         "(youtube|youtu|youtube-nocookie)\.(com|be)/"
@@ -111,10 +115,12 @@ def validate_youtube_url(url) -> bool:
         "www.youtube.com/",
         "m.youtube.com/",
         "youtu.be/",
-        "youtube-nocookie.com/"
+        "youtube-nocookie.com/",
     ]
 
-    return youtube_regex.match(url) is not None or any(domain in url for domain in acceptable_urls)
+    return youtube_regex.match(url) is not None or any(
+        domain in url for domain in acceptable_urls
+    )
 
 
 def file_existance(youtube_url) -> int:
@@ -126,16 +132,16 @@ def file_existance(youtube_url) -> int:
 
 
 async def search_file_Availability(youtube_url) -> int:
-    ''' The name of the function speaks volumes of it self, it does what it says it does 🤣.'''
-    
+    """The name of the function speaks volumes of it self, it does what it says it does 🤣."""
+
     async with aiohttp.ClientSession() as session:
         async with session.get(youtube_url, allow_redirects=False) as response:
             return response.status
 
 
 async def file_verification(youtube_url) -> bool:
-    ''' This relys on the search_file_availability function and the validate_youtube_url function to make sure the Youtube file is available.'''
-    
+    """This relys on the search_file_availability function and the validate_youtube_url function to make sure the Youtube file is available."""
+
     validatd_url = validate_youtube_url(youtube_url)
     status = await search_file_Availability(youtube_url) if validatd_url else None
 
@@ -144,13 +150,13 @@ async def file_verification(youtube_url) -> bool:
     return False
 
 
-
 def youtubefile(function):
-    ''' This is a decorator that returns a Youtube Object, why? because it was supposed to make the code DRY 💔.'''
-    
+    """This is a decorator that returns a Youtube Object, why? because it was supposed to make the code DRY 💔."""
+
     def wrapper(youtube_url):
         youtube_file = YouTube(youtube_url)
         return function(youtube_file)
+
     return wrapper
 
 
@@ -158,9 +164,9 @@ def youtubefile(function):
 async def add_audio_stream_codes(youtube_url) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
     it returns a list of audio stream codes. Its simply a list of lists, it has two indices and this is it's format:
-    
-    stream[abr][itag] where 
-        ::streams[0] returns a list of audio abr. 
+
+    stream[abr][itag] where
+        ::streams[0] returns a list of audio abr.
         ::streams[1] returns a list of audio stream itags from a Stream object.
 
     :fulldetails is for testing purposes ..."""
@@ -186,29 +192,28 @@ async def add_audio_stream_codes(youtube_url) -> list:
 
 @youtubefile
 async def add_video_stream_code(youtube_url):
-    ''' 
+    """
     The use of a youtubefile decorator does not make this function any special, this gets video itags and video resolution from a Stream object.
-    This is also a list lists with two indices and should be implemented in the following format:
+    This is also a list of lists with two indices and should be implemented in the following format:
         :: stream[0] -> return list of video resolution.
         :: stream[1] -> return list of itags.
-    '''
-    
+    """
+
     youtube_file = youtube_url
     streams: list = []
     itag: list = []
     video_resolution: list = []
-    
-    available_videofiles = youtube_file.streams.filter(file_extension='mp4')
+
+    available_videofiles = youtube_file.streams.filter(file_extension="mp4")
 
     for available_videofile in available_videofiles:
         itag.append(available_videofile.itag)
         resolution = available_videofile.resolution
         codec = available_videofile.video_codec
-        
+
         if resolution != None:
-            video_resolution.append(f"{resolution} | { codec }")  
+            video_resolution.append(f"{resolution} | { codec }")
 
     streams.append(video_resolution)
     streams.append(itag)
     return streams
-   
