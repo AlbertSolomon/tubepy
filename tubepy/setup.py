@@ -31,7 +31,7 @@ audio_dict: dict = {}
 
 video_itags: list = []
 video_resolutions: list = []
-video_dict: list = []
+video_dict: dict = {}
 
 def displayUI():
     ctk.set_appearance_mode("dark")
@@ -161,8 +161,9 @@ def displayUI():
                         video_itags = video_streams[1]
                         
                         video_dict = { video_resolutions:video_itags for (video_resolutions, video_itags) in zip(video_resolutions, video_itags) }
+                        combobox.configure(values=video_resolutions)  
                         event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
-                        
+                      
                     _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
                     _stream_thread.start()   
                         
@@ -170,9 +171,7 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))
             else:
                  event_label(app, "", event_color.get("dark"))
-                 
-            
-                  
+                              
         return switch
 
     # radio buttons event handler
@@ -217,19 +216,28 @@ def displayUI():
             if file_Availability:
                 if switch == "on":
                     event_label(app, downloadstatus.get("download"), app_color.get("primary"))
-                    print("Quick download")
 
                     download_thread = threading.Thread(
                         target=quick_download, args=(url, on_progress)
                     )
                     download_thread.start()
-                
-                elif radiobutton_value == "video":
-                    print("Download video")
                     
+                
+                elif radiobutton_value == "video":        
+                    global video_resolutions, video_dict
+                    
+                    if combobox.get() != "select 👇🏾":
+                        event_label(app, downloadstatus.get("videodownload"), app_color.get("primary"))
+                        
+                        itag = video_dict.get(combobox.get())
+                        download_thread = threading.Thread(target=download, args=(url, on_progress, itag))
+                        download_thread.start()
+                    else:
+                        event_label(app, error_message.get("option_issue"), event_color.get("danger"))
+                                 
+                            
                 else:
                     global audio_abrs, audio_dict
-                    
                     if combobox.get() != "select 👇🏾":
                         event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
                         
