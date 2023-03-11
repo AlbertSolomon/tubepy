@@ -88,9 +88,15 @@ def displayUI():
             print(float(download_percentage) / 100)
         else:
             print("Download complete!")
+            global audio_abrs, video_resolutions
+            
             progressbar.set(1)
             progress_label.configure(text="100 %")
             event_label(app, downloadstatus.get("successful"), app_color.get("primary"))
+            
+            entry.delete(0, ctk.END)
+            audio_abrs.clear()
+            video_resolutions.clear()
 
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
@@ -98,7 +104,6 @@ def displayUI():
 
     # switch button event handler
     state: list = ["disabled"]
-
     def switch_event() -> str:
         switch = switch_var.get()
         disabled = widget_state[0]
@@ -252,7 +257,6 @@ def displayUI():
             error = error_message.get("invalid_length")
             event_label(app, error, color)
 
-        entry.delete(0, ctk.END)
 
 
     #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
