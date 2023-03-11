@@ -171,13 +171,14 @@ def displayUI():
                     event_label(app, error_message.get("url_issue"), event_color.get("danger"))
             else:
                  event_label(app, "", event_color.get("dark"))
-                              
+                                               
         return switch
 
     # radio buttons event handler
     def radiobutton_event() -> str:
         radio_value = radio_var.get()
         global audio_abrs, video_resolutions
+        
         print(f"you selected { radio_value }")
         
         if radio_value == "audio":
@@ -187,14 +188,10 @@ def displayUI():
             combobox.configure(values=video_resolutions)
             combobox.update()
             print(video_resolutions)
-        
+                    
         # if radio_value == "audio":               
         return radio_value
-    
-    def globavalues():
-        print("from globals callbacks: abrs", audio_abrs)
-        print("from globals callbacks: itags", audio_itags)
-        print("from globals callbacks: stream dict", audio_dict)
+
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
@@ -254,9 +251,6 @@ def displayUI():
         else:
             error = error_message.get("invalid_length")
             event_label(app, error, color)
-            
-        print(combobox.get())
-        globavalues()
 
         entry.delete(0, ctk.END)
 
@@ -329,7 +323,7 @@ def displayUI():
         master=app,
         button_color=app_color.get("hover_color"),
         # vaules will take in a a list of streams
-        # values=audio_abrs,
+        values=["Option not available"],
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
