@@ -1,6 +1,8 @@
 import asyncio
 import json
 import re
+import urllib.request
+import concurrent.futures
 
 import aiohttp
 import requests  # this for testing purposes
@@ -29,6 +31,7 @@ error_message = {
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
     "option_issue": "Please select an option... 😕",
+    "network_error": "Sorry, bad network connection 💔"
 }
 
 app_color = {
@@ -217,3 +220,30 @@ async def add_video_stream_code(youtube_url):
     streams.append(video_resolution)
     streams.append(itag)
     return streams
+
+
+async def check_internet_connection(youtube_url) -> bool:
+    try:
+        await asyncio.to_thread(urllib.request.urlopen, youtube_url, timeout=5)
+        return True
+    except (urllib.error.URLError, asyncio.TimeoutError):
+        return False
+
+def connection_checker(function, error_callback=None):
+    async def wrapper(youtube_url):
+        loop = asyncio.get_event_loop()
+        coroutine = check_internet_connection(youtube_url)
+        future = asyncio.run_coroutine_threadsafe(coroutine, loop=loop)
+        network_check = future.result()
+        
+        if network_check:
+            return await function(youtube_url)
+        else:
+            return error_callback
+    
+    return wrapper
+
+
+@youtubefile
+async def download_details(youtube_url):
+    pass
