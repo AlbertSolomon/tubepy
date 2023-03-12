@@ -9,6 +9,7 @@ from lang import (
     search_file_Availability,
     url_input,
     validate_youtube_url,add_video_stream_code,
+    check_internet_connection,
 )
 from settings import change_download_location, download_path_settings
 
@@ -35,4 +36,5 @@ from settings import change_download_location, download_path_settings
 # audio_streams = asyncio.run( add_audio_stream_codes(test_url_input()) ) 
 # print(f"audio streams| { audio_streams[0] }")
 
-print(asyncio.run(add_video_stream_code("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
+# print(asyncio.run(add_video_stream_code("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
+print(asyncio.run(check_internet_connection("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
