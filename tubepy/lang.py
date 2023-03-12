@@ -20,6 +20,7 @@ downloadstatus = {
     "stream_load_success": "audio frequencies were successfully loaded 🎶",
     "successful": "download successful 🥳",
     "unsuccessful": "download failed... 💔",
+    "check_network": "checking network connection...🌐",
 }
 
 empty = {
@@ -31,7 +32,7 @@ error_message = {
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
     "option_issue": "Please select an option... 😕",
-    "network_error": "Sorry, bad network connection 💔"
+    "network_error": "Sorry, bad network connection 🌐"
 }
 
 app_color = {
@@ -228,7 +229,9 @@ async def check_internet_connection(youtube_url) -> bool:
         return True
     except (urllib.error.URLError, asyncio.TimeoutError):
         return False
-
+    
+    
+# this function will be revisited in the future.
 def connection_checker(function, error_callback=None):
     async def wrapper(youtube_url):
         loop = asyncio.get_event_loop()
