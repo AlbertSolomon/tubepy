@@ -236,6 +236,7 @@ def connection_checker(function, error_callback=None):
     async def wrapper(youtube_url):
         loop = asyncio.get_event_loop()
         coroutine = check_internet_connection(youtube_url)
+        
         future = asyncio.run_coroutine_threadsafe(coroutine, loop=loop)
         network_check = future.result()
         
