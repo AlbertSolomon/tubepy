@@ -24,8 +24,6 @@ def change_download_location(new_location):
 
 
 # change_download_location(new_location)
-
-
 def download_path_settings():
     root = tk.Tk()
     root.withdraw()
