@@ -18,7 +18,7 @@ from lang import (
     widget_state,
     add_audio_stream_codes,
     add_video_stream_code,
-    downloadstatus
+    downloadstatus, connection_checker,check_internet_connection,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -101,7 +101,7 @@ def displayUI():
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
 
-
+    
     # switch button event handler
     state: list = ["disabled"]
     def switch_event() -> str:
@@ -129,54 +129,79 @@ def displayUI():
             global audio_abrs, video_resolutions
             url = entry.get()
             
-            if len(audio_abrs) == 0 and len(url) != 0:
-                event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
-                
-                try:
+            def load_formats(url):
+                if len(audio_abrs) == 0 :
                     
-                    def add_audiostreams(url):
-                        global audio_abrs, audio_itags, audio_dict
-                        
-                        audio_streams = asyncio.run(add_audio_stream_codes(url))      
-                        audio_abrs = audio_streams[0]
-                        audio_itags = audio_streams[1]
-                        
-                        audio_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
-                        
-                        # combobox.configure(values=audio_abrs)
-                        event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
-                        
-                    stream_thread = threading.Thread(target=add_audiostreams, args=(url,))
-                    stream_thread.start()
+                    event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
                     
-                except:
-                    event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
-            else:
-                event_label(app, "", event_color.get("dark"))
-                
+                    try:
+                        
+                        def add_audiostreams(url):
+                            global audio_abrs, audio_itags, audio_dict
+                            
+                            audio_streams = asyncio.run(add_audio_stream_codes(url))      
+                            audio_abrs = audio_streams[0]
+                            audio_itags = audio_streams[1]
+                            
+                            audio_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
+                            
+                            # combobox.configure(values=audio_abrs)
+                            event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
+                            
+                        stream_thread = threading.Thread(target=add_audiostreams, args=(url,))
+                        stream_thread.start()
+                        
+                    except:
+                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
+                else:
+                    event_label(app, "", event_color.get("dark"))
+                    
 
-            if len(video_resolutions) == 0 and len(url) != 0:
-                event_label(app, downloadstatus.get("loadvideostreams"), app_color.get("primary"))
-                try:
-                    def add_video_resolutions(url):
-                        global video_resolutions,video_itags, video_dict
+                if len(video_resolutions) == 0:
+                    event_label(app, downloadstatus.get("loadvideostreams"), app_color.get("primary"))
+                    try:
                         
-                        video_streams = asyncio.run(add_video_stream_code(url))
-                        video_resolutions = video_streams[0]
-                        video_itags = video_streams[1]
+                        def add_video_resolutions(url):
+                            global video_resolutions,video_itags, video_dict
+                            
+                            video_streams = asyncio.run(add_video_stream_code(url))
+                            video_resolutions = video_streams[0]
+                            video_itags = video_streams[1]
+                            
+                            video_dict = { video_resolutions:video_itags for (video_resolutions, video_itags) in zip(video_resolutions, video_itags) }
+                            combobox.configure(values=video_resolutions)  
+                            event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
                         
-                        video_dict = { video_resolutions:video_itags for (video_resolutions, video_itags) in zip(video_resolutions, video_itags) }
-                        combobox.configure(values=video_resolutions)  
-                        event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
-                      
-                    _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
-                    _stream_thread.start()   
+                        _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
+                        _stream_thread.start()   
+                            
+                    except:
+                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))
+                else:
+                    event_label(app, "", event_color.get("dark"))
+            
+            if len(url) >= 20 and len(url) <= 2048:
+                
+                event_label(app, downloadstatus.get("check_network"), app_color.get("primary"))    
+                async def verify_formats():
+                    network_check = await check_internet_connection(url)
+                    file_Availability = await file_verification(url)
+                    
+                    if not network_check:
+                        event_label(app, error_message.get("network_error"), event_color.get("danger"))
+                        return
+                    
+                    if not file_Availability:
+                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))
+                        return
+                    
+                    verifying_thread = threading.Thread(target=load_formats, args=(url,))
+                    verifying_thread.start()
                         
-                except:
-                    event_label(app, error_message.get("url_issue"), event_color.get("danger"))
-            else:
-                 event_label(app, "", event_color.get("dark"))
-                                               
+                #verifying_thread = threading.Thread(target=verify_formats)
+                #verifying_thread.start()
+                asyncio.run(verify_formats())    
+                                                             
         return switch
 
     # radio buttons event handler
@@ -204,6 +229,8 @@ def displayUI():
         return choice
     
         # button event handler
+        
+    # Button event handler
     def button_event():
         url = entry.get()
         event_label(app, "", event_color.get("dark"))
@@ -228,8 +255,8 @@ def displayUI():
                 elif radiobutton_value == "video":        
                     global video_resolutions, video_dict
                     
-                    if combobox.get() != "select 👇🏾":
-                        event_label(app, downloadstatus.get("videodownload"), app_color.get("primary"))
+                    event_label(app, downloadstatus.get("videodownload"), app_color.get("primary"))
+                    if combobox.get() != "select 👇🏾": #TODO if combobox.get()  in video_resolutions
                         
                         itag = video_dict.get(combobox.get())
                         download_thread = threading.Thread(target=download, args=(url, on_progress, itag))
@@ -240,8 +267,8 @@ def displayUI():
                             
                 else:
                     global audio_abrs, audio_dict
-                    if combobox.get() != "select 👇🏾":
-                        event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
+                    event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
+                    if combobox.get() != "select 👇🏾": # or any other string
                         
                         itag = audio_dict.get(combobox.get())
                         download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
