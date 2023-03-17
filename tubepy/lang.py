@@ -165,7 +165,8 @@ def youtubefile(function):
 
 
 # adding stream codes to a list
-async def add_audio_stream_codes(youtube_url) -> list:
+@youtubefile
+async def add_audio_stream_codes(youtube_file) -> list:
     """This function tries to extract the audio stream codes from the youtube url.
     it returns a list of audio stream codes. Its simply a list of lists, it has two indices and this is it's format:
 
@@ -175,7 +176,6 @@ async def add_audio_stream_codes(youtube_url) -> list:
 
     :fulldetails is for testing purposes ..."""
 
-    youtube_file = YouTube(youtube_url)
     streams: list = []
     itag: list = []
     abr: list = []
@@ -195,7 +195,7 @@ async def add_audio_stream_codes(youtube_url) -> list:
 
 
 @youtubefile
-async def add_video_stream_code(youtube_url):
+async def add_video_stream_code(youtube_file):
     """
     The use of a youtubefile decorator does not make this function any special, this gets video itags and video resolution from a Stream object.
     This is also a list of lists with two indices and should be implemented in the following format:
@@ -203,7 +203,6 @@ async def add_video_stream_code(youtube_url):
         :: stream[1] -> return list of itags.
     """
 
-    youtube_file = youtube_url
     streams: list = []
     itag: list = []
     video_resolution: list = []
@@ -249,5 +248,12 @@ def connection_checker(function, error_callback=None):
 
 
 @youtubefile
-async def download_details(youtube_url):
+async def download_details(youtube_file):
     pass
+
+#@youtubefile
+#def streams_test(youtube_file):
+#    yt = youtube_file.streams.filter(adaptive=True)
+#    print(yt)
+    # title = youtube_file.title
+    # print(f"Title: {title }")
