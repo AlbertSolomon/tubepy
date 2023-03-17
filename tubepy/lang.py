@@ -248,12 +248,38 @@ def connection_checker(function, error_callback=None):
 
 
 @youtubefile
-async def download_details(youtube_file):
-    pass
+async def downloadfile_details(youtube_file) -> dict:
+    ''' This function retrieves relevant information from a YouTube object. '''
+    
+    title = youtube_file.title
+    author = youtube_file.author
+    video_description = youtube_file.description
+    video_info = youtube_file.vid_info
+    
+    lenght = youtube_file.length
+    thumbnail = youtube_file.thumbnail_url
+    channel = youtube_file.channel_url 
+    views = youtube_file.views
+    
+    upload_date = youtube_file.publish_date   
+    file_info: dict = {
+        
+        "title": title,
+        "author": author,
+        # "description": video_description,
+        # "info": video_info,
+        "length": lenght,
+        "thumbnail": thumbnail,
+        # "channel": channel,
+        "views": views,
+        "date": upload_date,
+    }
+    
+    return file_info
 
-#@youtubefile
-#def streams_test(youtube_file):
+# @youtubefile
+# def streams_test(youtube_file):
 #    yt = youtube_file.streams.filter(adaptive=True)
 #    print(yt)
     # title = youtube_file.title
-    # print(f"Title: {title }")
+#   print(f"Title: { title }")
