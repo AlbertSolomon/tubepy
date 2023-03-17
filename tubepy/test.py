@@ -9,14 +9,13 @@ from lang import (
     search_file_Availability,
     url_input,
     validate_youtube_url,add_video_stream_code,
-    check_internet_connection,
+    check_internet_connection, downloadfile_details
 )
 from settings import change_download_location, download_path_settings
 
-
 # this input variable will be used for testing purposes
-# def test_url_input() -> None:
-#     return input(url_input)
+def test_url_input() -> None:
+    return input(url_input)
 
 
 # download_path_settings()
@@ -35,6 +34,10 @@ from settings import change_download_location, download_path_settings
 # audio_streams: list = []
 # audio_streams = asyncio.run( add_audio_stream_codes(test_url_input()) ) 
 # print(f"audio streams| { audio_streams[0] }")
+# 
+# # print(asyncio.run(add_video_stream_code("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
+# print(asyncio.run(check_internet_connection("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
 
-# print(asyncio.run(add_video_stream_code("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
-print(asyncio.run(check_internet_connection("https://www.youtube.com/watch?v=LRQJsm1uGJU")))
+# streams_test(test_url_input())
+
+print( asyncio.run( downloadfile_details( test_url_input() ) ))
