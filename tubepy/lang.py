@@ -276,10 +276,3 @@ async def downloadfile_details(youtube_file) -> dict:
     }
     
     return file_info
-
-# @youtubefile
-# def streams_test(youtube_file):
-#    yt = youtube_file.streams.filter(adaptive=True)
-#    print(yt)
-    # title = youtube_file.title
-#   print(f"Title: { title }")
