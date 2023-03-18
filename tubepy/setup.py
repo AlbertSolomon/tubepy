@@ -173,7 +173,7 @@ def displayUI():
                             event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
                         
                         _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
-                        _stream_thread.start()   
+                        _stream_thread.start()
                             
                     except:
                         event_label(app, error_message.get("url_issue"), event_color.get("danger"))
@@ -285,7 +285,6 @@ def displayUI():
             event_label(app, error, color)
 
 
-
     #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
 
     # entry button
@@ -377,7 +376,14 @@ def displayUI():
     )
     button.pack(padx=10, pady=20)
     
-    frame = ctk.CTkFrame(master=app, width=200, height=200)
+    frame = ctk.CTkFrame(master=app, width=500, height=400)
+    frame.pack(padx=20, pady=10)
+    #def segmented_button_callback(value):
+    #    print("segmented button clicked:", value)
+
+    #segemented_button = ctk.CTkSegmentedButton(master=frame,values=["Value 1", "Value 2", "Value 3"],command=segmented_button_callback)
+    #segemented_button.pack(padx=20, pady=10)
+    #segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
