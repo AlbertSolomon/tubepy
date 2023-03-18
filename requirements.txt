@@ -8,7 +8,7 @@ customtkinter==5.0.3
 darkdetect==0.8.0
 ffmpeg-python==0.2.0
 frozenlist==1.3.3
-future==0.18.2
+future==0.18.3
 humanize==4.6.0
 idna==3.4
 multidict==6.0.4
