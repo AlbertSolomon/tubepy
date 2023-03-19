@@ -376,7 +376,7 @@ def displayUI():
     )
     button.pack(padx=10, pady=20)
     
-    frame = ctk.CTkFrame(master=app, width=500, height=400)
+    frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=20, pady=10)
     #def segmented_button_callback(value):
     #    print("segmented button clicked:", value)
