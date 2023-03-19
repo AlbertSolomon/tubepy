@@ -8,6 +8,7 @@ import aiohttp
 import requests  # this for testing purposes
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
+from humanize.time import precisedelta
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -272,7 +273,7 @@ async def downloadfile_details(youtube_file) -> dict:
         "thumbnail": thumbnail,
         # "channel": channel,
         "views": views,
-        "date": upload_date,
+        "date": precisedelta(upload_date),
     }
     
     return file_info
