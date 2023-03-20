@@ -261,7 +261,7 @@ def displayUI():
                     global video_resolutions, video_dict
                     
                     event_label(app, downloadstatus.get("videodownload"), app_color.get("primary"))
-                    if combobox.get() != "select 👇🏾": #TODO if combobox.get()  in video_resolutions
+                    if combobox.get() in video_resolutions:
                         
                         itag = video_dict.get(combobox.get())
                         download_thread = threading.Thread(target=download, args=(url, on_progress, itag))
@@ -273,7 +273,7 @@ def displayUI():
                 else:
                     global audio_abrs, audio_dict
                     event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
-                    if combobox.get() != "select 👇🏾": # or any other string
+                    if combobox.get() in audio_abrs:
                         
                         itag = audio_dict.get(combobox.get())
                         download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
@@ -357,8 +357,6 @@ def displayUI():
     combobox = ctk.CTkComboBox(
         master=app,
         button_color=app_color.get("hover_color"),
-        # vaules will take in a a list of streams
-        # values=[error_message.get("unavailable_options")],
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
