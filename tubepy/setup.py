@@ -447,15 +447,15 @@ def displayUI():
     frame.pack(padx=5, pady=(10,5))
 
     thumbnail_image = ctk.CTkImage(
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"), size=(120, 150)
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"), size=(120, 150)  # https://i.ytimg.com/vi/DHjqpvDnNGE/sddefault.jpg/"https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
     )
 
     image_label = ctk.CTkLabel(master=frame, width=50, height=150, corner_radius=10, text="" ,image=thumbnail_image)
     image_label.grid(row=0, column=0, padx=0, pady=0)
     
-    textbox = ctk.CTkTextbox(master=frame, width=380, height=150)
-    textbox.grid(row=0, column=1,padx=15, pady=15)
-    textbox.insert("0.0", "new text to insert thhhhhh ugioodnvdf ervbboiv vuovbojnv vqoehv fvoevr kvneov volnvkdnklnv vbubv vnoeithb")
+    infobox = ctk.CTkLabel(master=frame, width=380, height=150,text_color= app_color.get("primary"), text="this is awesome\n  soooooo coooooool", anchor="nw")
+    infobox.grid(row=0, column=1,padx=15, pady=15)
+    
 
     # def segmented_button_callback(value):
     #    print("segmented button clicked:", value)
