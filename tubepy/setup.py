@@ -358,7 +358,7 @@ def displayUI():
         master=app,
         button_color=app_color.get("hover_color"),
         # vaules will take in a a list of streams
-        values=[error_message.get("unavailable_options")],
+        # values=[error_message.get("unavailable_options")],
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
