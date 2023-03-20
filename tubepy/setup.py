@@ -454,14 +454,16 @@ def displayUI():
     image_label.grid(row=0, column=0, padx=0, pady=0)
     
     infobox = ctk.CTkLabel(master=frame, width=380, height=150,text_color= app_color.get("primary"), text="this is awesome\n  soooooo coooooool", anchor="nw")
-    infobox.grid(row=0, column=1,padx=15, pady=15)
+    infobox.grid(row=0, column=1,padx=15, pady=(15,0))
     
-
-    # def segmented_button_callback(value):
-    #    print("segmented button clicked:", value)
-
-    # segemented_button = ctk.CTkSegmentedButton(master=frame,values=["Value 1", "Value 2", "Value 3"],command=segmented_button_callback)
-    # segemented_button.pack(padx=20, pady=10)
+    def segmented_button_callback(value):
+       print("segmented button clicked:", value)
+       
+       
+       
+       
+    segemented_button = ctk.CTkSegmentedButton(master=frame,height=20, values=["change download Location", "About Tubepy","QR Code"],command=segmented_button_callback)
+    segemented_button.grid(row=1,column=1, padx=0, pady=(0,5))
     # segemented_button.set("Value 1")  # set initial value
 
     # progress bar
