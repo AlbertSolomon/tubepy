@@ -459,7 +459,8 @@ def displayUI():
     def segmented_button_callback(value):
        print("segmented button clicked:", value)
        
-       
+       if value == "change download Location":
+           download_path_settings()
        
        
     segemented_button = ctk.CTkSegmentedButton(master=frame,height=20, values=["change download Location", "About Tubepy","QR Code"],command=segmented_button_callback)
