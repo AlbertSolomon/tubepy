@@ -119,15 +119,15 @@ def displayUI():
             radiobutton_1.configure(state=state[0])
             radiobutton_2.configure(state=state[0])
         else:
+            global audio_abrs, video_resolutions
+            url = entry.get()
+            
             state[0] = normal
             combobox.configure(state=state[0])
 
             state[0] = normal
             radiobutton_1.configure(state=state[0])
-            radiobutton_2.configure(state=state[0]) 
-            
-            global audio_abrs, video_resolutions
-            url = entry.get()
+            radiobutton_2.configure(state=state[0])     
             
             def load_formats(url):
                 if len(audio_abrs) == 0 :
@@ -206,8 +206,8 @@ def displayUI():
 
     # radio buttons event handler
     def radiobutton_event() -> str:
-        radio_value = radio_var.get()
         global audio_abrs, video_resolutions
+        radio_value = radio_var.get()
         
         print(f"you selected { radio_value }")
         
@@ -218,6 +218,11 @@ def displayUI():
             combobox.configure(values=video_resolutions)
             combobox.update()
             print(video_resolutions)
+        
+        if not audio_abrs and not video_resolutions:
+            empty_message: list = [error_message.get("unavailable_options")]
+            combobox.configure(values=empty_message )
+            return
                     
         # if radio_value == "audio":               
         return radio_value
@@ -353,7 +358,7 @@ def displayUI():
         master=app,
         button_color=app_color.get("hover_color"),
         # vaules will take in a a list of streams
-        values=["Option not available"],
+        values=[error_message.get("unavailable_options")],
         state=state[0],
         command=combobox_callback,
         variable=combobox_var,
