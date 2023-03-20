@@ -11,19 +11,20 @@ import customtkinter as ctk
 from app import audio_download, download, quick_download
 from lang import (
     CodeChangeHandler,
+    add_audio_stream_codes,
+    add_video_stream_code,
     app_color,
+    check_internet_connection,
+    connection_checker,
+    downloadstatus,
     error_message,
     event_color,
     file_verification,
     widget_state,
-    add_audio_stream_codes,
-    add_video_stream_code,
-    downloadstatus, connection_checker,check_internet_connection,
 )
 from PIL import Image
 from settings import download_path_settings
 from watchdog.observers import Observer
-
 
 audio_itags: list = []
 audio_abrs: list = []
@@ -33,6 +34,7 @@ video_itags: list = []
 video_resolutions: list = []
 video_dict: dict = {}
 
+
 def displayUI():
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("green")
@@ -40,7 +42,6 @@ def displayUI():
     app = ctk.CTk()
     app.geometry("840x640")
     app.title("Tubepy")
-       
 
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
@@ -56,14 +57,12 @@ def displayUI():
         # label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
         # label.pack(padx=10, pady=0)
 
-
     # right click context menu logic
     def do_popup(event, frame):
         try:
             frame.tk_popup(event.x_root, event.y_root)
         finally:
             frame.grab_release()
-            
 
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
@@ -89,11 +88,11 @@ def displayUI():
         else:
             print("Download complete!")
             global audio_abrs, video_resolutions
-            
+
             progressbar.set(1)
             progress_label.configure(text="100 %")
             event_label(app, downloadstatus.get("successful"), app_color.get("primary"))
-            
+
             entry.delete(0, ctk.END)
             audio_abrs.clear()
             video_resolutions.clear()
@@ -101,9 +100,9 @@ def displayUI():
         # download_percentage = downloaded_chunk / youtube_filesize * 100
         # print(f"download percentage : { download_percentage }")
 
-    
     # switch button event handler
     state: list = ["disabled"]
+
     def switch_event() -> str:
         switch = switch_var.get()
         disabled = widget_state[0]
@@ -121,96 +120,144 @@ def displayUI():
         else:
             global audio_abrs, video_resolutions
             url = entry.get()
-            
+
             state[0] = normal
             combobox.configure(state=state[0])
 
             state[0] = normal
             radiobutton_1.configure(state=state[0])
-            radiobutton_2.configure(state=state[0])     
-            
+            radiobutton_2.configure(state=state[0])
+
             def load_formats(url):
-                if len(audio_abrs) == 0 :
-                    
-                    event_label(app, downloadstatus.get("loadstreams"), app_color.get("primary"))
-                    
+                if len(audio_abrs) == 0:
+
+                    event_label(
+                        app, downloadstatus.get("loadstreams"), app_color.get("primary")
+                    )
+
                     try:
-                        
+
                         def add_audiostreams(url):
                             global audio_abrs, audio_itags, audio_dict
-                            
-                            audio_streams = asyncio.run(add_audio_stream_codes(url))      
+
+                            audio_streams = asyncio.run(add_audio_stream_codes(url))
                             audio_abrs = audio_streams[0]
                             audio_itags = audio_streams[1]
-                            
-                            audio_dict = { audio_abrs:audio_itags for (audio_abrs, audio_itags) in zip(audio_abrs, audio_itags) }
-                            
+
+                            audio_dict = {
+                                audio_abrs: audio_itags
+                                for (audio_abrs, audio_itags) in zip(
+                                    audio_abrs, audio_itags
+                                )
+                            }
+
                             # combobox.configure(values=audio_abrs)
-                            event_label(app, downloadstatus.get("stream_load_success"), app_color.get("primary"))
-                            
-                        stream_thread = threading.Thread(target=add_audiostreams, args=(url,))
+                            event_label(
+                                app,
+                                downloadstatus.get("stream_load_success"),
+                                app_color.get("primary"),
+                            )
+
+                        stream_thread = threading.Thread(
+                            target=add_audiostreams, args=(url,)
+                        )
                         stream_thread.start()
-                        
+
                     except:
-                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))              
+                        event_label(
+                            app,
+                            error_message.get("url_issue"),
+                            event_color.get("danger"),
+                        )
                 else:
                     event_label(app, "", event_color.get("dark"))
-                    
 
                 if len(video_resolutions) == 0:
-                    event_label(app, downloadstatus.get("loadvideostreams"), app_color.get("primary"))
+                    event_label(
+                        app,
+                        downloadstatus.get("loadvideostreams"),
+                        app_color.get("primary"),
+                    )
                     try:
-                        
+
                         def add_video_resolutions(url):
-                            global video_resolutions,video_itags, video_dict
-                            
+                            global video_resolutions, video_itags, video_dict
+
                             video_streams = asyncio.run(add_video_stream_code(url))
                             video_resolutions = video_streams[0]
                             video_itags = video_streams[1]
-                            
-                            video_dict = { video_resolutions:video_itags for (video_resolutions, video_itags) in zip(video_resolutions, video_itags) }
-                            combobox.configure(values=video_resolutions)  
-                            event_label(app, downloadstatus.get("vstream_load_success"), app_color.get("primary"))
-                        
-                        _stream_thread = threading.Thread(target=add_video_resolutions, args=(url,))
+
+                            video_dict = {
+                                video_resolutions: video_itags
+                                for (video_resolutions, video_itags) in zip(
+                                    video_resolutions, video_itags
+                                )
+                            }
+                            combobox.configure(values=video_resolutions)
+                            event_label(
+                                app,
+                                downloadstatus.get("vstream_load_success"),
+                                app_color.get("primary"),
+                            )
+
+                        _stream_thread = threading.Thread(
+                            target=add_video_resolutions, args=(url,)
+                        )
                         _stream_thread.start()
-                            
+
                     except:
-                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))
+                        event_label(
+                            app,
+                            error_message.get("url_issue"),
+                            event_color.get("danger"),
+                        )
                 else:
                     event_label(app, "", event_color.get("dark"))
-            
+
             if len(url) >= 20 and len(url) <= 2048:
-                
-                event_label(app, downloadstatus.get("check_network"), app_color.get("primary"))    
+
+                event_label(
+                    app, downloadstatus.get("check_network"), app_color.get("primary")
+                )
+
                 async def verify_formats():
                     network_check = await check_internet_connection(url)
                     file_Availability = await file_verification(url)
-                    
+
                     if not network_check:
-                        event_label(app, error_message.get("network_error"), event_color.get("danger"))
+                        event_label(
+                            app,
+                            error_message.get("network_error"),
+                            event_color.get("danger"),
+                        )
                         return
-                    
+
                     if not file_Availability:
-                        event_label(app, error_message.get("url_issue"), event_color.get("danger"))
+                        event_label(
+                            app,
+                            error_message.get("url_issue"),
+                            event_color.get("danger"),
+                        )
                         return
-                    
-                    verifying_thread = threading.Thread(target=load_formats, args=(url,))
+
+                    verifying_thread = threading.Thread(
+                        target=load_formats, args=(url,)
+                    )
                     verifying_thread.start()
-                        
-                #verifying_thread = threading.Thread(target=verify_formats)
-                #verifying_thread.start()
-                asyncio.run(verify_formats())    
-                                                             
+
+                # verifying_thread = threading.Thread(target=verify_formats)
+                # verifying_thread.start()
+                asyncio.run(verify_formats())
+
         return switch
 
     # radio buttons event handler
     def radiobutton_event() -> str:
         global audio_abrs, video_resolutions
         radio_value = radio_var.get()
-        
+
         print(f"you selected { radio_value }")
-        
+
         if radio_value == "audio":
             combobox.configure(values=audio_abrs)
             combobox.update()
@@ -218,29 +265,27 @@ def displayUI():
             combobox.configure(values=video_resolutions)
             combobox.update()
             print(video_resolutions)
-        
+
         if not audio_abrs and not video_resolutions:
             empty_message: list = [error_message.get("unavailable_options")]
-            combobox.configure(values=empty_message )
+            combobox.configure(values=empty_message)
             return
-                    
-        # if radio_value == "audio":               
-        return radio_value
 
+        # if radio_value == "audio":
+        return radio_value
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
         print("combobox dropdown clicked:", choice)
         return choice
-    
+
         # button event handler
-        
+
     # Button event handler
     def button_event():
         url = entry.get()
         event_label(app, "", event_color.get("dark"))
         color = event_color.get("danger")
-        
 
         if len(url) >= 20 and len(url) <= 2048:
             file_Availability = asyncio.run(file_verification(url))
@@ -249,38 +294,58 @@ def displayUI():
 
             if file_Availability:
                 if switch == "on":
-                    event_label(app, downloadstatus.get("download"), app_color.get("primary"))
+                    event_label(
+                        app, downloadstatus.get("download"), app_color.get("primary")
+                    )
 
                     download_thread = threading.Thread(
                         target=quick_download, args=(url, on_progress)
                     )
                     download_thread.start()
-                    
-                
-                elif radiobutton_value == "video":        
+
+                elif radiobutton_value == "video":
                     global video_resolutions, video_dict
-                    
-                    event_label(app, downloadstatus.get("videodownload"), app_color.get("primary"))
+
+                    event_label(
+                        app,
+                        downloadstatus.get("videodownload"),
+                        app_color.get("primary"),
+                    )
                     if combobox.get() in video_resolutions:
-                        
+
                         itag = video_dict.get(combobox.get())
-                        download_thread = threading.Thread(target=download, args=(url, on_progress, itag))
+                        download_thread = threading.Thread(
+                            target=download, args=(url, on_progress, itag)
+                        )
                         download_thread.start()
                     else:
-                        event_label(app, error_message.get("option_issue"), event_color.get("danger"))
-                                 
-                            
+                        event_label(
+                            app,
+                            error_message.get("option_issue"),
+                            event_color.get("danger"),
+                        )
+
                 else:
                     global audio_abrs, audio_dict
-                    event_label(app, downloadstatus.get("audiodownload"), app_color.get("primary"))
+                    event_label(
+                        app,
+                        downloadstatus.get("audiodownload"),
+                        app_color.get("primary"),
+                    )
                     if combobox.get() in audio_abrs:
-                        
+
                         itag = audio_dict.get(combobox.get())
-                        download_thread = threading.Thread(target=audio_download, args=(url, on_progress, itag))
+                        download_thread = threading.Thread(
+                            target=audio_download, args=(url, on_progress, itag)
+                        )
                         download_thread.start()
                     else:
-                        event_label(app, error_message.get("option_issue"), event_color.get("danger"))
-        
+                        event_label(
+                            app,
+                            error_message.get("option_issue"),
+                            event_color.get("danger"),
+                        )
+
             else:
                 error = error_message.get("url_issue")
                 event_label(app, error, color)
@@ -288,7 +353,6 @@ def displayUI():
         else:
             error = error_message.get("invalid_length")
             event_label(app, error, color)
-
 
     #! UI COMPONENTS ----------------------------------------------------------------------------------------------------------------------
 
@@ -378,15 +442,15 @@ def displayUI():
         font=("", 16),
     )
     button.pack(padx=10, pady=20)
-    
+
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=20, pady=10)
-    #def segmented_button_callback(value):
+    # def segmented_button_callback(value):
     #    print("segmented button clicked:", value)
 
-    #segemented_button = ctk.CTkSegmentedButton(master=frame,values=["Value 1", "Value 2", "Value 3"],command=segmented_button_callback)
-    #segemented_button.pack(padx=20, pady=10)
-    #segemented_button.set("Value 1")  # set initial value
+    # segemented_button = ctk.CTkSegmentedButton(master=frame,values=["Value 1", "Value 2", "Value 3"],command=segmented_button_callback)
+    # segemented_button.pack(padx=20, pady=10)
+    # segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
@@ -421,11 +485,11 @@ def displayUI():
         borderwidth=0,
         bd=0,
     )
-    
+
     RightClickMenu.add_command(
         label="Paste", command=lambda: entry.insert(tkinter.END, app.clipboard_get())
     )
-    
+
     RightClickMenu.add_command(
         label="Copy", command=lambda: app.clipboard_append(entry.get())
     )
