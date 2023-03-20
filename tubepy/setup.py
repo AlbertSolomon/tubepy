@@ -444,7 +444,19 @@ def displayUI():
     button.pack(padx=10, pady=20)
 
     frame = ctk.CTkFrame(master=app, width=500, height=200)
-    frame.pack(padx=20, pady=10)
+    frame.pack(padx=5, pady=(10,5))
+
+    thumbnail_image = ctk.CTkImage(
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"), size=(120, 150)
+    )
+
+    image_label = ctk.CTkLabel(master=frame, width=50, height=150, corner_radius=10, text="" ,image=thumbnail_image)
+    image_label.grid(row=0, column=0, padx=0, pady=0)
+    
+    textbox = ctk.CTkTextbox(master=frame, width=380, height=150)
+    textbox.grid(row=0, column=1,padx=15, pady=15)
+    textbox.insert("0.0", "new text to insert thhhhhh ugioodnvdf ervbboiv vuovbojnv vqoehv fvoevr kvneov volnvkdnklnv vbubv vnoeithb")
+
     # def segmented_button_callback(value):
     #    print("segmented button clicked:", value)
 
