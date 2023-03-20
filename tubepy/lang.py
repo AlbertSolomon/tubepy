@@ -33,7 +33,8 @@ error_message = {
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
     "option_issue": "Please select an option... 😕",
-    "network_error": "Sorry, bad network connection 🌐"
+    "network_error": "Sorry, bad network connection 🌐",
+    "unavailable_options": "Options not available",
 }
 
 app_color = {
