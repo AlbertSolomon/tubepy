@@ -30,3 +30,4 @@ def download_path_settings():
 
     filepath = filedialog.askdirectory()
     change_download_location(filepath)
+    
