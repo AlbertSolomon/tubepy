@@ -444,28 +444,51 @@ def displayUI():
     button.pack(padx=10, pady=20)
 
     frame = ctk.CTkFrame(master=app, width=500, height=200)
-    frame.pack(padx=5, pady=(10,5))
+    frame.pack(padx=5, pady=(10, 5))
 
     thumbnail_image = ctk.CTkImage(
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"), size=(120, 150)  # https://i.ytimg.com/vi/DHjqpvDnNGE/sddefault.jpg/"https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
+        size=(
+            120,
+            150,
+        ),  # https://i.ytimg.com/vi/DHjqpvDnNGE/sddefault.jpg/"https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
     )
 
-    image_label = ctk.CTkLabel(master=frame, width=50, height=150, corner_radius=10, text="" ,image=thumbnail_image)
+    image_label = ctk.CTkLabel(
+        master=frame,
+        width=50,
+        height=150,
+        corner_radius=10,
+        text="",
+        image=thumbnail_image,
+    )
     image_label.grid(row=0, column=0, padx=0, pady=0)
-    
-    infobox = ctk.CTkLabel(master=frame, width=380, height=150,text_color= app_color.get("primary"), text="this is awesome\n  soooooo coooooool", anchor="nw")
-    infobox.grid(row=0, column=1,padx=15, pady=(15,0))
-    
+
+    infobox = ctk.CTkLabel(
+        master=frame,
+        width=380,
+        height=150,
+        text_color=app_color.get("primary"),
+        text="this is awesome\n  soooooo coooooool",
+        anchor="nw",
+    )
+    infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
+
     def segmented_button_callback(value):
-       print("segmented button clicked:", value)
-       
-       if value == "change download Location":
-           download_path_settings()
-       
-       
-    segemented_button = ctk.CTkSegmentedButton(master=frame,height=20, values=["change download Location", "About Tubepy","QR Code"],command=segmented_button_callback)
-    segemented_button.grid(row=1,column=1, padx=0, pady=(0,5))
-    # segemented_button.set("Value 1")  # set initial value
+        print("segmented button clicked:", value)
+
+        if value == "change download Location":
+            download_path_settings()
+            return
+
+    segemented_button = ctk.CTkSegmentedButton(
+        master=frame,
+        height=20,
+        values=["change download Location", "About Tubepy", "QR Code"],
+        command=segmented_button_callback,
+    )
+    segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
+    segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
