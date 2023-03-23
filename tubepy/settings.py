@@ -29,5 +29,7 @@ def download_path_settings():
     root.withdraw()
 
     filepath = filedialog.askdirectory()
-    change_download_location(filepath)
-    
+
+    if filepath:
+        change_download_location(filepath) 
+        return
