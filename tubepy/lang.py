@@ -1,14 +1,14 @@
 import asyncio
+import concurrent.futures
 import json
 import re
 import urllib.request
-import concurrent.futures
 
 import aiohttp
 import requests  # this for testing purposes
+from humanize.time import precisedelta
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
-from humanize.time import precisedelta
 
 downloadstatus = {
     "load": "loading... 😒",
@@ -230,42 +230,41 @@ async def check_internet_connection(youtube_url) -> bool:
         return True
     except (urllib.error.URLError, asyncio.TimeoutError):
         return False
-    
-    
+
+
 # this function will be revisited in the future.
 def connection_checker(function, error_callback=None):
     async def wrapper(youtube_url):
         loop = asyncio.get_event_loop()
         coroutine = check_internet_connection(youtube_url)
-        
+
         future = asyncio.run_coroutine_threadsafe(coroutine, loop=loop)
         network_check = future.result()
-        
+
         if network_check:
             return await function(youtube_url)
         else:
             return error_callback
-    
+
     return wrapper
 
 
 @youtubefile
 async def downloadfile_details(youtube_file) -> dict:
-    ''' This function retrieves relevant information from a YouTube object. '''
-    
+    """This function retrieves relevant information from a YouTube object."""
+
     title = youtube_file.title
     author = youtube_file.author
     video_description = youtube_file.description
     video_info = youtube_file.vid_info
-    
+
     lenght = youtube_file.length
     thumbnail = youtube_file.thumbnail_url
-    channel = youtube_file.channel_url 
+    channel = youtube_file.channel_url
     views = youtube_file.views
-    
-    upload_date = youtube_file.publish_date   
+
+    upload_date = youtube_file.publish_date
     file_info: dict = {
-        
         "title": title,
         "author": author,
         # "description": video_description,
@@ -276,5 +275,5 @@ async def downloadfile_details(youtube_file) -> dict:
         "views": views,
         "date": precisedelta(upload_date),
     }
-    
+
     return file_info
