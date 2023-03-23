@@ -72,9 +72,6 @@ def read_config_file():
     return location
 
 
-# print(read_config_file())
-
-
 class CodeChangeHandler(FileSystemEventHandler):
     """This is a handler for the code change event during development."""
 
