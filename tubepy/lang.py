@@ -82,7 +82,11 @@ class CodeChangeHandler(FileSystemEventHandler):
         self.exclude_file = exclude_file
 
     def on_any_event(self, event):
-        if event.is_directory and self.exclude_dir and event.src_path.startswith(self.exclude_dir):
+        if (
+            event.is_directory
+            and self.exclude_dir
+            and event.src_path.startswith(self.exclude_dir)
+        ):
             return
         if event.src_path == self.exclude_file:
             return
