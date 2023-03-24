@@ -102,6 +102,7 @@ def displayUI():
 
     # switch button event handler
     state: list = ["disabled"]
+
     def switch_event() -> str:
         switch = switch_var.get()
         disabled = widget_state[0]
@@ -353,7 +354,6 @@ def displayUI():
             error = error_message.get("invalid_length")
             event_label(app, error, color)
 
-
     def segmented_button_callback(value):
         print("segmented button clicked:", value)
 
@@ -362,16 +362,15 @@ def displayUI():
             settings_thread = threading.Thread(target=download_path_settings)
             settings_thread.start()
             return
-        
 
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
-    
-    #?                                                                                                     UI COMPONENTS 🌳
-    
+
+    # ?                                                                                                     UI COMPONENTS 🌳
+
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
-    
+
     # entry button
     entry = ctk.CTkEntry(
         master=app,
@@ -490,7 +489,6 @@ def displayUI():
     )
     infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
 
-
     segemented_button = ctk.CTkSegmentedButton(
         master=frame,
         height=20,
@@ -552,7 +550,12 @@ if __name__ == "__main__":
 
     exclude_dir = "../utilities"
     exclude_file = "../utilities/config.json"
-    event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ["python"] + sys.argv), exclude_dir=exclude_dir, exclude_file=exclude_file)
+    
+    event_handler = CodeChangeHandler(
+        lambda: os.execv(sys.executable, ["python"] + sys.argv),
+        exclude_dir=exclude_dir,
+        exclude_file=exclude_file,
+    )
     observer = Observer()
     observer.schedule(event_handler, "./tubepy", recursive=True)
     observer.start()
