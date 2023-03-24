@@ -102,7 +102,6 @@ def displayUI():
 
     # switch button event handler
     state: list = ["disabled"]
-
     def switch_event() -> str:
         switch = switch_var.get()
         disabled = widget_state[0]
@@ -359,7 +358,9 @@ def displayUI():
         print("segmented button clicked:", value)
 
         if value == "change download Location":
-            download_path_settings()
+            # download_path_settings()
+            settings_thread = threading.Thread(target=download_path_settings)
+            settings_thread.start()
             return
         
 
@@ -549,11 +550,11 @@ def displayUI():
 
 if __name__ == "__main__":
 
-    event_handler = CodeChangeHandler(
-        lambda: os.execv(sys.executable, ["python"] + sys.argv)
-    )
+    exclude_dir = "../utilities"
+    exclude_file = "../utilities/config.json"
+    event_handler = CodeChangeHandler(lambda: os.execv(sys.executable, ["python"] + sys.argv), exclude_dir=exclude_dir, exclude_file=exclude_file)
     observer = Observer()
-    observer.schedule(event_handler, ".", recursive=True)
+    observer.schedule(event_handler, "./tubepy", recursive=True)
     observer.start()
 
     try:
