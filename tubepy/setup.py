@@ -6,6 +6,8 @@ import sys
 import threading
 import tkinter
 import traceback
+import requests
+import urllib.parse
 
 import customtkinter as ctk
 from app import audio_download, download, quick_download
@@ -461,12 +463,16 @@ def displayUI():
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=5, pady=(10, 5))
 
+    #url = "https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
+    #escaped_url = urllib.parse.quote(url, safe=':/')
+    
     thumbnail_image = ctk.CTkImage(
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
+        #dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),  
         size=(
-            120,
+            160,
             150,
-        ),  # https://i.ytimg.com/vi/DHjqpvDnNGE/sddefault.jpg/"https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
+        ),
     )
 
     image_label = ctk.CTkLabel(
@@ -488,6 +494,7 @@ def displayUI():
         anchor="nw",
     )
     infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
+    
 
     segemented_button = ctk.CTkSegmentedButton(
         master=frame,
@@ -521,6 +528,7 @@ def displayUI():
         font=("", 16),
     )
     progress_label.pack_forget()
+    
 
     RightClickMenu = tkinter.Menu(
         entry,
@@ -556,6 +564,7 @@ if __name__ == "__main__":
         exclude_dir=exclude_dir,
         exclude_file=exclude_file,
     )
+    
     observer = Observer()
     observer.schedule(event_handler, "./tubepy", recursive=True)
     observer.start()
