@@ -75,14 +75,18 @@ def read_config_file():
 class CodeChangeHandler(FileSystemEventHandler):
     """This is a handler for the code change event during development."""
 
-    def __init__(self, callback):
+    def __init__(self, callback, exclude_dir=None, exclude_file=None):
         super().__init__()
         self.callback = callback
+        self.exclude_dir = exclude_dir
+        self.exclude_file = exclude_file
 
     def on_any_event(self, event):
-        if event.is_directory:
+        if event.is_directory and self.exclude_dir and event.src_path.startswith(self.exclude_dir):
             return
-        elif event.event_type in ["modified", "created", "deleted"]:
+        if event.src_path == self.exclude_file:
+            return
+        if event.event_type in ["modified", "created", "deleted"]:
             self.callback()
 
 
