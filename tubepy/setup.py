@@ -22,7 +22,8 @@ from lang import (
     error_message,
     event_color,
     file_verification,
-    widget_state,
+    widget_state, 
+    downloadfile_details,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -65,6 +66,7 @@ def displayUI():
             frame.tk_popup(event.x_root, event.y_root)
         finally:
             frame.grab_release()
+                       
 
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
@@ -249,7 +251,12 @@ def displayUI():
 
                 # verifying_thread = threading.Thread(target=verify_formats)
                 # verifying_thread.start()
-                asyncio.run(verify_formats())
+                
+                def finalizing_verification():
+                    asyncio.run(verify_formats())
+                    
+                finalizing_thread = threading.Thread(target=finalizing_verification)
+                finalizing_thread.start()
 
         return switch
 
@@ -294,7 +301,7 @@ def displayUI():
             switch = switch_event()
             radiobutton_value = radiobutton_event()
 
-            if file_Availability:
+            if file_Availability:    
                 if switch == "on":
                     event_label(
                         app, downloadstatus.get("download"), app_color.get("primary")
