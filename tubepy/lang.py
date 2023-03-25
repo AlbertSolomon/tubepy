@@ -29,7 +29,7 @@ empty = {
 }
 
 error_message = {
-    "invalid_length": "Invalid url length !. The URL length you have provided might be too short or too long 😥",
+    "invalid_length": "Invalid url length !. The URL length you have provided is invalid. Please try again 😥",
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
     "option_issue": "Please select an option... 😕",
