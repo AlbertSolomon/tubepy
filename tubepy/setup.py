@@ -367,7 +367,7 @@ def displayUI():
     def segmented_button_callback(value):
         print("segmented button clicked:", value)
 
-        if value == "change download Location":
+        if value == "Change download Location":
             # download_path_settings()
             settings_thread = threading.Thread(target=download_path_settings)
             settings_thread.start()
@@ -492,11 +492,12 @@ def displayUI():
         image=thumbnail_image,
     )
     image_label.grid(row=0, column=0, padx=0, pady=0)
-
+    
+    
     infobox = ctk.CTkLabel(
         master=frame,
         width=380,
-        height=150,
+        height=155,
         text_color=app_color.get("primary"),
         text=app_info.get("general_summary"),
         anchor="nw",
@@ -506,10 +507,15 @@ def displayUI():
     infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
     
 
+    tiny_frame = ctk.CTkFrame(master=app, width=500, height=50)
+    tiny_frame.pack(padx=0, pady=(5,0))
+
     segemented_button = ctk.CTkSegmentedButton(
-        master=frame,
+        master=tiny_frame,
         height=20,
-        values=["change download Location", "About Tubepy", "QR Code"],
+        selected_color= app_color.get("extra_color"),
+        text_color=app_color.get("primary"),
+        values=["Change download Location", "About Tubepy", "QR Code"],
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
