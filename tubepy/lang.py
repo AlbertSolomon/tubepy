@@ -10,6 +10,10 @@ from humanize.time import precisedelta
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 
+app_info = {
+    "general_summary": "Tubepy is a simple open source desktop app that allows easy downloading of Youtube Videos, it has the following sections:\n\n Quick Download: is an option that downloads' YouTube videos at the highest available resolution quickly.\n\n Video: is an option for custom resolution and Please *note that some of the resolutions do not have audio (Quick download is recomended).\n\n Audio: is an option for downloading the audio version of the video.",
+}
+
 downloadstatus = {
     "load": "loading... 😒",
     "download": "downloading... 😒",
