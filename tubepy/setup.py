@@ -23,7 +23,8 @@ from lang import (
     event_color,
     file_verification,
     widget_state, 
-    downloadfile_details,
+    downloadfile_details, 
+    app_info,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -497,8 +498,10 @@ def displayUI():
         width=380,
         height=150,
         text_color=app_color.get("primary"),
-        text="this is awesome\n  soooooo coooooool",
+        text=app_info.get("general_summary"),
         anchor="nw",
+        justify="left",
+        wraplength=480,
     )
     infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
     
