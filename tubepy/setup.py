@@ -46,6 +46,7 @@ def displayUI():
     app = ctk.CTk()
     app.geometry("840x640")
     app.title("Tubepy")
+    app.resizable(width=False, height=False)
 
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
