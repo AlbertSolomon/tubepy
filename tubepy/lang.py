@@ -202,7 +202,7 @@ async def add_audio_stream_codes(youtube_file) -> list:
 
 
 @youtubefile
-async def add_video_stream_code(youtube_file):
+async def add_video_stream_code(youtube_file) -> list:
     """
     The use of a youtubefile decorator does not make this function any special, this gets video itags and video resolution from a Stream object.
     This is also a list of lists with two indices and should be implemented in the following format:
@@ -230,6 +230,24 @@ async def add_video_stream_code(youtube_file):
 
 
 async def check_internet_connection(youtube_url) -> bool:
+    """
+    Check if an internet connection is available by attempting to open a URL within a specified timeout.
+
+    Parameters:
+    youtube_url (str): The URL to check for internet connection.
+
+    Returns:
+    bool: True if the URL can be opened within the timeout, False otherwise.
+
+    Raises:
+    None.
+
+    Example:
+    >>> is_connected = asyncio.run( check_internet_connection("https://www.youtube.com/") )
+    >>> print(is_connected)
+    True
+    """
+
     try:
         await asyncio.to_thread(urllib.request.urlopen, youtube_url, timeout=5)
         return True
@@ -256,7 +274,20 @@ def connection_checker(function, error_callback=None):
 
 @youtubefile
 async def downloadfile_details(youtube_file) -> dict:
-    """This function retrieves relevant information from a YouTube object."""
+    """
+    This function retrieves relevant information from a YouTube object.
+
+    Returns:
+    dict: A dictionary containing the details of the `youtube_file` object.
+
+    Raises:
+    None.
+
+    Example:
+    >>> file_details = asyncio.run( downloadfile_details(youtube_url) )
+    >>> print(file_details)
+    {'title': 'Rick Astley - Never Gonna Give You Up (Video)', 'author': 'Rick Astley', 'length': '00:03:33', 'thumbnail': 'https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg', 'views': '1,373,364,201', 'date': '12 years ago'}
+    """
 
     title = youtube_file.title
     author = youtube_file.author
