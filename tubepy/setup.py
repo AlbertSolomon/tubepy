@@ -6,25 +6,25 @@ import sys
 import threading
 import tkinter
 import traceback
-import requests
 import urllib.parse
 
 import customtkinter as ctk
+import requests
 from app import audio_download, download, quick_download
 from lang import (
     CodeChangeHandler,
     add_audio_stream_codes,
     add_video_stream_code,
     app_color,
+    app_info,
     check_internet_connection,
     connection_checker,
+    downloadfile_details,
     downloadstatus,
     error_message,
     event_color,
     file_verification,
-    widget_state, 
-    downloadfile_details, 
-    app_info,
+    widget_state,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -38,16 +38,16 @@ video_itags: list = []
 video_resolutions: list = []
 video_dict: dict = {}
 
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("green")
+
+app = ctk.CTk()
+app.geometry("840x640")
+app.title("Tubepy")
+app.resizable(width=False, height=False)
+
 
 def displayUI():
-    ctk.set_appearance_mode("dark")
-    ctk.set_default_color_theme("green")
-
-    app = ctk.CTk()
-    app.geometry("840x640")
-    app.title("Tubepy")
-    app.resizable(width=False, height=False)
-
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
         label = ctk.CTkLabel(
@@ -68,7 +68,6 @@ def displayUI():
             frame.tk_popup(event.x_root, event.y_root)
         finally:
             frame.grab_release()
-                       
 
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
@@ -253,10 +252,10 @@ def displayUI():
 
                 # verifying_thread = threading.Thread(target=verify_formats)
                 # verifying_thread.start()
-                
+
                 def finalizing_verification():
                     asyncio.run(verify_formats())
-                    
+
                 finalizing_thread = threading.Thread(target=finalizing_verification)
                 finalizing_thread.start()
 
@@ -303,7 +302,7 @@ def displayUI():
             switch = switch_event()
             radiobutton_value = radiobutton_event()
 
-            if file_Availability:    
+            if file_Availability:
                 if switch == "on":
                     event_label(
                         app, downloadstatus.get("download"), app_color.get("primary")
@@ -472,12 +471,12 @@ def displayUI():
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=5, pady=(10, 5))
 
-    #url = "https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
-    #escaped_url = urllib.parse.quote(url, safe=':/')
-    
+    # url = "https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
+    # escaped_url = urllib.parse.quote(url, safe=':/')
+
     thumbnail_image = ctk.CTkImage(
-        #dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),  
+        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
         size=(
             160,
             150,
@@ -493,8 +492,7 @@ def displayUI():
         image=thumbnail_image,
     )
     image_label.grid(row=0, column=0, padx=0, pady=0)
-    
-    
+
     infobox = ctk.CTkLabel(
         master=frame,
         width=380,
@@ -506,15 +504,14 @@ def displayUI():
         wraplength=480,
     )
     infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
-    
 
     tiny_frame = ctk.CTkFrame(master=app, width=500, height=50)
-    tiny_frame.pack(padx=0, pady=(5,0))
+    tiny_frame.pack(padx=0, pady=(5, 0))
 
     segemented_button = ctk.CTkSegmentedButton(
         master=tiny_frame,
         height=20,
-        selected_color= app_color.get("extra_color"),
+        selected_color=app_color.get("extra_color"),
         text_color=app_color.get("primary"),
         values=["Change download Location", "About Tubepy"],
         command=segmented_button_callback,
@@ -545,7 +542,6 @@ def displayUI():
         font=("", 16),
     )
     progress_label.pack_forget()
-    
 
     RightClickMenu = tkinter.Menu(
         entry,
@@ -575,13 +571,13 @@ if __name__ == "__main__":
 
     exclude_dir = "../utilities"
     exclude_file = "../utilities/config.json"
-    
+
     event_handler = CodeChangeHandler(
         lambda: os.execv(sys.executable, ["python"] + sys.argv),
         exclude_dir=exclude_dir,
         exclude_file=exclude_file,
     )
-    
+
     observer = Observer()
     observer.schedule(event_handler, "./tubepy", recursive=True)
     observer.start()
