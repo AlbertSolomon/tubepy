@@ -498,7 +498,7 @@ def displayUI():
     infobox = ctk.CTkLabel(
         master=frame,
         width=380,
-        height=155,
+        height=150,
         text_color=app_color.get("primary"),
         text=app_info.get("general_summary"),
         anchor="nw",
@@ -516,7 +516,7 @@ def displayUI():
         height=20,
         selected_color= app_color.get("extra_color"),
         text_color=app_color.get("primary"),
-        values=["Change download Location", "About Tubepy", "QR Code"],
+        values=["Change download Location", "About Tubepy"],
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
