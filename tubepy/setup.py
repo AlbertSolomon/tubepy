@@ -372,6 +372,10 @@ def displayUI():
             settings_thread = threading.Thread(target=download_path_settings)
             settings_thread.start()
             return
+        
+        if value == "About Tubepy":
+            nextpage()
+            return
 
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
@@ -564,8 +568,27 @@ def displayUI():
     entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
     app.bind("<1>", lambda event: event.widget.focus_set())
 
-    app.mainloop()
 
+
+def aboutTubepy(app):  
+    ctk.CTkLabel(app, text = 'This is page 2').pack(padx=20, pady=20)
+    ctk.CTkButton(app, text = 'To page 1', command = nextpage).pack(padx=20, pady=20)
+    
+def nextpage():
+    global page_number, app
+    for widget in app.winfo_children():
+        widget.destroy()
+        
+    if page_number == 1:
+        aboutTubepy(app)
+        page_number = 2
+    else:
+        displayUI()
+        page_number = 1
+        
+page_number = 1
+displayUI()
+app.mainloop()
 
 if __name__ == "__main__":
 
