@@ -48,6 +48,7 @@ app.resizable(width=False, height=False)
 
 
 def displayUI():
+    
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
         label = ctk.CTkLabel(
@@ -571,14 +572,25 @@ def displayUI():
 
 
 def aboutTubepy(app):  
-    ctk.CTkLabel(app, text = 'This is page 2').pack(padx=20, pady=20)
-    ctk.CTkButton(app, text = 'To page 1', command = nextpage).pack(padx=20, pady=20)
+    page = ctk.CTkFrame(master=app, width=400, corner_radius=25)
+    page.pack()
+    
+    heading_label =ctk.CTkLabel(master=page, text ="ABOUT TUBEPY ", justify="center")
+    heading_label.grid(row=0, column=1, padx= [200,350], pady=10, ipadx=0)
+    
+    back_btn = ctk.CTkButton(master=page, width=80, height=40, corner_radius=50, text ="Back", command =nextpage)
+    back_btn.grid(row=0,column=0, padx= 15, pady=10)
+    
+    tubepy_infoLabel = ctk.CTkLabel(master=app, text=app_info.get("about_app"), wraplength=510,)
+    tubepy_infoLabel.pack(pady=20) 
+    
+    
     
 def nextpage():
     global page_number, app
     for widget in app.winfo_children():
         widget.destroy()
-        
+         
     if page_number == 1:
         aboutTubepy(app)
         page_number = 2
