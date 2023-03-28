@@ -589,8 +589,27 @@ def aboutTubepy(app):
     back_btn.grid(row=0,column=0, padx= 15, pady=10)
     
     tubepy_infoLabel = ctk.CTkLabel(master=app, text=app_info.get("about_app"),anchor="nw",justify="left", wraplength=510,)
-    tubepy_infoLabel.pack(pady=20) 
+    tubepy_infoLabel.pack(pady=20)
     
+    QRCODE_image = ctk.CTkImage(
+        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
+        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
+        size=(
+            160,
+            150,
+        ),
+    )
+    
+    QRCODE_label = ctk.CTkLabel(
+        master=app,
+        width=50,
+        height=150,
+        corner_radius=10,
+        text="",
+        image=QRCODE_image,
+    )
+    QRCODE_label.pack(padx=0, pady=10)
+ 
        
 def nextpage():
     global page_number, app
