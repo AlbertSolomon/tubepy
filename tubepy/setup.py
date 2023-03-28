@@ -374,7 +374,7 @@ def displayUI():
             settings_thread.start()
             return
         
-        if value == "About Tubepy":
+        if value == "About":
             nextpage()
             return
 
@@ -502,7 +502,7 @@ def displayUI():
         master=frame,
         width=380,
         height=150,
-        text_color=app_color.get("primary"),
+        #text_color=app_color.get("primary"),
         text=app_info.get("general_summary"),
         anchor="nw",
         justify="left",
@@ -518,7 +518,7 @@ def displayUI():
         height=20,
         selected_color=app_color.get("extra_color"),
         text_color=app_color.get("primary"),
-        values=["Change download Location", "About Tubepy"],
+        values=["Change download Location", "About"],
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
@@ -585,10 +585,10 @@ def aboutTubepy(app):
     heading_label =ctk.CTkLabel(master=page, text ="ABOUT TUBEPY ", justify="center")
     heading_label.grid(row=0, column=1, padx= [200,350], pady=10, ipadx=0)
     
-    back_btn = ctk.CTkButton(master=page, width=80, height=40, corner_radius=50, text ="Back", command =nextpage)
+    back_btn = ctk.CTkButton(master=page, width=80, height=40, border_width=0, text_color=app_color.get("extra_color"), corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), text ="Back", command =nextpage)
     back_btn.grid(row=0,column=0, padx= 15, pady=10)
     
-    tubepy_infoLabel = ctk.CTkLabel(master=app, text=app_info.get("about_app"), wraplength=510,)
+    tubepy_infoLabel = ctk.CTkLabel(master=app, text=app_info.get("about_app"),anchor="nw",justify="left", wraplength=510,)
     tubepy_infoLabel.pack(pady=20) 
     
        
