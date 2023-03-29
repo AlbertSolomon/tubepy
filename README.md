@@ -25,4 +25,4 @@ run the project like so ` python tubepy/setup.py ` on windows, ` python3 tutepy/
 
 ## Contributions
 
-> For more information on how to contribute please see the CONTRIBUTIONS.md file.
+> For more information on how to contribute please read the CONTRIBUTIONS.md file.
