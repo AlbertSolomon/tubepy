@@ -48,7 +48,6 @@ app.resizable(width=False, height=False)
 
 
 def displayUI():
-    
     def event_label(app, message, color):
         text_var = tkinter.StringVar(value=message)
         label = ctk.CTkLabel(
@@ -373,7 +372,7 @@ def displayUI():
             settings_thread = threading.Thread(target=download_path_settings)
             settings_thread.start()
             return
-        
+
         if value == "About":
             nextpage()
             return
@@ -502,7 +501,7 @@ def displayUI():
         master=frame,
         width=380,
         height=150,
-        #text_color=app_color.get("primary"),
+        # text_color=app_color.get("primary"),
         text=app_info.get("general_summary"),
         anchor="nw",
         justify="left",
@@ -578,19 +577,37 @@ def displayUI():
 #! *****************************************************************************************************************************************************************************************************************************************
 #! *****************************************************************************************************************************************************************************************************************************************
 
-def aboutTubepy(app):  
+
+def aboutTubepy(app):
     page = ctk.CTkFrame(master=app, width=400, corner_radius=25)
     page.pack()
-    
-    heading_label =ctk.CTkLabel(master=page, text ="ABOUT TUBEPY ", justify="center")
-    heading_label.grid(row=0, column=1, padx= [200,350], pady=10, ipadx=0)
-    
-    back_btn = ctk.CTkButton(master=page, width=80, height=40, border_width=0, text_color=app_color.get("extra_color"), corner_radius=50, hover_color=app_color.get("hover_color"), fg_color=app_color.get("primary"), text ="Back", command =nextpage)
-    back_btn.grid(row=0,column=0, padx= 15, pady=10)
-    
-    tubepy_infoLabel = ctk.CTkLabel(master=app, text=app_info.get("about_app"),anchor="nw",justify="left", wraplength=510,)
+
+    heading_label = ctk.CTkLabel(master=page, text="ABOUT TUBEPY ", justify="center")
+    heading_label.grid(row=0, column=1, padx=[200, 350], pady=10, ipadx=0)
+
+    back_btn = ctk.CTkButton(
+        master=page,
+        width=80,
+        height=40,
+        border_width=0,
+        text_color=app_color.get("extra_color"),
+        corner_radius=50,
+        hover_color=app_color.get("hover_color"),
+        fg_color=app_color.get("primary"),
+        text="Back",
+        command=nextpage,
+    )
+    back_btn.grid(row=0, column=0, padx=15, pady=10)
+
+    tubepy_infoLabel = ctk.CTkLabel(
+        master=app,
+        text=app_info.get("about_app"),
+        anchor="nw",
+        justify="left",
+        wraplength=510,
+    )
     tubepy_infoLabel.pack(pady=20)
-    
+
     QRCODE_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
@@ -599,7 +616,7 @@ def aboutTubepy(app):
             150,
         ),
     )
-    
+
     QRCODE_label = ctk.CTkLabel(
         master=app,
         width=50,
@@ -609,20 +626,21 @@ def aboutTubepy(app):
         image=QRCODE_image,
     )
     QRCODE_label.pack(padx=0, pady=10)
- 
-       
+
+
 def nextpage():
     global page_number, app
     for widget in app.winfo_children():
         widget.destroy()
-         
+
     if page_number == 1:
         aboutTubepy(app)
         page_number = 2
     else:
         displayUI()
         page_number = 1
-        
+
+
 page_number = 1
 displayUI()
 app.mainloop()
