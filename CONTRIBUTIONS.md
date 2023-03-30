@@ -1,4 +1,4 @@
-# Contributors Guide for "tubepy": Perfect for Newbies!
+# Contributors Guide for "tubepy": Perfect for Newbies
 
 > Hey there, welcome to "tubepy"! We're excited that you're interested in contributing to our simple GUI desktop YouTube video downloader written in Python. Whether you're a seasoned open source contributor or a newbie, we welcome your contributions.
 > If you're new to open source, don't worry! Here are some steps to help you get started:
