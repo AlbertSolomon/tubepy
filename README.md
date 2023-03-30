@@ -6,7 +6,7 @@
 
 </div>
 
-> Youtube video downloader in python.
+> A simple desktop Youtube video downloader in python.
 
 ## version 1
 
