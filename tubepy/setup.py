@@ -494,7 +494,7 @@ def displayUI():
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
         size=(
-            160,
+            170,
             150,
         ),
     )
