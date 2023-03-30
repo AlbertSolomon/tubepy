@@ -316,7 +316,7 @@ async def downloadfile_details(youtube_file) -> dict:
         "thumbnail": thumbnail,
         # "channel": channel,
         "views": views,
-        "date": naturaldelta(upload_date, months=True, minimum_unit='hours'), # precisedelta(upload_date),
+        "date": precisedelta(upload_date), # naturaldelta(upload_date, months=True, minimum_unit='hours')
     }
 
     return file_info
