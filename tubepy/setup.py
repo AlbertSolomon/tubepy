@@ -69,6 +69,19 @@ def displayUI():
         finally:
             frame.grab_release()
 
+    def display_fileinfo(youtube_link):
+        stringified_details = ""
+        file_details = asyncio.run(downloadfile_details(youtube_link))
+
+        for key, file_detail in file_details.items():
+            if key == "thumbnail":
+                thumbnail_image.configure(
+                    dark_image=Image.open(requests.get(file_detail, stream=True).raw)
+                )
+            else:
+                stringified_details += f"{ key.capitalize() }: { file_detail } \n\n"
+        infobox.configure(text=stringified_details)
+
     def on_progress(stream, chunk, bytes_remaining):
         youtube_filesize = stream.filesize
         print(f"youtube file size : { youtube_filesize }")
@@ -266,7 +279,7 @@ def displayUI():
         global audio_abrs, video_resolutions
         radio_value = radio_var.get()
 
-        print(f"you selected { radio_value }")
+        # print(f"you selected { radio_value }")
 
         if radio_value == "audio":
             combobox.configure(values=audio_abrs)
@@ -286,10 +299,7 @@ def displayUI():
 
     # Combo box event handler
     def combobox_callback(choice) -> str:
-        print("combobox dropdown clicked:", choice)
         return choice
-
-        # button event handler
 
     # Button event handler
     def button_event():
@@ -303,6 +313,10 @@ def displayUI():
             radiobutton_value = radiobutton_event()
 
             if file_Availability:
+
+                info_thread = threading.Thread(target=display_fileinfo, args=(url,))
+                info_thread.start()
+
                 if switch == "on":
                     event_label(
                         app, downloadstatus.get("download"), app_color.get("primary")
@@ -365,8 +379,6 @@ def displayUI():
             event_label(app, error, color)
 
     def segmented_button_callback(value):
-        print("segmented button clicked:", value)
-
         if value == "Change download Location":
             # download_path_settings()
             settings_thread = threading.Thread(target=download_path_settings)
@@ -580,7 +592,7 @@ def displayUI():
 
 def aboutTubepy(app):
     page = ctk.CTkFrame(master=app, width=400, corner_radius=25)
-    page.pack()
+    page.pack(pady=10)
 
     heading_label = ctk.CTkLabel(master=page, text="ABOUT TUBEPY ", justify="center")
     heading_label.grid(row=0, column=1, padx=[200, 350], pady=10, ipadx=0)
@@ -610,7 +622,9 @@ def aboutTubepy(app):
 
     QRCODE_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/qr-code.png"), # from https://www.qrcode-monkey.com/
+        dark_image=Image.open(
+            "assets/qr-code.png"
+        ),  # from https://www.qrcode-monkey.com/
         size=(
             160,
             150,
