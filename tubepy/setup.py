@@ -610,7 +610,7 @@ def aboutTubepy(app):
 
     QRCODE_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/qr-code.png"),
+        dark_image=Image.open("assets/qr-code.png"), # from https://www.qrcode-monkey.com/
         size=(
             160,
             150,

@@ -11,9 +11,10 @@ from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 from version import __version__
 
+repo_link = "https://github.com/AlbertSolomon/tubepy"
 app_info = {
     "general_summary": "Quick Download: is an option that downloads' YouTube videos at the highest available resolution quickly.\n\n Video: is an option for custom resolution and Please *note that some of the resolutions do not have audio (Quick Download is recomended).\n\n Audio: is an option for downloading the audio version of the video.",
-    "about_app": f"Tubepy is a simple open source desktop app developed by Albert Solomon Phiri that allows easy downloading of Youtube Videos.\n\nTubepy is currently at version { __version__ } and is licensed under the MIT license hence you can modify and redistribute the software under the conditions of this license.\n\n CONTRIBUTIONS: Tubepy is a project which is tailored for the developer who are just getting started contributing to open source, it has a lot of 'good first issues' on Github.\n\n CONTRIBUTORS: ALBERT SOLOMON PHIRI \n\n WANNA CONTRIBUTE ? : Interested contributors should follow this link to the repository (link) or scan the QR CODE below, cant wait, happy coding and OOOh! dont forget to star the project.\n\n LETS CODE TOGETHER !!!",
+    "about_app": f"Tubepy is a simple open source desktop app developed by Albert Solomon Phiri that allows easy downloading of Youtube Videos.\n\nTubepy is currently at version { __version__ } and is licensed under the MIT license hence you can modify and redistribute the software under the conditions of this license.\n\n CONTRIBUTIONS: Tubepy is a project which is tailored for the developer who are just getting started contributing to open source, it has a lot of 'good first issues' on Github.\n\n CONTRIBUTORS: ALBERT SOLOMON PHIRI \n\n WANNA CONTRIBUTE ? : Interested contributors should follow this link to the repository { repo_link } or scan the QR CODE below, cant wait, happy coding and OOOH! dont forget to star ⭐ the project.\n\n LETS CODE TOGETHER !!!",
 }
 
 downloadstatus = {
