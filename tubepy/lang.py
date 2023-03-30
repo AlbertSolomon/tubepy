@@ -6,7 +6,7 @@ import urllib.request
 
 import aiohttp
 import requests  # this for testing purposes
-from humanize.time import precisedelta
+from humanize.time import precisedelta, naturaldelta
 from pytube import YouTube
 from watchdog.events import FileSystemEventHandler
 from version import __version__
@@ -312,11 +312,11 @@ async def downloadfile_details(youtube_file) -> dict:
         "author": author,
         # "description": video_description,
         # "info": video_info,
-        "length": lenght,
+        "length": precisedelta(lenght, suppress=['seconds', 'milliseconds', 'microseconds']),
         "thumbnail": thumbnail,
         # "channel": channel,
         "views": views,
-        "date": precisedelta(upload_date),
+        "date": naturaldelta(upload_date, months=True, minimum_unit='hours'), # precisedelta(upload_date),
     }
 
     return file_info
