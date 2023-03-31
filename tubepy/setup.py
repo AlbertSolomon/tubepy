@@ -408,7 +408,7 @@ def displayUI():
         border_width=2,
         corner_radius=50,
     )
-    entry.pack(padx=20, pady=30)
+    entry.pack(padx=20, pady=(30,15))
 
     # swich button
     switch_var = ctk.StringVar(value="on")
@@ -482,7 +482,7 @@ def displayUI():
         fg_color=app_color.get("primary"),
         font=("", 16),
     )
-    button.pack(padx=10, pady=20)
+    button.pack(padx=10, pady=(10,5))
 
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=5, pady=(10, 5))
@@ -494,8 +494,8 @@ def displayUI():
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
         size=(
-            170,
-            150,
+            160,
+            155,
         ),
     )
 
@@ -511,18 +511,18 @@ def displayUI():
 
     infobox = ctk.CTkLabel(
         master=frame,
-        width=380,
+        width=400,
         height=150,
         # text_color=app_color.get("primary"),
         text=app_info.get("general_summary"),
         anchor="nw",
         justify="left",
-        wraplength=480,
+        wraplength=490,
     )
-    infobox.grid(row=0, column=1, padx=15, pady=(15, 0))
+    infobox.grid(row=0, column=1, padx=10, pady=(15, 0))
 
     tiny_frame = ctk.CTkFrame(master=app, width=500, height=50)
-    tiny_frame.pack(padx=0, pady=(5, 0))
+    tiny_frame.pack(padx=0, pady=(5, 5))
 
     segemented_button = ctk.CTkSegmentedButton(
         master=tiny_frame,
@@ -533,7 +533,7 @@ def displayUI():
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
-    segemented_button.set("Value 1")  # set initial value
+    #segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
