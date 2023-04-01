@@ -4,9 +4,7 @@
 </h1>
 <h1>TUBEPY</h1> 
 </div>
-
-
-
+# <p align="center"> <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg"> <img src="https://img.shields.io/badge/Python-3.10.8-blue.svg"> <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20MacOS-blue.svg"> <img src="https://img.shields.io/badge/Status-Active-green.svg"> </p>
 
 > A simple desktop Youtube video downloader in python.
 
