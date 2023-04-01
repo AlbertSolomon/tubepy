@@ -1,6 +1,6 @@
 <div align="center">
 <h1>
-    <img width="180" height=180 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
+    <img width="190" height=180 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
 </h1> 
 </div>
 
