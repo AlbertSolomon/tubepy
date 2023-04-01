@@ -1,8 +1,8 @@
 <div align="center">
 
 <h1>
-    <img width="120" height=110 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
-    <img width="200" height=50 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20ALL%20WHITE.png"/>
+    <img width="160" height=120 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
+    <img width="200" height=70 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20ALL%20WHITE.png"/>
 </h1> 
 
 
