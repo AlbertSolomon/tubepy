@@ -1,12 +1,7 @@
 <div align="center">
-
 <h1>
-    <img width="160" height=160 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
-    <img width="220" height=120 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20ALL%20WHITE.png"/>
+    <img width="260" height=260 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
 </h1> 
-
-
-
 </div>
 
 
