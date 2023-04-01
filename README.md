@@ -2,7 +2,7 @@
 
 <h1>
     <img width="160" height=130 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
-    <img width="200" height=70 src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20ALL%20WHITE.png"/>
+    <img  src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20ALL%20WHITE.png"/>
 </h1> 
 
 
