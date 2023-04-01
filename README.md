@@ -1,7 +1,8 @@
 <div align="center">
 <h1>
     <img width="160" height="150" src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/icontest3.png"/> <br>
-</h1> 
+</h1>
+<h1>TUBEPY</h1> 
 </div>
 
 
