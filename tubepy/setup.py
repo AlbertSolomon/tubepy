@@ -656,8 +656,8 @@ def nextpage():
 
 
 page_number = 1
-displayUI()
-app.mainloop()
+#displayUI()
+#app.mainloop()
 
 if __name__ == "__main__":
 
@@ -676,6 +676,7 @@ if __name__ == "__main__":
 
     try:
         displayUI()
+        app.mainloop()
     except Exception as e:
 
         traceback.print_exc()
