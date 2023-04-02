@@ -45,6 +45,7 @@ app = ctk.CTk()
 app.geometry("840x640")
 app.title("Tubepy")
 app.resizable(width=False, height=False)
+app.iconbitmap("assets/icons/new_tubepy_logo128.ico")
 
 
 def displayUI():
@@ -492,7 +493,7 @@ def displayUI():
 
     thumbnail_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
+        dark_image=Image.open("assets/new_tubepy_logo.png"),
         size=(
             160,
             155,
