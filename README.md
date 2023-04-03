@@ -1,6 +1,6 @@
 <div align="center">
 <h1>
-<img width="160" height="150" src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/new_tubepy_logo.png"/> <br>
+<img width="160" height="150" src="https://github.com/AlbertSolomon/tubepy/blob/main/assets/new_tubepy_logo.png"/>
 </h1>
 <h1>TUBEPY</h1> 
 </div>
@@ -8,11 +8,11 @@
 
 > A simple desktop Youtube video downloader in python.
 
-## version 1
+## Version 1
 
 > This is an application which uses the [custom tkinter](https://github.com/TomSchimansky/CustomTkinter) library to render GUI widgets and [pytube](https://pytube.io/en/latest/) library to download youtube files.
 
-## installation
+## Installation
 
 > The installation procedure goes like so:
 > First of all make sure that you have installed Python 3.10.8 or higher.
@@ -26,3 +26,7 @@ run the project like so ` python tubepy/setup.py ` on windows, ` python3 tutepy/
 ## Contributions
 
 > For more information on how to contribute please read the CONTRIBUTIONS.md file.
+
+## Screenshots
+
+![Home Page](https://github.com/AlbertSolomon/tubepy/blob/main/assets/screenshots/home%20page.png)
