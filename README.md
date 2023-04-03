@@ -29,4 +29,8 @@ run the project like so ` python tubepy/setup.py ` on windows, ` python3 tutepy/
 
 ## Screenshots
 
+Home page
 ![Home Page](https://github.com/AlbertSolomon/tubepy/blob/main/assets/screenshots/home%20page.png)
+
+About page
+![About Page](https://github.com/AlbertSolomon/tubepy/blob/main/assets/screenshots/about%20page.png)
