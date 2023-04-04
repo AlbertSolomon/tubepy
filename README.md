@@ -34,3 +34,7 @@ Home page
 
 About page
 ![About Page](https://github.com/AlbertSolomon/tubepy/blob/main/assets/screenshots/about%20page.png)
+
+## Demo
+
+> gif here
