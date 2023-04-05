@@ -127,11 +127,14 @@ def displayUI():
     # switch button event handler
     state: list = ["disabled"]
 
-    def switch_event() -> str:
+    def update_quick_download():
         if switch_var.get() == "on":
             radio_var.set("video")
         else:
-           radio_var.set("audio")
+            radio_var.set("audio")
+
+    def switch_event() -> str:
+        update_quick_download()
         switch = switch_var.get()
         disabled = widget_state[0]
         normal = widget_state[1]
