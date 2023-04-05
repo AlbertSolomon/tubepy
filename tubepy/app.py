@@ -4,7 +4,7 @@ import time
 
 from ffmpeg import FFmpeg, Progress, ffmpeg
 from lang import clean_filename, error_message, read_config_file
-from pytube import YouTube
+from pytube import Playlist, YouTube
 
 current_time = time.time()
 
@@ -12,11 +12,13 @@ location = read_config_file()
 preferred_location = location["download_location"]
 
 # TODO lETS TRY TO USED A YOUTUBE FILE DECORETOR SO THAT WE MAKE THE CODE D.R.Y
-def quick_download(youtube_url, on_progress):     
+def quick_download(youtube_url, on_progress):
     """Download a YouTube video or playlist and save it to the given output directory."""
-    if 'playlist' in youtube_url:
+
+    if "playlist" in youtube_url:
         playlist = Playlist(youtube_url)
         video_count = len(playlist.video_urls)
+
         for i, video_url in enumerate(playlist.video_urls):
             print(f"Downloading video {i+1} of {video_count}")
             youtube_file = YouTube(video_url, on_progress_callback=on_progress)
