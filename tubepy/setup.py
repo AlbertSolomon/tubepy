@@ -128,6 +128,10 @@ def displayUI():
     state: list = ["disabled"]
 
     def switch_event() -> str:
+        if switch_var.get() == "on":
+            radio_var.set("video")
+        else:
+           radio_var.set("audio")
         switch = switch_var.get()
         disabled = widget_state[0]
         normal = widget_state[1]
@@ -418,6 +422,7 @@ def displayUI():
 
     # swich button
     switch_var = ctk.StringVar(value="on")
+    default_radio_button_value = "audio" if switch_var.get() == "off" else "video"
     switch_1 = ctk.CTkSwitch(
         master=app,
         button_color=app_color.get("primary"),
@@ -443,7 +448,7 @@ def displayUI():
         text="Video",
         command=radiobutton_event,
         variable=radio_var,
-        value="video",
+        value=default_radio_button_value,
         state=state[0],
     )
 
