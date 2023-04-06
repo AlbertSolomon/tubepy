@@ -163,7 +163,7 @@ async def file_verification(youtube_url) -> bool:
     validatd_url = validate_youtube_url(youtube_url)
     status = await search_file_Availability(youtube_url) if validatd_url else None
 
-    if status == 200:
+    if status == 200 or 302:
         return True
     return False
 
