@@ -37,4 +37,4 @@ About page
 
 ## Demo
 
-> gif here
+![Demo](https://github.com/AlbertSolomon/tubepy/blob/main/assets/demo.gif)
