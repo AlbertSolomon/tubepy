@@ -6,10 +6,10 @@ import urllib.request
 
 import aiohttp
 import requests  # this for testing purposes
-from humanize.time import precisedelta, naturaldelta
+from humanize.time import naturaldelta, precisedelta
 from pytube import YouTube
-from watchdog.events import FileSystemEventHandler
 from version import __version__
+from watchdog.events import FileSystemEventHandler
 
 repo_link = "https://github.com/AlbertSolomon/tubepy"
 app_info = {
@@ -70,6 +70,7 @@ download_location = "~/Downloads"
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
 sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp"  # "https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works)
+
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
@@ -312,11 +313,15 @@ async def downloadfile_details(youtube_file) -> dict:
         "author": author,
         # "description": video_description,
         # "info": video_info,
-        "length": precisedelta(lenght, suppress=['seconds', 'milliseconds', 'microseconds']),
+        "length": precisedelta(
+            lenght, suppress=["seconds", "milliseconds", "microseconds"]
+        ),
         "thumbnail": thumbnail,
         # "channel": channel,
         "views": views,
-        "date": precisedelta(upload_date), # naturaldelta(upload_date, months=True, minimum_unit='hours')
+        "date": precisedelta(
+            upload_date
+        ),  # naturaldelta(upload_date, months=True, minimum_unit='hours')
     }
 
     return file_info
