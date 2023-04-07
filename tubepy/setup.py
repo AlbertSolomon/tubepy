@@ -127,7 +127,14 @@ def displayUI():
     # switch button event handler
     state: list = ["disabled"]
 
+    def update_quick_download():
+        if switch_var.get() == "on":
+            radio_var.set("video")
+        else:
+            radio_var.set("audio")
+
     def switch_event() -> str:
+        update_quick_download()
         switch = switch_var.get()
         disabled = widget_state[0]
         normal = widget_state[1]
@@ -413,6 +420,7 @@ def displayUI():
 
     # swich button
     switch_var = ctk.StringVar(value="on")
+    default_radio_button_value = "audio" if switch_var.get() == "off" else "video"
     switch_1 = ctk.CTkSwitch(
         master=app,
         button_color=app_color.get("primary"),
@@ -438,9 +446,28 @@ def displayUI():
         text="Video",
         command=radiobutton_event,
         variable=radio_var,
-        value="video",
+        value=default_radio_button_value,
         state=state[0],
     )
+
+    class Console(tkinter.Frame):
+        def __init__(self, master):
+            tkinter.Frame.__init__(self, master)
+
+            self.label = tkinter.Label(self, wraplength=500, bg="#2d2d2d", fg="white")
+            self.label.pack(fill="none", expand=False)
+
+            sys.stdout = self
+            sys.stderr = self
+
+        def write(self, message):
+            if "Downloading video" in message:
+                self.label.configure(text=message)
+            if "!" in message:
+                self.label.configure(text=message)
+                
+    console = Console(app)
+    console.pack()
 
     radiobutton_2 = ctk.CTkRadioButton(
         master=app,
