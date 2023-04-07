@@ -161,7 +161,6 @@ def displayUI():
 
             def load_formats(url):
                 if len(audio_abrs) == 0:
-
                     event_label(
                         app, downloadstatus.get("loadstreams"), app_color.get("primary")
                     )
@@ -246,7 +245,6 @@ def displayUI():
                     event_label(app, "", event_color.get("dark"))
 
             if len(url) >= 20 and len(url) <= 2048:
-
                 event_label(
                     app, downloadstatus.get("check_network"), app_color.get("primary")
                 )
@@ -326,7 +324,6 @@ def displayUI():
             radiobutton_value = radiobutton_event()
 
             if file_Availability:
-
                 info_thread = threading.Thread(target=display_fileinfo, args=(url,))
                 info_thread.start()
 
@@ -349,7 +346,6 @@ def displayUI():
                         app_color.get("primary"),
                     )
                     if combobox.get() in video_resolutions:
-
                         itag = video_dict.get(combobox.get())
                         download_thread = threading.Thread(
                             target=download, args=(url, on_progress, itag)
@@ -370,7 +366,6 @@ def displayUI():
                         app_color.get("primary"),
                     )
                     if combobox.get() in audio_abrs:
-
                         itag = audio_dict.get(combobox.get())
                         download_thread = threading.Thread(
                             target=audio_download, args=(url, on_progress, itag)
@@ -611,7 +606,7 @@ def displayUI():
     )
 
     entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
-    app.bind("<1>", lambda event: event.widget.focus_set())
+    entry.bind("<1>", lambda event: event.widget.focus_set())
 
 
 #! *****************************************************************************************************************************************************************************************************************************************
@@ -693,7 +688,6 @@ page_number = 1
 # app.mainloop()
 
 if __name__ == "__main__":
-
     exclude_dir = "../utilities"
     exclude_file = "../utilities/config.json"
 
@@ -711,7 +705,6 @@ if __name__ == "__main__":
         displayUI()
         app.mainloop()
     except Exception as e:
-
         traceback.print_exc()
         tb = e.__traceback__
         filename = tb.tb_frame.f_code.co_filename
