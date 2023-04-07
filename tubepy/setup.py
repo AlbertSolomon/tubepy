@@ -455,6 +455,25 @@ def displayUI():
         state=state[0],
     )
 
+    class Console(tkinter.Frame):
+        def __init__(self, master):
+            tkinter.Frame.__init__(self, master)
+
+            self.label = tkinter.Label(self, wraplength=500, bg="#2d2d2d", fg="white")
+            self.label.pack(fill="none", expand=False)
+
+            sys.stdout = self
+            sys.stderr = self
+
+        def write(self, message):
+            if "Downloading video" in message:
+                self.label.configure(text=message)
+            if "!" in message:
+                self.label.configure(text=message)
+                
+    console = Console(app)
+    console.pack()
+
     radiobutton_2 = ctk.CTkRadioButton(
         master=app,
         height=20,
