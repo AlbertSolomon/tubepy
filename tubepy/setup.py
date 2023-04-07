@@ -579,7 +579,7 @@ def displayUI():
     )
 
     entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
-    app.bind("<1>", lambda event: event.widget.focus_set())
+    entry.bind("<1>", lambda event: event.widget.focus_set())
 
 
 #! *****************************************************************************************************************************************************************************************************************************************
