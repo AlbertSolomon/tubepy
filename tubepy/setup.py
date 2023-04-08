@@ -121,7 +121,7 @@ def displayUI():
             progressbar.pack_forget()
             progress_label.pack_forget()
 
-    class Console:
+    class PlaylistDownloadProgress:
         """Displays playlist download progress information to the UI"""
 
         def __init__(self):
@@ -137,7 +137,6 @@ def displayUI():
             except Exception:
                 event_label(app, "", event_color.get("dark"))
 
-    Console()
 
     # switch button event handler
     state: list = ["disabled"]
@@ -405,6 +404,7 @@ def displayUI():
             nextpage()
             return
 
+    PlaylistDownloadProgress()
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
 
