@@ -578,7 +578,7 @@ def displayUI():
     )
 
     entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
-    #app.bind("<1>", lambda event: event.widget.focus_set())
+    app.bind("<1>", lambda event: event.widget.focus_set())
 
 
 #! *****************************************************************************************************************************************************************************************************************************************
@@ -645,7 +645,8 @@ def aboutTubepy(app):
 def nextpage():
     global page_number, app
     for widget in app.winfo_children():
-        widget.destroy()
+        #widget.destroy()
+        widget.forget()
 
     if page_number == 1:
         aboutTubepy(app)
