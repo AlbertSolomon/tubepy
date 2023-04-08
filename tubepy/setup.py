@@ -121,8 +121,23 @@ def displayUI():
             progressbar.pack_forget()
             progress_label.pack_forget()
 
-        # download_percentage = downloaded_chunk / youtube_filesize * 100
-        # print(f"download percentage : { download_percentage }")
+    class Console:
+        """Displays playlist download progress information to the UI"""
+
+        def __init__(self):
+            sys.stdout = self
+            sys.stderr = self
+
+        def write(self, message):
+            try:
+                if "Downloading video" in message:
+                    event_label(app, message, app_color.get("primary"))
+                if "!" in message:
+                    event_label(app, message, app_color.get("primary"))
+            except Exception:
+                event_label(app, "", event_color.get("dark"))
+
+    Console()
 
     # switch button event handler
     state: list = ["disabled"]
@@ -441,21 +456,6 @@ def displayUI():
         value="video",
         state=state[0],
     )
-
-    class Console():
-        def __init__(self):
-            sys.stdout = self
-            sys.stderr = self
-
-        def write(self, message):
-            try:              
-                if "Downloading video" in message:
-                    event_label(app, message, app_color.get("primary"))
-                if "!" in message:
-                    event_label(app, message, app_color.get("primary"))        
-            except Exception:
-                event_label(app, "", event_color.get("dark"))
-    Console()
 
     radiobutton_2 = ctk.CTkRadioButton(
         master=app,
