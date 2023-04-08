@@ -442,24 +442,20 @@ def displayUI():
         state=state[0],
     )
 
-    class Console(tkinter.Frame):
-        def __init__(self, master):
-            tkinter.Frame.__init__(self, master)
-
-            self.label = tkinter.Label(self, wraplength=500, bg="#2d2d2d", fg="white")
-            self.label.pack(fill="none", expand=False)
-
+    class Console():
+        def __init__(self):
             sys.stdout = self
             sys.stderr = self
 
         def write(self, message):
-            if "Downloading video" in message:
-                self.label.configure(text=message)
-            if "!" in message:
-                self.label.configure(text=message)
-            
-    console = Console(app)
-    console.pack()
+            try:              
+                if "Downloading video" in message:
+                    event_label(app, message, app_color.get("primary"))
+                if "!" in message:
+                    event_label(app, message, app_color.get("primary"))        
+            except Exception:
+                event_label(app, "", event_color.get("dark"))
+    Console()
 
     radiobutton_2 = ctk.CTkRadioButton(
         master=app,
@@ -676,8 +672,7 @@ def nextpage():
 
 
 page_number = 1
-# displayUI()
-# app.mainloop()
+
 
 if __name__ == "__main__":
     exclude_dir = "../utilities"
