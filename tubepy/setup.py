@@ -4,6 +4,7 @@ import linecache
 import os
 import sys
 import threading
+import time
 import tkinter
 import traceback
 import urllib.parse
@@ -45,6 +46,7 @@ app = ctk.CTk()
 app.geometry("840x640")
 app.title("Tubepy")
 app.resizable(width=False, height=False)
+app.iconbitmap("assets/icons/new_tubepy_logo128.ico")
 
 
 def displayUI():
@@ -115,8 +117,26 @@ def displayUI():
             audio_abrs.clear()
             video_resolutions.clear()
 
-        # download_percentage = downloaded_chunk / youtube_filesize * 100
-        # print(f"download percentage : { download_percentage }")
+            time.sleep(5)
+            progressbar.pack_forget()
+            progress_label.pack_forget()
+
+    class PlaylistDownloadProgress:
+        """Displays playlist download progress information to the UI"""
+
+        def __init__(self):
+            sys.stdout = self
+            sys.stderr = self
+
+        def write(self, message):
+            try:
+                if "Downloading video" in message:
+                    event_label(app, message, app_color.get("primary"))
+                if "!" in message:
+                    event_label(app, message, app_color.get("primary"))
+            except Exception:
+                event_label(app, "", event_color.get("dark"))
+
 
     # switch button event handler
     state: list = ["disabled"]
@@ -148,7 +168,6 @@ def displayUI():
 
             def load_formats(url):
                 if len(audio_abrs) == 0:
-
                     event_label(
                         app, downloadstatus.get("loadstreams"), app_color.get("primary")
                     )
@@ -233,7 +252,6 @@ def displayUI():
                     event_label(app, "", event_color.get("dark"))
 
             if len(url) >= 20 and len(url) <= 2048:
-
                 event_label(
                     app, downloadstatus.get("check_network"), app_color.get("primary")
                 )
@@ -313,7 +331,6 @@ def displayUI():
             radiobutton_value = radiobutton_event()
 
             if file_Availability:
-
                 info_thread = threading.Thread(target=display_fileinfo, args=(url,))
                 info_thread.start()
 
@@ -336,7 +353,6 @@ def displayUI():
                         app_color.get("primary"),
                     )
                     if combobox.get() in video_resolutions:
-
                         itag = video_dict.get(combobox.get())
                         download_thread = threading.Thread(
                             target=download, args=(url, on_progress, itag)
@@ -357,7 +373,6 @@ def displayUI():
                         app_color.get("primary"),
                     )
                     if combobox.get() in audio_abrs:
-
                         itag = audio_dict.get(combobox.get())
                         download_thread = threading.Thread(
                             target=audio_download, args=(url, on_progress, itag)
@@ -389,6 +404,7 @@ def displayUI():
             nextpage()
             return
 
+    PlaylistDownloadProgress()
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
 
@@ -408,7 +424,7 @@ def displayUI():
         border_width=2,
         corner_radius=50,
     )
-    entry.pack(padx=20, pady=(30,15))
+    entry.pack(padx=20, pady=(30, 15))
 
     # swich button
     switch_var = ctk.StringVar(value="on")
@@ -482,7 +498,7 @@ def displayUI():
         fg_color=app_color.get("primary"),
         font=("", 16),
     )
-    button.pack(padx=10, pady=(10,5))
+    button.pack(padx=10, pady=(10, 5))
 
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=5, pady=(10, 5))
@@ -492,7 +508,7 @@ def displayUI():
 
     thumbnail_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/TUBEPY LOGO SKETCH small.png"),
+        dark_image=Image.open("assets/new_tubepy_logo.png"),
         size=(
             160,
             155,
@@ -533,7 +549,7 @@ def displayUI():
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
-    #segemented_button.set("Value 1")  # set initial value
+    # segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
@@ -578,7 +594,7 @@ def displayUI():
     )
 
     entry.bind("<Button-3>", lambda event: do_popup(event, frame=RightClickMenu))
-    app.bind("<1>", lambda event: event.widget.focus_set())
+    entry.bind("<1>", lambda event: event.widget.focus_set())
 
 
 #! *****************************************************************************************************************************************************************************************************************************************
@@ -657,11 +673,9 @@ def nextpage():
 
 
 page_number = 1
-#displayUI()
-#app.mainloop()
+
 
 if __name__ == "__main__":
-
     exclude_dir = "../utilities"
     exclude_file = "../utilities/config.json"
 
@@ -679,7 +693,6 @@ if __name__ == "__main__":
         displayUI()
         app.mainloop()
     except Exception as e:
-
         traceback.print_exc()
         tb = e.__traceback__
         filename = tb.tb_frame.f_code.co_filename

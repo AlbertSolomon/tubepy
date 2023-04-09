@@ -6,15 +6,15 @@ import urllib.request
 
 import aiohttp
 import requests  # this for testing purposes
-from humanize.time import precisedelta, naturaldelta
+from humanize.time import naturaldelta, precisedelta
 from pytube import YouTube
-from watchdog.events import FileSystemEventHandler
 from version import __version__
+from watchdog.events import FileSystemEventHandler
 
 repo_link = "https://github.com/AlbertSolomon/tubepy"
 app_info = {
     "general_summary": "Quick Download: is an option that downloads' YouTube videos at the highest available resolution (MP4) quickly.\n\n Video: is an option for custom resolution and Please *note that some of the resolutions do not have audio (Quick Download is recomended).\n\n Audio: is an option for downloading the audio version of the video.",
-    "about_app": f"Tubepy is a simple open source desktop app developed by Albert Solomon Phiri that allows easy downloading of Youtube Videos.\n\nTubepy is currently at version { __version__ } and is licensed under the MIT license hence you can modify and redistribute the software under the conditions of this license.\n\n CONTRIBUTIONS: Tubepy is a project which is tailored for the developer who are just getting started contributing to open source, it has a lot of 'good first issues' on Github.\n\n CONTRIBUTORS: ALBERT SOLOMON PHIRI \n\n WANNA CONTRIBUTE ? : Interested contributors should follow this link to the repository { repo_link } or scan the QR CODE below, cant wait, happy coding and OOOH! dont forget to star ⭐ the project.\n\n LETS CODE TOGETHER !!!",
+    "about_app": f"Tubepy is a simple open source desktop app developed by Albert Solomon Phiri that allows easy downloading of Youtube Videos.\n\nTubepy is currently at version { __version__ } and is licensed under the MIT license hence you can modify and redistribute the software under the conditions of this license.\n\n CONTRIBUTIONS: Tubepy is a project which is tailored for the developer who are just getting started contributing to open source, it has a lot of 'good first issues' on Github.\n\n WANNA CONTRIBUTE ? : Interested contributors should follow this link to the repository { repo_link } or scan the QR CODE below, cant wait, happy coding and OOOH! dont forget to star ⭐ the project.\n\n LETS CODE TOGETHER !!!",
 }
 
 downloadstatus = {
@@ -70,6 +70,7 @@ download_location = "~/Downloads"
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
 sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp"  # "https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works)
+
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
@@ -312,11 +313,15 @@ async def downloadfile_details(youtube_file) -> dict:
         "author": author,
         # "description": video_description,
         # "info": video_info,
-        "length": precisedelta(lenght, suppress=['seconds', 'milliseconds', 'microseconds']),
+        "length": precisedelta(
+            lenght, suppress=["seconds", "milliseconds", "microseconds"]
+        ),
         "thumbnail": thumbnail,
         # "channel": channel,
         "views": views,
-        "date": precisedelta(upload_date), # naturaldelta(upload_date, months=True, minimum_unit='hours')
+        "date": precisedelta(
+            upload_date
+        ),  # naturaldelta(upload_date, months=True, minimum_unit='hours')
     }
 
     return file_info
