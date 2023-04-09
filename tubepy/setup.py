@@ -661,7 +661,8 @@ def aboutTubepy(app):
 def nextpage():
     global page_number, app
     for widget in app.winfo_children():
-        widget.destroy()
+        #widget.destroy()
+        widget.forget()
 
     if page_number == 1:
         aboutTubepy(app)
