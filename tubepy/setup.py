@@ -483,6 +483,15 @@ def displayUI():
         variable=combobox_var,
     )
     combobox.pack(padx=40, pady=10, side=tkinter.TOP)
+    
+    download_icon = ctk.CTkImage(
+        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
+        dark_image=Image.open("assets/icons/cloud-download.png"), 
+        size=(
+            18,
+            19,
+        ),
+    )
 
     # download button
     button = ctk.CTkButton(
@@ -497,6 +506,8 @@ def displayUI():
         hover_color=app_color.get("hover_color"),
         fg_color=app_color.get("primary"),
         font=("", 16),
+        image=download_icon,
+        compound="right",
     )
     button.pack(padx=10, pady=(10, 5))
 
