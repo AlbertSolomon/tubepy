@@ -612,6 +612,15 @@ def aboutTubepy(app):
 
     heading_label = ctk.CTkLabel(master=page, text="ABOUT TUBEPY ", justify="center")
     heading_label.grid(row=0, column=1, padx=[200, 350], pady=10, ipadx=0)
+    
+    back_image_ico = ctk.CTkImage(
+        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
+        dark_image=Image.open("assets/icons/left-arrow.png"), #<a href="https://www.flaticon.com/free-icons/back" title="back icons">Back icons created by Roundicons - Flaticon</a>
+        size=(
+            10,
+            10,
+        ),
+    )
 
     back_btn = ctk.CTkButton(
         master=page,
@@ -624,6 +633,7 @@ def aboutTubepy(app):
         fg_color=app_color.get("primary"),
         text="Back",
         command=nextpage,
+        image=back_image_ico,
     )
     back_btn.grid(row=0, column=0, padx=15, pady=10)
 
