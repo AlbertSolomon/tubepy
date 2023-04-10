@@ -137,7 +137,6 @@ def displayUI():
             except Exception:
                 event_label(app, "", event_color.get("dark"))
 
-
     # switch button event handler
     state: list = ["disabled"]
 
@@ -483,10 +482,10 @@ def displayUI():
         variable=combobox_var,
     )
     combobox.pack(padx=40, pady=10, side=tkinter.TOP)
-    
+
     download_icon = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/icons/cloud-download.png"), 
+        dark_image=Image.open("assets/icons/cloud-download.png"),
         size=(
             18,
             19,
@@ -623,10 +622,12 @@ def aboutTubepy(app):
 
     heading_label = ctk.CTkLabel(master=page, text="ABOUT TUBEPY ", justify="center")
     heading_label.grid(row=0, column=1, padx=[200, 350], pady=10, ipadx=0)
-    
+
     back_image_icon = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
-        dark_image=Image.open("assets/icons/left-arrow.png"), #<a href="https://www.flaticon.com/free-icons/back" title="back icons">Back icons created by Roundicons - Flaticon</a>
+        dark_image=Image.open(
+            "assets/icons/left-arrow.png"
+        ),  # <a href="https://www.flaticon.com/free-icons/back" title="back icons">Back icons created by Roundicons - Flaticon</a>
         size=(
             10,
             10,
@@ -682,7 +683,7 @@ def aboutTubepy(app):
 def nextpage():
     global page_number, app
     for widget in app.winfo_children():
-        #widget.destroy()
+        # widget.destroy()
         widget.forget()
 
     if page_number == 1:
