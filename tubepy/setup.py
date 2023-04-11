@@ -31,14 +31,6 @@ from PIL import Image
 from settings import download_path_settings
 from watchdog.observers import Observer
 
-audio_itags: list = []
-audio_abrs: list = []
-audio_dict: dict = {}
-
-video_itags: list = []
-video_resolutions: list = []
-video_dict: dict = {}
-
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("green")
 
@@ -48,22 +40,29 @@ app.title("Tubepy")
 app.resizable(width=False, height=False)
 app.iconbitmap("assets/icons/new_tubepy_logo128.ico")
 
+audio_itags: list = []
+audio_abrs: list = []
+audio_dict: dict = {}
 
-def displayUI():
-    def event_label(app, message, color):
-        text_var = tkinter.StringVar(value=message)
-        label = ctk.CTkLabel(
-            master=app,
-            textvariable=text_var,
-            width=500,
-            height=25,
-            text_color=color,
-            corner_radius=0,
-        )
-        label.place(relx=0.5, rely=0.02, anchor=tkinter.CENTER)
-        # label.pack(padx=10, pady=5, ipadx=8, ipady=5 ,side=tkinter.TOP)
-        # label.pack(padx=10, pady=0)
+video_itags: list = []
+video_resolutions: list = []
+video_dict: dict = {}
 
+
+def event_label(app, message, color):
+    text_var = tkinter.StringVar(value=message)
+    label = ctk.CTkLabel(
+        master=app,
+        textvariable=text_var,
+        width=500,
+        height=25,
+        text_color=color,
+        corner_radius=0,
+    )
+    label.place(relx=0.5, rely=0.02, anchor=tkinter.CENTER)
+
+
+def displayUI(page_state: list = None):
     # right click context menu logic
     def do_popup(event, frame):
         try:
@@ -684,6 +683,7 @@ def nextpage():
     global page_number, app
     for widget in app.winfo_children():
         # widget.destroy()
+        # event_label(app, "", event_color.get("dark"))
         widget.forget()
 
     if page_number == 1:
