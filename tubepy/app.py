@@ -29,14 +29,16 @@ def quick_download(youtube_url, on_progress):
 
 
 def data_save_download(youtube_url, on_progress):
+    """Download the lowest resolution video of a YouTube URL to the location set with `preferred_location`."""
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
     youtube_file.streams.get_lowest_resolution().download(preferred_location)
 
 
 def download(youtube_url, on_progress, itag):
+    """ Download a YouTube video with the specified URL and video quality."""
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
 
-    # downloading progressive videos ( allowing users to choose theie desird resolutions)yo
+    # downloading progressive videos (allowing users to choose their desired resolutions)
     progressive_res = youtube_file.streams.get_by_itag(itag=itag)
     progressive_res.download(preferred_location)
 
@@ -44,7 +46,9 @@ def download(youtube_url, on_progress, itag):
 # ? download audio files from youtube
 def audio_download(youtube_url, on_progress, itag):
     """
-    added exception handler for convessionall purposes
+    Downloads the audio of a YouTube video at the specified URL, using the specified
+    stream format with the given itag. The audio file is downloaded to the preferred location
+    specified in the configuration file.
     """
     try:
         youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
@@ -59,6 +63,8 @@ def audio_download(youtube_url, on_progress, itag):
 
 # ? download Dynamic Adaptive Streaming over HTTP (DASH) and merge them with ffmpeg from youtube
 def DASH_download(youtube_url):
+    """Downloads a YouTube video using DASH protocol to merge video and audio streams.
+    Video and audio are saved as separate files, and merged later."""
     youtube_file = YouTube(youtube_url)
 
     try:
