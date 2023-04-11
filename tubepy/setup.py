@@ -48,6 +48,8 @@ video_itags: list = []
 video_resolutions: list = []
 video_dict: dict = {}
 
+download_inprogress: bool = False
+
 
 def event_label(app, message, color):
     text_var = tkinter.StringVar(value=message)
@@ -84,6 +86,7 @@ def displayUI(page_state: list = None):
         infobox.configure(text=stringified_details)
 
     def on_progress(stream, chunk, bytes_remaining):
+        global download_inprogress
         youtube_filesize = stream.filesize
         print(f"youtube file size : { youtube_filesize }")
 
@@ -104,9 +107,11 @@ def displayUI(page_state: list = None):
             # progress bar
             progressbar.set(float(download_percentage) / 100)
             print(float(download_percentage) / 100)
+            download_inprogress = True
         else:
-            print("Download complete!")
+            download_inprogress = False
             global audio_abrs, video_resolutions
+            print("Download complete!")
 
             progressbar.set(1)
             progress_label.configure(text="100 %")
@@ -680,16 +685,22 @@ def aboutTubepy(app):
 
 
 def nextpage():
-    global page_number, app
+    global page_number, app, download_inprogress
+
     for widget in app.winfo_children():
         # widget.destroy()
-        event_label(app, "", event_color.get("dark"))
+        event_label(
+            app, "", event_color.get("dark")
+        )  # show downloading when there is a download in progress
         widget.forget()
 
     if page_number == 1:
         aboutTubepy(app)
         page_number = 2
     else:
+        if download_inprogress:
+            event_label(app, downloadstatus.get("download"), app_color.get("primary"))
+
         displayUI()
         page_number = 1
 
