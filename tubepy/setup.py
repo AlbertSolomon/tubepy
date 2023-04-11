@@ -683,7 +683,7 @@ def nextpage():
     global page_number, app
     for widget in app.winfo_children():
         # widget.destroy()
-        # event_label(app, "", event_color.get("dark"))
+        event_label(app, "", event_color.get("dark"))
         widget.forget()
 
     if page_number == 1:
