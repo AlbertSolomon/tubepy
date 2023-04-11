@@ -18,9 +18,19 @@ def quick_download(youtube_url, on_progress):
     if "playlist" in youtube_url:
         playlist = Playlist(youtube_url)
         video_count = len(playlist.video_urls)
+        video_number = 0
 
-        for i, video_url in enumerate(playlist.video_urls):
-            print(f"Downloading video {i+1} of {video_count}")
+        for video, video_url in enumerate(playlist.video_urls):
+            video_number = video + 1 
+            playlist_download_percentage = (video_number/video_count) * 100
+            
+            print(f"Downloading video { video_number } of { video_count }")
+            
+            # if playlist_download_percentage != 100:
+            #     print("Download in progress")
+            # else:
+            #     print("Download complete")
+            
             youtube_file = YouTube(video_url, on_progress_callback=on_progress)
             youtube_file.streams.get_highest_resolution().download(preferred_location)
     else:
