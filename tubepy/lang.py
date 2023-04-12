@@ -341,7 +341,7 @@ async def playlist_details(youtube_url) -> dict:
             - "views": An integer representing the total number of views of the playlist.
             - "url": A string representing the URL of a sample video from the playlist.
     """
-    
+
     sample_playlist_url: str = ""
 
     if "playlist" in youtube_url:
