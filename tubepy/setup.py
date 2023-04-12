@@ -25,8 +25,8 @@ from lang import (
     error_message,
     event_color,
     file_verification,
-    widget_state,
     playlist_details,
+    widget_state,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -75,25 +75,25 @@ def displayUI(page_state: list = None):
 
     def display_fileinfo(youtube_url):
         stringified_details = ""
-        
-        def youtube_file_information(stringified_details,file_details):
+
+        def youtube_file_information(stringified_details, file_details):
             for key, file_detail in file_details.items():
                 if key == "thumbnail":
                     thumbnail_image.configure(
-                        dark_image=Image.open(requests.get(file_detail, stream=True).raw)
+                        dark_image=Image.open(
+                            requests.get(file_detail, stream=True).raw
+                        )
                     )
                 else:
                     stringified_details += f"{ key.capitalize() }: { file_detail } \n\n"
             infobox.configure(text=stringified_details)
-            
+
         if "playlist" in youtube_url:
             playlist_information = asyncio.run(playlist_details(youtube_url))
             youtube_file_information(stringified_details, playlist_information)
-            print(f"yesss, {playlist_information}")
         else:
             file_details = asyncio.run(downloadfile_details(youtube_url))
             youtube_file_information(stringified_details, file_details)
-                      
 
     def on_progress(stream, chunk, bytes_remaining):
         global download_inprogress
