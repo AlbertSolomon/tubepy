@@ -328,6 +328,20 @@ async def downloadfile_details(youtube_file) -> dict:
 
 
 async def playlist_details(youtube_url) -> dict:
+    """
+    Retrieves basic information about a YouTube playlist.
+
+    Args:
+        youtube_url (str): A string representing the URL of the YouTube playlist.
+
+    Returns:
+        dict: A dictionary containing the following keys and their corresponding values:
+            - "title": A string representing the title of the playlist.
+            - "length": An integer representing the number of videos in the playlist.
+            - "views": An integer representing the total number of views of the playlist.
+            - "url": A string representing the URL of a sample video from the playlist.
+    """
+    
     sample_playlist_url: str = ""
 
     if "playlist" in youtube_url:
