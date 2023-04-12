@@ -7,7 +7,7 @@ import urllib.request
 import aiohttp
 import requests  # this for testing purposes
 from humanize.time import naturaldelta, precisedelta
-from pytube import YouTube, Playlist
+from pytube import Playlist, YouTube
 from version import __version__
 from watchdog.events import FileSystemEventHandler
 
@@ -329,16 +329,16 @@ async def downloadfile_details(youtube_file) -> dict:
 
 async def playlist_details(youtube_url) -> dict:
     sample_playlist_url: str = ""
-    
+
     if "playlist" in youtube_url:
         playlist = Playlist(youtube_url)
-        #do a lazy loop
+        # do a lazy loop
         for sample_url in playlist.video_urls[:1]:
             sample_playlist_url = sample_url
-        
+
         playlist_info = await downloadfile_details(sample_playlist_url)
         playlist_info["title"] = playlist.title
         playlist_info["length"] = playlist.length
         playlist_info["views"] = playlist.views
-        
+
     return playlist_info
