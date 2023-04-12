@@ -12,6 +12,7 @@ from lang import (
     search_file_Availability,
     url_input,
     validate_youtube_url,
+    playlist_details,
 )
 from settings import change_download_location, download_path_settings
 
@@ -43,4 +44,6 @@ def test_url_input() -> None:
 
 # streams_test(test_url_input())
 
-print(asyncio.run(downloadfile_details(test_url_input())))
+# print(asyncio.run(downloadfile_details(test_url_input())))
+
+print(asyncio.run(playlist_details(test_url_input())))
