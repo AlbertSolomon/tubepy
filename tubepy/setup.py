@@ -26,6 +26,7 @@ from lang import (
     event_color,
     file_verification,
     widget_state,
+    playlist_details,
 )
 from PIL import Image
 from settings import download_path_settings
@@ -72,10 +73,7 @@ def displayUI(page_state: list = None):
         finally:
             frame.grab_release()
 
-    def display_fileinfo(youtube_link):
-        stringified_details = ""
-        file_details = asyncio.run(downloadfile_details(youtube_link))
-
+    def youtube_file_information(stringified_details, file_details):
         for key, file_detail in file_details.items():
             if key == "thumbnail":
                 thumbnail_image.configure(
@@ -84,6 +82,10 @@ def displayUI(page_state: list = None):
             else:
                 stringified_details += f"{ key.capitalize() }: { file_detail } \n\n"
         infobox.configure(text=stringified_details)
+        
+
+        #youtube_file_information(stringified_details, file_details)
+
 
     def on_progress(stream, chunk, bytes_remaining):
         global download_inprogress
