@@ -93,9 +93,6 @@ def displayUI(page_state: list = None):
         else:
             file_details = asyncio.run(downloadfile_details(youtube_url))
             youtube_file_information(stringified_details, file_details)
-        # print(file_details)
-        # display_thread = threading.Thread(target=youtube_file_information, args=(file_details),)
-        # display_thread.start()
                       
 
     def on_progress(stream, chunk, bytes_remaining):
