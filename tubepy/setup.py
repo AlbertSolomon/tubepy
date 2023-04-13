@@ -527,9 +527,6 @@ def displayUI(page_state: list = None):
     frame = ctk.CTkFrame(master=app, width=500, height=200)
     frame.pack(padx=5, pady=(10, 5))
 
-    # url = "https://github.com/AlbertSolomon/tubepy/blob/main/assets/TUBEPY%20LOGO%20SKETCH%20small.png"
-    # escaped_url = urllib.parse.quote(url, safe=':/')
-
     thumbnail_image = ctk.CTkImage(
         # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open("assets/new_tubepy_logo.png"),
@@ -638,7 +635,6 @@ def aboutTubepy(app):
     heading_label.grid(row=0, column=1, padx=[200, 350], pady=10, ipadx=0)
 
     back_image_icon = ctk.CTkImage(
-        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open(
             "assets/icons/left-arrow.png"
         ),  # <a href="https://www.flaticon.com/free-icons/back" title="back icons">Back icons created by Roundicons - Flaticon</a>
@@ -673,7 +669,6 @@ def aboutTubepy(app):
     tubepy_infoLabel.pack(pady=20)
 
     QRCODE_image = ctk.CTkImage(
-        # dark_image=Image.open(requests.get("https://previews.123rf.com/images/morphart/morphart2008/morphart200804535/152569857-cute-apple-pie-illustration-vector-on-white-background.jpg", stream=True).raw),  # "assets/TUBEPY LOGO SKETCH small.png"
         dark_image=Image.open(
             "assets/qr-code.png"
         ),  # from https://www.qrcode-monkey.com/
