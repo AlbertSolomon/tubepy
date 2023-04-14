@@ -76,8 +76,8 @@ def read_config_file():
             location = json.load(config_location)
 
     except FileNotFoundError:
-        with open("utilities/config.json", "w") as f:
-            json.dump(default_download_location, f, indent=4)
+        with open("utilities/config.json", "w") as config_file:
+            json.dump(default_download_location, config_file, indent=4)
 
         with open("utilities/config.json", "r") as config_location:
             location = json.load(config_location)
