@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # ignoring config.json file
-config.json
+#utilities/config.json
 ~/Downloads"
