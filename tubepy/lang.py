@@ -12,12 +12,12 @@ from version import __version__
 from watchdog.events import FileSystemEventHandler
 
 repo_link = "https://github.com/AlbertSolomon/tubepy"
-app_info = {
+app_info: dict = {
     "general_summary": "Quick Download: is an option that downloads' YouTube videos at the highest available resolution (MP4) quickly.\n\n Video: is an option for custom resolution and Please *note that some of the resolutions do not have audio (Quick Download is recomended).\n\n Audio: is an option for downloading the audio version of the video.",
     "about_app": f"Tubepy is a simple open source desktop app developed by Albert Solomon Phiri that allows easy downloading of Youtube Videos.\n\nTubepy is currently at version { __version__ } and is licensed under the MIT license hence you can modify and redistribute the software under the conditions of this license.\n\n CONTRIBUTIONS: Tubepy is a project which is tailored for the developer who are just getting started contributing to open source, it has a lot of 'good first issues' on Github.\n\n WANNA CONTRIBUTE ? : Interested contributors should follow this link to the repository { repo_link } or scan the QR CODE below, cant wait, happy coding and OOOH! dont forget to star ⭐ the project.\n\n LETS CODE TOGETHER !!!",
 }
 
-downloadstatus = {
+downloadstatus: dict = {
     "load": "loading... 😒",
     "download": "downloading... 😒",
     "audiodownload": "downloading audio 🎶 ...",
@@ -31,11 +31,11 @@ downloadstatus = {
     "check_network": "checking network connection...🌐",
 }
 
-empty = {
+empty: dict = {
     "empty_location": " empty default location",
 }
 
-error_message = {
+error_message: dict = {
     "invalid_length": "Invalid url length !. The URL length you have provided is invalid. Please try again 😥",
     "videoUnavailable": "Sorry, the video is not available at the moment. 💔",
     "url_issue": "The url you have provided is not valid. Please verify it and try again. 😊",
@@ -44,7 +44,7 @@ error_message = {
     "unavailable_options": "Options not available",
 }
 
-app_color = {
+app_color: dict = {
     "primary": "#EECF89",
     "secondary": "#24DCA2",
     "extra_color": "#1C2331",
@@ -52,21 +52,18 @@ app_color = {
     "hover_color": "#c9941d",
 }
 
-event_color = {
+event_color: dict = {
     "danger": "#AA1B48",
     "success": "#1BAA7D",
     "warning": "orange",
     "dark": "black",
 }
 
-widget_state = ["disabled", "normal"]
+widget_state: list = ["disabled", "normal"]
 
 download_location = "~/Downloads"
-"""
-    {
-        "download_location": "~/Downloads"
-    }
-"""
+default_download_location: dict = {"download_location": "~/Downloads"}
+
 
 url_input = "Enter Youtube Video URL here 👉🏾: "
 sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp"  # "https://www.youtube.com/shorts/mBqK_-L-PVg" (this url works)
@@ -74,9 +71,18 @@ sample_url = "https://www.youtube.com/shorts/mBqK_-L-GVp"  # "https://www.youtub
 
 # refactoring for reading for reading from config.json file
 def read_config_file():
-    with open("utilities/config.json", "r") as config_location:
-        location = json.load(config_location)
+    try:
+        with open("utilities/config.json", "r") as config_location:
+            location = json.load(config_location)
 
+    except FileNotFoundError:
+        with open("utilities/config.json", "w") as f:
+            json.dump(default_download_location, f, indent=4)
+
+        with open("utilities/config.json", "r") as config_location:
+            location = json.load(config_location)
+
+        return location
     return location
 
 
