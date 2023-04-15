@@ -149,7 +149,7 @@ def displayUI(page_state: list = None):
                 if "!" in message:
                     event_label(app, message, app_color.get("primary"))
             except Exception:
-                event_label(app, "", event_color.get("dark"))
+                event_label(app, error_message.get("playlist_error"), event_color.get("danger"))
 
     # switch button event handler
     state: list = ["disabled"]
