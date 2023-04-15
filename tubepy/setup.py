@@ -136,7 +136,19 @@ def displayUI(page_state: list = None):
             progress_label.pack_forget()
 
     class PlaylistDownloadProgress:
-        """Displays playlist download progress information to the UI"""
+        """Displays playlist download progress information to the UI
+
+        Initializes the instance of the class.
+        Sets the standard output and error streams to be the instance of the class itself.
+
+        This method is called whenever the CLI program prints something to the standard output or error streams.
+        Captures the message and checks if it contains any information related to the playlist download progress.
+        If it does, it uses the event_label() method to display the message to the user in a user-friendly way.
+        If there is an exception during this process, the method displays an error message in red to indicate an error has occurred.
+
+        Args:
+            message (str): A string containing the message printed to the standard output or error streams by the CLI program.
+        """
 
         def __init__(self):
             sys.stdout = self
@@ -149,7 +161,9 @@ def displayUI(page_state: list = None):
                 if "!" in message:
                     event_label(app, message, app_color.get("primary"))
             except Exception:
-                event_label(app, error_message.get("playlist_error"), event_color.get("danger"))
+                event_label(
+                    app, error_message.get("playlist_error"), event_color.get("danger")
+                )
 
     # switch button event handler
     state: list = ["disabled"]
