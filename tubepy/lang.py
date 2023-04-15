@@ -42,6 +42,7 @@ error_message: dict = {
     "option_issue": "Please select an option... 😕",
     "network_error": "Sorry, bad network connection 🌐",
     "unavailable_options": "Options not available",
+    "playlist_error": "Sorry, something went wrong during the download process 😥",
 }
 
 app_color: dict = {
