@@ -39,7 +39,7 @@ app = ctk.CTk()
 app.geometry("840x640")
 app.title("Tubepy")
 app.resizable(width=False, height=False)
-app.iconbitmap("assets/icons/new_tubepy_logo128.ico")
+app.iconbitmap("@assets/icons/new_tubepy_logo128.xbm")
 
 audio_itags: list = []
 audio_abrs: list = []
