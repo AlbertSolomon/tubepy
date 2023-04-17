@@ -24,7 +24,7 @@ build_options = {
 
 # Define the executablesy
 base = "Win32GUI" if sys.platform == "win32" else None
-executables = [Executable("tubepy/setup.py", base=base, target_name="tubepy.msi")]
+executables = [Executable("tubepy/setup.py", base=base, icon='assets/icons/new_tubepy_logo128.ico', target_name="tubepy.exe")]
 
 # Define the setup parameters
 setup(
