@@ -11,11 +11,6 @@ sys.path.append("tubepy")
 includefiles = [
     "tubepy/",
     "utilities/",
-    #"tubepy/__init__.py",
-    #"tubepy/lang.py",
-    #"tubepy/app.py",
-    #"tubepy/settings.py",
-    #"tubepy/",
     "assets/",
 ]
 
@@ -23,7 +18,7 @@ includefiles = [
 # Define the build options
 build_options = {
     "packages": packages,
-    "excludes": ["requirements.txt", ".github"],
+    "excludes": ["requirements.txt", ".github", "assets/screenshots/", "assets/demo.gifdemo.gif"],
     "include_files": includefiles,
 }
 
