@@ -11,11 +11,11 @@ sys.path.append("tubepy")
 includefiles = [
     "tubepy/",
     "utilities/",
-    "tubepy/__init__.py",
-    "tubepy/lang.py",
-    "tubepy/app.py",
-    "tubepy/settings.py",
-    "tubepy/",
+    #"tubepy/__init__.py",
+    #"tubepy/lang.py",
+    #"tubepy/app.py",
+    #"tubepy/settings.py",
+    #"tubepy/",
     "assets/",
 ]
 
