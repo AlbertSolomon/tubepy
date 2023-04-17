@@ -46,6 +46,8 @@ if sys.platform.startswith("linux"):
 elif sys.platform.startswith("win"):
     app.iconbitmap("assets/icons/new_tubepy_logo128.ico")
 
+# Mac OS implementation here
+
 audio_itags: list = []
 audio_abrs: list = []
 audio_dict: dict = {}
