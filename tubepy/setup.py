@@ -591,7 +591,6 @@ def displayUI(page_state: list = None):
         command=segmented_button_callback,
     )
     segemented_button.grid(row=1, column=1, padx=0, pady=(0, 5))
-    # segemented_button.set("Value 1")  # set initial value
 
     # progress bar
     progressbar = ctk.CTkProgressBar(
