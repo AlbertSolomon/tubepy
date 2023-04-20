@@ -38,3 +38,5 @@ About page
 ## Demo
 
 ![Demo](https://github.com/AlbertSolomon/tubepy/blob/main/assets/demo.gif)
+
+> Enjoy using Tubepy to download your favorite YouTube videos! 🍾.
