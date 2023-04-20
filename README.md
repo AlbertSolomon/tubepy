@@ -14,16 +14,18 @@
 
 ## Installation
 
-> The installation procedure goes like so:
-> First of all make sure that you have installed Python 3.10.8 or higher.
-> Clone/Fork the project and create a virtual environment in the root directory of the project; follow this [link](https://www.geeksforgeeks.org/python-virtual-environment/) for more information about virtual environments.
-> After creating the virtual environment, run the following command to install the requirements.
+To install Tubepy, follow the steps below:
+
+1. Make sure you have Python 3.10.8 or higher installed on your machine.
+2. Clone or fork the project from the GitHub repository.
+3. Create a virtual environment in the root directory of the project. You can find more information about virtual environments [here](https://www.geeksforgeeks.org/python-virtual-environment/).
+4. Activate the virtual environment and run the following command to install the required dependencies:
 
 ```bash
     pip install -r requirements.txt 
 ```
 
-To run the application on Windows, execute the following command
+5. To run the application on Windows, execute the following command
 
 ```bash
     python tubepy/setup.py 
@@ -52,6 +54,7 @@ About page
 ![Demo](https://github.com/AlbertSolomon/tubepy/blob/main/assets/demo.gif)
 
 ## Troubleshooting
+
 > If you face any errors while installing the software, ensure that you have installed Python 3.10.8 or a newer version on your system and that you have correctly installed all the necessary dependencies in the ``requirements.txt``. If the error persists, you can raise an issue [here](https://github.com/AlbertSolomon/tubepy/issues) or start a discussion in the [discussion section](https://github.com/AlbertSolomon/tubepy/discussions).
 
 Enjoy using Tubepy to download your favorite YouTube videos! 🍾.
