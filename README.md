@@ -19,11 +19,21 @@
 > Clone/Fork the project and create a virtual environment in the root directory of the project; follow this [link](https://www.geeksforgeeks.org/python-virtual-environment/) for more information about virtual environments.
 > After creating the virtual environment, run the following command to install the requirements.
 
-```bash 
+```bash
     pip install -r requirements.txt 
 ```
 
-run the project like so ` python tubepy/setup.py ` on windows, ` python3 tutepy/setup.py ` on unix based systems.
+To run the application on Windows, execute the following command
+
+```bash
+    python tubepy/setup.py 
+```
+
+On Unix-based systems, run the command below:
+
+```bash
+    python3 tubepy/setup.py 
+```
 
 ## Contributions
 
