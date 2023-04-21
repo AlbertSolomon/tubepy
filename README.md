@@ -45,7 +45,7 @@ Tubepy leverages the cx_freeze library to produce binaries, which can be built b
     python setup.py build
 ```
 
-Keep in mind that you might need to provide extra information or configuration options to the setup.py file for a more personalized build process.
+Keep in mind that you might need to provide extra information or configuration options to the ``setup.py`` file for a more personalized build process.
 
 ## Contributions
 
