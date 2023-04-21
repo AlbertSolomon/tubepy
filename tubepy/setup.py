@@ -427,6 +427,9 @@ def displayUI(page_state: list = None):
             error = error_message.get("invalid_length")
             event_label(app, error, color)
 
+        if "playlist" in url:
+            PlaylistDownloadProgress()
+
     def segmented_button_callback(value):
         if value == "Change download Location":
             # download_path_settings()
@@ -438,7 +441,6 @@ def displayUI(page_state: list = None):
             nextpage()
             return
 
-    PlaylistDownloadProgress()
     #! *****************************************************************************************************************************************************************************************************************************************
     #! *****************************************************************************************************************************************************************************************************************************************
 
