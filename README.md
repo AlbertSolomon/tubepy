@@ -37,6 +37,16 @@ On Unix-based systems, run the command below:
     python3 tubepy/setup.py 
 ```
 
+### Building Binnaries
+
+Tubepy leverages the cx_freeze library to produce binaries, which can be built by running the command below:
+
+```bash
+    python setup.py build
+```
+
+Keep in mind that you might need to provide extra information or configuration options to the setup.py file for a more personalized build process.
+
 ## Contributions
 
 > For more information on how to contribute please read the CONTRIBUTIONS.md file.
