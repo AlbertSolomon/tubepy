@@ -37,7 +37,7 @@ On Unix-based systems, run the command below:
     python3 tubepy/setup.py 
 ```
 
-### Building Binnaries
+### Building Binaries
 
 Tubepy leverages the cx_freeze library to produce binaries, which can be built by running the command below:
 
