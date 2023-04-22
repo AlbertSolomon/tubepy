@@ -47,6 +47,10 @@ Tubepy leverages the cx_freeze library to produce binaries, which can be built b
 
 Keep in mind that you might need to provide extra information or configuration options to the ``setup.py`` file for a more personalized build process.
 
+### Installer Script
+
+Before running ``tubepy_installer_exe_script.iss``, make sure you have Inno Setup installed. Open the script in the editor, modify the directory paths to match your project, and hit run. Happy installing!
+
 ## Contributions
 
 > For more information on how to contribute please read the CONTRIBUTIONS.md file.
