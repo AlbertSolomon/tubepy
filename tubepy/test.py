@@ -1,6 +1,6 @@
 import asyncio
 
-from app import DASH_download, audio_download, download, quick_download
+from app import DASH_download, audio_download, download, quick_download, test_download
 from lang import (
     add_audio_stream_codes,
     add_video_stream_code,
@@ -44,5 +44,7 @@ def test_url_input() -> None:
 
 # streams_test(test_url_input())
 
-print(asyncio.run(downloadfile_details(test_url_input())))
+#print(asyncio.run(downloadfile_details(test_url_input())))
 #print(asyncio.run(playlist_details(test_url_input())))
+
+test_download(test_url_input())

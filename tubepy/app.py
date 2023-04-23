@@ -118,3 +118,8 @@ def DASH_download(youtube_url):
 
 
 # ? download video files from youtube with other formats
+
+
+def test_download(youtube_url: str):
+    youtube_file = YouTube(youtube_url)
+    youtube_file.streams.get_highest_resolution().download(preferred_location)
