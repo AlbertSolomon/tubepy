@@ -37,6 +37,20 @@ On Unix-based systems, run the command below:
     python3 tubepy/setup.py 
 ```
 
+Ensure that you have ``tkinter`` installed while working on Linux by utilizing the package manager offered by your current distribution.
+
+#### fedora
+
+```bash 
+    sudo dnf install python3-tkinter
+```
+
+#### Ubuntu
+
+```bash
+    sudo apt-get install python3-tk
+```
+
 ### Building Binaries
 
 Tubepy leverages the cx_freeze library to produce binaries, which can be built by running the command below:
