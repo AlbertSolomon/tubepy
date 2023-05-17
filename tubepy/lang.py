@@ -150,8 +150,8 @@ def validate_youtube_url(url) -> bool:
     return youtube_regex.search(url) is not None or any(
         domain in url for domain in acceptable_urls
     )
-dotbe: str = "https://youtu.be/KR22jigJLok"
-print(validate_youtube_url(dotbe)) 
+dotbe: str = "https://youtu.be/mVX3Z46iYTQ"
+# print(validate_youtube_url(dotbe)) 
 
 
 def file_existance(youtube_url) -> int:
@@ -159,9 +159,9 @@ def file_existance(youtube_url) -> int:
     it's result with the search_file_Availability function."""
 
     if "youtu.be/" in youtube_url:
-        youtudotbe = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
+        youtudotbe_url = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
+        youtube_url = youtudotbe_url
 
-    youtube_url = youtudotbe
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
 
