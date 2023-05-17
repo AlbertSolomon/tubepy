@@ -44,7 +44,7 @@ def test_url_input() -> None:
 
 # streams_test(test_url_input())
 
-#print(asyncio.run(downloadfile_details(test_url_input())))
+print(asyncio.run(downloadfile_details(test_url_input())))
 #print(asyncio.run(playlist_details(test_url_input())))
 
-test_download(test_url_input())
+# test_download(test_url_input())
