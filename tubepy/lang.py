@@ -131,11 +131,12 @@ def validate_youtube_url(url) -> bool:
     "This makes sure the url provided is valid and acceptable. No one likes regex so i asked CHATGPT 🤣."
 
     # to fix the youtube.be, we should make link to its original state, then run it trough this regex, it its true then we can use url to perform the required operations.
-
+    # https://youtu.be/KR22jigJLok
     youtube_regex = re.compile(
-        r"(https?://)?(www\.)?"
-        "(youtube|youtu|youtube-nocookie)\.(com|be)/"
-        "(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11})"
+        r"((https?://)?(www\.)?"
+        r"(youtube|youtu|youtube-nocookie)\.(com|be)/"
+        r"(watch\?v=|embed/|v/|.+\?v=|shorts/)?([^&=%\?]{11}))"
+        r"|(youtu\.be/[^&=%\?]{11})"
     )
 
     acceptable_urls = [
@@ -146,14 +147,22 @@ def validate_youtube_url(url) -> bool:
         "youtube-nocookie.com/",
     ]
 
-    return youtube_regex.match(url) is not None or any(
+    return youtube_regex.search(url) is not None or any(
         domain in url for domain in acceptable_urls
     )
+
+
+# dotbe: str = "https://youtu.be/mVX3Z46iYTQ"
+# print(validate_youtube_url(dotbe))
 
 
 def file_existance(youtube_url) -> int:
     """This function is a available for testing purposes, thus to compare
     it's result with the search_file_Availability function."""
+
+    if "youtu.be/" in youtube_url:
+        youtudotbe_url = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
+        youtube_url = youtudotbe_url
 
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
@@ -161,6 +170,10 @@ def file_existance(youtube_url) -> int:
 
 async def search_file_Availability(youtube_url) -> int:
     """The name of the function speaks volumes of it self, it does what it says it does 🤣."""
+
+    if "youtu.be/" in youtube_url:
+        youtudotbe_url = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
+        youtube_url = youtudotbe_url
 
     async with aiohttp.ClientSession() as session:
         async with session.get(youtube_url, allow_redirects=False) as response:
