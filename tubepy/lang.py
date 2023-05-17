@@ -130,7 +130,6 @@ def clean_filename(name) -> str:
 def validate_youtube_url(url) -> bool:
     "This makes sure the url provided is valid and acceptable. No one likes regex so i asked CHATGPT 🤣."
 
-    # to fix the youtube.be, we should make link to its original state, then run it trough this regex, it its true then we can use url to perform the required operations.
     # https://youtu.be/KR22jigJLok
     youtube_regex = re.compile(
         r"((https?://)?(www\.)?"
