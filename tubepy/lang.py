@@ -158,8 +158,14 @@ def file_existance(youtube_url) -> int:
     """This function is a available for testing purposes, thus to compare
     it's result with the search_file_Availability function."""
 
+    if "youtu.be/" in youtube_url:
+        youtudotbe = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
+
+    youtube_url = youtudotbe
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
+
+print(file_existance(dotbe))
 
 
 async def search_file_Availability(youtube_url) -> int:
@@ -169,7 +175,7 @@ async def search_file_Availability(youtube_url) -> int:
         async with session.get(youtube_url, allow_redirects=False) as response:
             return response.status
         
-print(asyncio.run(search_file_Availability(dotbe)))
+# print(asyncio.run(search_file_Availability(dotbe)))
 
 
 async def file_verification(youtube_url) -> bool:
