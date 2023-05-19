@@ -159,10 +159,6 @@ def file_existance(youtube_url) -> int:
     """This function is a available for testing purposes, thus to compare
     it's result with the search_file_Availability function."""
 
-    if "youtu.be/" in youtube_url:
-        youtudotbe_url = youtube_url.replace("youtu.be/", "www.youtube.com/watch?v=")
-        youtube_url = youtudotbe_url
-
     request = requests.get(youtube_url, allow_redirects=False)
     return request.status_code
 
