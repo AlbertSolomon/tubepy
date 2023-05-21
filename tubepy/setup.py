@@ -622,7 +622,7 @@ def displayUI(page_state: list = None):
         entry,
         tearoff=False,
         activebackground=app_color.get("primary"),
-        background="#565b5e",
+        background=app_color.get("rightclick_menu_bg-color"),
         fg=app_color.get("primary"),
         borderwidth=0,
         bd=0,

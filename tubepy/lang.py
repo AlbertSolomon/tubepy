@@ -51,6 +51,7 @@ app_color: dict = {
     "extra_color": "#1C2331",
     "text_color": "#9B2E51",
     "hover_color": "#c9941d",
+    "rightclick_menu_bg-color": "#565b5e",
 }
 
 event_color: dict = {
