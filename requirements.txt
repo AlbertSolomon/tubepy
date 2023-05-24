@@ -27,7 +27,7 @@ python-ffmpeg==2.0.0
 pytube==15.0.0
 requests==2.31.0
 tomli==2.0.1
-typing_extensions==4.5.0
+typing_extensions==4.6.1
 urllib3==1.26.14
 watchdog==2.2.1
 yarl==1.8.2
