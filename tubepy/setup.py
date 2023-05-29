@@ -372,7 +372,7 @@ def displayUI(page_state: list = None):
                     event_label(
                         app, downloadstatus.get("download"), app_color.get("primary")
                     )
-
+                    # try to catch exceptions in case dowload fails
                     download_thread = threading.Thread(
                         target=quick_download, args=(url, on_progress)
                     )
