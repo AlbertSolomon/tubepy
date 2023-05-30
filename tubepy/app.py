@@ -3,13 +3,14 @@ import subprocess
 import time
 
 from ffmpeg import FFmpeg, Progress, ffmpeg
-from lang import clean_filename, error_message, read_config_file, onfailure_decorator 
+from lang import clean_filename, error_message, read_config_file, onfailure_decorator
 from pytube import Playlist, YouTube
 
 current_time = time.time()
 
 location = read_config_file()
 preferred_location = location["download_location"]
+
 
 # TODO lETS TRY TO USED A YOUTUBE FILE DECORETOR SO THAT WE MAKE THE CODE D.R.Y
 def quick_download(youtube_url, on_progress):
@@ -21,16 +22,16 @@ def quick_download(youtube_url, on_progress):
         video_number = 0
 
         for video, video_url in enumerate(playlist.video_urls):
-            video_number = video + 1 
-            playlist_download_percentage = (video_number/video_count) * 100
-            
+            video_number = video + 1
+            playlist_download_percentage = (video_number / video_count) * 100
+
             print(f"Downloading video { video_number } of { video_count }")
-            
+
             # if playlist_download_percentage != 100:
             #     print("Download in progress")
             # else:
             #     print("Download complete")
-            
+
             youtube_file = YouTube(video_url, on_progress_callback=on_progress)
             youtube_file.streams.get_highest_resolution().download(preferred_location)
     else:
@@ -45,7 +46,7 @@ def data_save_download(youtube_url, on_progress):
 
 
 def download(youtube_url, on_progress, itag):
-    """ Download a YouTube video with the specified URL and video quality."""
+    """Download a YouTube video with the specified URL and video quality."""
     youtube_file = YouTube(youtube_url, on_progress_callback=on_progress)
 
     # downloading progressive videos (allowing users to choose their desired resolutions)
@@ -123,6 +124,7 @@ def DASH_download(youtube_url):
 def test_download(youtube_url: str):
     youtube_file = YouTube(youtube_url)
     youtube_file.streams.get_highest_resolution().download(preferred_location)
+
 
 @onfailure_decorator
 def datatest(youtube_url):
