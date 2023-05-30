@@ -374,3 +374,11 @@ async def playlist_details(youtube_url) -> dict:
         playlist_info["views"] = playlist.views
 
     return playlist_info
+
+def onfailure_decorator(function, error_function=None):
+    def wrapper(url):
+        try:
+            return function(url)
+        except Exception:
+            print("download failed")
+    return wrapper
