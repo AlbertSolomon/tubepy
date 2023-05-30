@@ -1,6 +1,6 @@
 import asyncio
 
-from app import DASH_download, audio_download, download, quick_download, test_download
+from app import DASH_download, audio_download, download, quick_download, test_download, datatest
 from lang import (
     add_audio_stream_codes,
     add_video_stream_code,
@@ -21,6 +21,8 @@ from settings import change_download_location, download_path_settings
 def test_url_input() -> None:
     return input(url_input)
 
+
+datatest(test_url_input())
 
 # download_path_settings()
 # download(test_url_input())
