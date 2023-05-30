@@ -379,6 +379,8 @@ def onfailure_decorator(function, error_function=None):
     def wrapper(url):
         try:
             return function(url)
-        except Exception:
-            print("download failed")
+        except Exception as the_error:
+            print("download failed...😥")
+            print(the_error)
+
     return wrapper
