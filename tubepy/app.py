@@ -3,7 +3,7 @@ import subprocess
 import time
 
 from ffmpeg import FFmpeg, Progress, ffmpeg
-from lang import clean_filename, error_message, read_config_file, onfailure_decorator
+from lang import clean_filename, error_message, read_config_file, onfailure_decorator, on_download_failure_decorator
 from pytube import Playlist, YouTube
 
 current_time = time.time()
@@ -126,7 +126,7 @@ def test_download(youtube_url: str):
     youtube_file.streams.get_highest_resolution().download(preferred_location)
 
 
-@onfailure_decorator
+@on_download_failure_decorator(error_function=None)
 def datatest(youtube_url):
     youtube_file = YouTube(youtube_url)
     youtube_file.streams.get_lowest_resolution().download(preferred_location)
