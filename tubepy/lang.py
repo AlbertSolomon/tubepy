@@ -375,12 +375,29 @@ async def playlist_details(youtube_url) -> dict:
 
     return playlist_info
 
-def onfailure_decorator(function, error_function=None):
-    def wrapper(url):
+def onfailure_decorator(functione):
+    def wrapper(url, on_progress=None):
         try:
-            return function(url)
+            return function(url,)
         except Exception as the_error:
             print("download failed...😥")
             print(the_error)
 
     return wrapper
+
+def on_download_failure_decorator(error_function=None):
+    def onfailure_decorator(function):
+        def wrapper(url, on_progress=None):
+            try:
+                if on_progress is not None:
+                    return function(url, on_progress=on_progress)
+                else:
+                    return function(url,)
+            except Exception as the_error:
+                if error_function is not None:
+                    app=""
+                    error_function(app, the_error, event_color.get("danger"))
+                else:
+                    print(f"download failed....\n error::> {the_error} ")
+        return wrapper
+    return onfailure_decorator
