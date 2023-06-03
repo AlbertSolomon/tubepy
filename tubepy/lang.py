@@ -385,6 +385,12 @@ def onfailure_decorator(functione):
 
     return wrapper
 
+"""
+
+@ ideas :::: write a decorator that registers errors to some global variable or file
+:: and write code that monitor this file, and print or displays errors registered in this files/global variable and this should happen in real time.    
+
+"""
 def on_download_failure_decorator(error_function=None):
     def onfailure_decorator(function):
         def wrapper(url, on_progress=None):
