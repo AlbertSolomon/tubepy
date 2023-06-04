@@ -4,7 +4,9 @@
 </h1>
 <h1>TUBEPY</h1> 
 </div>
-<p align="center"> <img src="https://img.shields.io/badge/Version-1.1.0-blue.svg"> <img src="https://img.shields.io/badge/Python-3.10.8-blue.svg"> <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20MacOS-blue.svg"> <img src="https://img.shields.io/badge/Status-Active-green.svg"> </p>
+<p align="center"> <img src="https://camo.githubusercontent.com/3dbcfa4997505c80ef928681b291d33ecfac2dabf563eb742bb3e269a5af909c/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f496c65726961796f2f6d61726b646f776e2d6261646765733f7374796c653d666f722d7468652d6261646765"> <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"> <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"><img src="https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=macos&logoColor=F0F0F0"><img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white"> <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"><br><img src="https://img.shields.io/badge/Status-Active-green.svg"> </p>
+
+
 
 > A simple desktop Youtube video downloader in python.
 
