@@ -86,3 +86,5 @@ About page
 If you face any errors while installing the software, please ensure that you have installed Python 3.10.8 or a newer version on your system and that you have correctly installed all the necessary dependencies in the ``requirements.txt``. If the error persists, you can raise an issue [here](https://github.com/AlbertSolomon/tubepy/issues) or start a discussion in the [discussion section](https://github.com/AlbertSolomon/tubepy/discussions).
 
 > Enjoy using Tubepy to download your favorite YouTube videos! 🍾.
+
+<p align="center"><a href="https://github.com/AlbertSolomon/tubepy#"><img src="https://superagi.com/wp-content/uploads/2023/05/backToTopButton.png" alt="Back to top" height="29"/></a></p>
