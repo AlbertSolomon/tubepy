@@ -58,7 +58,7 @@ Ensure that you have ``tkinter`` installed while working on Linux by utilizing t
 Tubepy leverages the cx_freeze library to produce binaries, which can be built by running the command below:
 
 ```bash
-    python setup.py build
+    python setup.py build # which is present in the root directory.
 ```
 
 Keep in mind that you might need to provide extra information or configuration options to the ``setup.py`` file for a more personalized build process.
