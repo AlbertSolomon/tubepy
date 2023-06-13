@@ -21,7 +21,7 @@ multidict==6.0.4
 packaging==23.0
 Pillow==9.5.0
 pluggy==1.0.0
-pyee==9.0.4
+pyee==10.0.1
 pytest==7.3.2
 python-ffmpeg==2.0.0
 pytube==15.0.0
