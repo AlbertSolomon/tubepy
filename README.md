@@ -41,13 +41,13 @@ On Unix-based systems, run the command below:
 
 Ensure that you have ``tkinter`` installed while working on Linux by utilizing the package manager offered by your current distribution.
 
-#### fedora
+### fedora
 
 ```bash 
     sudo dnf install python3-tkinter
 ```
 
-#### Ubuntu
+### Ubuntu
 
 ```bash
     sudo apt-get install python3-tk
