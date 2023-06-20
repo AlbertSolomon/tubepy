@@ -16,7 +16,7 @@ future==0.18.3
 humanize==4.6.0
 idna==3.4
 iniconfig==2.0.0
-lief==0.13.1
+lief==0.13.2
 multidict==6.0.4
 packaging==23.0
 Pillow==9.5.0
