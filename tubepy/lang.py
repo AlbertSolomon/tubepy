@@ -282,23 +282,7 @@ async def check_internet_connection(youtube_url) -> bool:
 
 
 # this function will be revisited in the future.
-def connection_checker(function, error_callback=None):
-    async def wrapper(youtube_url):
-        loop = asyncio.get_event_loop()
-        coroutine = check_internet_connection(youtube_url)
-
-        future = asyncio.run_coroutine_threadsafe(coroutine, loop=loop)
-        network_check = future.result()
-
-        if network_check:
-            return await function(youtube_url)
-        else:
-            return error_callback
-
-    return wrapper
-
-
-@youtubefile
+youtubefile
 async def downloadfile_details(youtube_file) -> dict:
     """
     This function retrieves relevant information from a YouTube object.
