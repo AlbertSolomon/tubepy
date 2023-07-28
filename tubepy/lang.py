@@ -281,8 +281,6 @@ async def check_internet_connection(youtube_url) -> bool:
         return False
 
 
-# this function will be revisited in the future.
-youtubefile
 async def downloadfile_details(youtube_file) -> dict:
     """
     This function retrieves relevant information from a YouTube object.
