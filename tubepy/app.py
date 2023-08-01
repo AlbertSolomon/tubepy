@@ -126,7 +126,8 @@ def test_download(youtube_url: str):
     youtube_file.streams.get_highest_resolution().download(preferred_location)
 
 
-@on_download_failure_decorator(error_function=None)
-def datatest(youtube_url):
-    youtube_file = YouTube(youtube_url)
-    youtube_file.streams.get_lowest_resolution().download(preferred_location)
+# @on_download_failure_decorator(error_function=None)
+# def datatest(youtube_url):
+#     youtube_file = YouTube(youtube_url)
+#     youtube_file.streams.get_lowest_resolution().download(preferred_location)
+
