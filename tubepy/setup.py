@@ -19,7 +19,7 @@ from lang import (
     app_color,
     app_info,
     check_internet_connection,
-    connection_checker,
+    #connection_checker,
     downloadfile_details,
     downloadstatus,
     error_message,
