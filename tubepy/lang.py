@@ -8,7 +8,7 @@ import aiohttp
 import requests  # this for testing purposes
 from humanize.time import naturaldelta, precisedelta
 from pytube import Playlist, YouTube
-from .version import __version__
+from version import __version__
 from watchdog.events import FileSystemEventHandler
 
 repo_link = "https://github.com/AlbertSolomon/tubepy"
