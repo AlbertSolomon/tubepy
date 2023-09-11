@@ -370,7 +370,9 @@ def onfailure_decorator(functione):
 """
 
 @ ideas :::: write a decorator that registers errors to some global variable or file
-:: and write code that monitor this file, and print or displays errors registered in this files/global variable and this should happen in real time.    
+:: and write code that monitor this file, and print or displays errors registered in this files/global variable and this should happen in real time.
+
+@ ideas :::: or we should try to pipe | the errors to logs.txt file and then display the errors accordingly.
 
 """
 def on_download_failure_decorator(error_function=None):
