@@ -20,9 +20,9 @@ from settings import change_download_location, download_path_settings
 # this input variable will be used for testing purposes
 def test_url_input() -> None:
     return input(url_input)
+print(56+56)
 
-
-datatest(test_url_input())
+#datatest(test_url_input())
 
 # download_path_settings()
 # download(test_url_input())
