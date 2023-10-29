@@ -15,7 +15,7 @@
 > This is an application which uses the [custom tkinter](https://github.com/TomSchimansky/CustomTkinter) library to render GUI widgets and [pytube](https://pytube.io/en/latest/) library to download youtube files.
 
 > **Warning**
-Pytube often encounters compatibility issues due to YouTube's frequent updates. Regrettably, the Pytube library has some maintenance challenges, leading to delays in resolving these issues. Consequently, we are exploring the possibility of integrating youtube-dl as an alternative solution. Nevertheless, please don't hesitate to report any problems [here](https://github.com/AlbertSolomon/tubepy/issues) or engage in [discussions here](https://github.com/AlbertSolomon/tubepy/discussions). Your input is valuable to us or else you can refer or follow **[pytube issue 1786](https://github.com/pytube/pytube/issues/178k6)**.
+Pytube often encounters compatibility issues due to YouTube's frequent updates. Regrettably, the Pytube library has some maintenance challenges, leading to delays in resolving these issues. Consequently, we are exploring the possibility of integrating youtube-dl as an alternative solution. Nevertheless, please don't hesitate to report any problems [here](https://github.com/AlbertSolomon/tubepy/issues) or engage in [discussions here](https://github.com/AlbertSolomon/tubepy/discussions). Your input is valuable to us or else you can refer or follow **[pytube issue 1786](https://github.com/pytube/pytube/issues/1786)**.
 
 ## Installation
 
