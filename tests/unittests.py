@@ -1,8 +1,9 @@
 import pytest
 import sys
+import asyncio
 
 sys.path.append("tubepy")
-from tubepy.lang import validate_youtube_url
+from tubepy.lang import validate_youtube_url, search_file_Availability
 
 def test_url_validation():
     assert(validate_youtube_url("https://www.youtube.com/watch?v=r6tH55syq0o")) == True
@@ -11,4 +12,5 @@ def test_url_validation():
 
 def test_file_Availability():
     # async def search_file_Availability(youtube_url) -> int:
-    pass
+    assert(asyncio.run(search_file_Availability("http://linuxcommand.org/lc3_writing_shell_scripts.php"))) = False
+
