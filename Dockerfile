@@ -1,3 +1,5 @@
+# issue with tkinter
+
 FROM python:3.10.8-slim
 
 COPY . /tubepy/
