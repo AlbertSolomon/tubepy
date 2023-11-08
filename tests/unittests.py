@@ -12,5 +12,5 @@ def test_url_validation():
 
 def test_file_Availability():
     # async def search_file_Availability(youtube_url) -> int:
-    assert(asyncio.run(search_file_Availability("http://linuxcommand.org/lc3_writing_shell_scripts.php"))) = False
+    assert(asyncio.run(search_file_Availability("http://linuxcommand.org/lc3_writing_shell_scripts.php"))) == False
 
