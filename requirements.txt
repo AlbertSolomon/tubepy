@@ -5,7 +5,7 @@ attrs==23.2.0
 certifi==2023.11.17
 charset-normalizer==3.3.2
 colorama==0.4.6
-customtkinter==5.2.1
+customtkinter==5.2.2
 #cx-Freeze
 # cx-Logging==3.1.0
 darkdetect==0.8.0
