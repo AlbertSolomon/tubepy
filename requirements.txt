@@ -12,7 +12,7 @@ darkdetect==0.8.0
 exceptiongroup==1.2.0
 ffmpeg-python==0.2.0
 frozenlist==1.4.1
-future==0.18.3
+future==1.0.0
 humanize==4.9.0
 idna==3.6
 iniconfig==2.0.0
