@@ -19,7 +19,7 @@ iniconfig==2.0.0
 # lief==0.13.2
 # multidict==6.0.4
 packaging==24.0
-Pillow==10.2.0
+Pillow==10.3.0
 pluggy==1.4.0
 pyee==11.1.0
 pytest==8.1.1
