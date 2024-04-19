@@ -9,7 +9,7 @@ customtkinter==5.2.2
 #cx-Freeze
 # cx-Logging==3.1.0
 darkdetect==0.8.0
-exceptiongroup==1.2.0
+exceptiongroup==1.2.1
 ffmpeg-python==0.2.0
 frozenlist==1.4.1
 future==1.0.0
