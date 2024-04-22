@@ -20,7 +20,7 @@ iniconfig==2.0.0
 # multidict==6.0.4
 packaging==24.0
 Pillow==10.3.0
-pluggy==1.4.0
+pluggy==1.5.0
 pyee==11.1.0
 pytest==8.1.1
 python-ffmpeg==2.0.11
